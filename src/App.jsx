@@ -1,17 +1,19 @@
+import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import Banner from './Components/Banner'
-import NavBar from './Components/NavBar'
-import NavBar2 from './Components/NavBar2'
-import Footer from './Components/Footer'
+import PostForm from './Components/PostForm'
+import Pages from './Pages/Pages'
+import Post from './Pages/Post'
+
 
 function App() {
 
   return (
     <div className="App">
-       <NavBar />
-       <NavBar2 />
-       <Banner />
-       <Footer />
+      <Routes>
+        <Route path='/' element={<Pages/>}/>
+        <Route path='/post' element={<Post/>}/>
+        <Route path='/post/postform' element={<PostForm/>}/>
+      </Routes>   
     </div>
   )
 }

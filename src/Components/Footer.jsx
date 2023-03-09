@@ -7,7 +7,7 @@ import fb from "../assets/facebook.svg";
 
 const Footer = () => {
   return (
-    <div className="w-full h-80 mt-16 pt-10 bg-gray-400 text-slate-900 flex flex-wrap justify-around relative font-poppins">
+    <div className="w-full h-80 pt-10 bg-blue-100 text-slate-900 flex flex-wrap justify-around relative font-poppins">
       <h1 className="text-2xl font-semibold">Olx-Clone</h1>
       <div>
         <h2 className="text-xl font-semibold ">About Us</h2>
