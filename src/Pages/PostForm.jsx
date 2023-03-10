@@ -2,6 +2,7 @@ import React from 'react'
 import Details from './Post Ad/Details'
 import LocationAdder from './Post Ad/LocationAdder'
 import PhotoUploader from './Post Ad/PhotoUploader'
+import ReviewDetails from './Post Ad/ReviewDetails'
 import SetPrice from './Post Ad/SetPrice'
 
 const PostForm = () => {
@@ -19,6 +20,7 @@ const PostForm = () => {
                 <SetPrice/>
                 <PhotoUploader />
                 <LocationAdder />
+                <ReviewDetails />
             </div>
         </div>
     </div>

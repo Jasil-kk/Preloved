@@ -38,7 +38,7 @@ const LocationAdder = () => {
     { label: "Kunnamkulam" },
     { label: "Pookotur" },
     { label: "Chelari" },
-];
+  ];
 
   return (
     <div className="p-5 border-b border-blue-500">

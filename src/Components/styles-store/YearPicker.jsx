@@ -1,10 +1,10 @@
 import React from 'react'
-import TextField from '@mui/material/TextField';
+import InputField from './InputField';
 
 const YearPicker = () => {
   return (
     <div className='mt-8'>
-        <TextField sx={{ width: 400 }} type="number" id="outlined-basic" label="Year *" variant="outlined" />
+        <InputField type={"number"} label={"Year *"}/>
     </div>
   )
 }

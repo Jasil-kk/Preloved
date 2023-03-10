@@ -1,12 +1,11 @@
 import React from 'react'
-import TextField from '@mui/material/TextField';
+import InputField from './InputField';
 
 
 const KMdriven = () => {
   return (
     <div className='mt-8'>
-        <TextField sx={{ width: 400 }} type="number" id="outlined-basic" label="KM driven *" variant="outlined" />
-        
+        <InputField type={"number"} label={"KM driven *"}/>
     </div>
   )
 }
