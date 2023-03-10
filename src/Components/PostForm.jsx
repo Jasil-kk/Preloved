@@ -1,6 +1,7 @@
 import React from 'react'
 import Details from '../Pages/Post Ad/Details'
 import SetPrice from '../Pages/Post Ad/SetPrice'
+import PhotoUploader from './styles-store/PhotoUploader'
 
 const PostForm = () => {
   return (
@@ -15,6 +16,7 @@ const PostForm = () => {
                 <h1 className='text-2xl font-semibold mt-5 ml-5'>INCLUDE SOME DETAILS</h1>
                 <Details/>
                 <SetPrice/>
+                <PhotoUploader />
             </div>
         </div>
     </div>
