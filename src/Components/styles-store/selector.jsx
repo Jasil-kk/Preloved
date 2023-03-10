@@ -1,22 +1,15 @@
 import React from "react";
 import { TextField, Autocomplete } from "@mui/material";
 
-const Selector = () => {
-  const Brands = [
-    { label: "Honda"},
-    { label: "maruti-suzuki"},
-    { label: "Hyundai"},
-    { label: "Tata"},
-  ];
-
+const Selector = (props) => {
   return (
-    <div>
+    <div className="mt-5">
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={Brands}
+        options={props.brands}
         sx={{ width: 400 }}
-        renderInput={(params) => <TextField {...params} label="Brand *" />}
+        renderInput={(params) => <TextField {...params} label={props.label} />}
       />
     </div>
   );

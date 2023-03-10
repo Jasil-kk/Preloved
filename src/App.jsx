@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
 import './App.css'
-import PostForm from './Components/PostForm'
 import Pages from './Pages/Pages'
 import Post from './Pages/Post'
+import PostForm from './Pages/PostForm'
 
 
 function App() {

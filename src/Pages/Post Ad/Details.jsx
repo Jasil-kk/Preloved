@@ -9,9 +9,17 @@ import Transmission from '../../Components/styles-store/Transmission'
 import YearPicker from '../../Components/styles-store/YearPicker'
 
 const Details = () => {
+
+  const Brands = [
+    { label: "Honda"},
+    { label: "maruti-suzuki"},
+    { label: "Hyundai"},
+    { label: "Tata"},
+  ];
+
   return (
     <div className='p-5 border-b border-blue-500'>
-        <Selector/>
+        <Selector brands={Brands} label={"Brand *"}/>
         <YearPicker/>
         <FuelSelector/>
         <Transmission />
