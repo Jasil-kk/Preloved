@@ -97,9 +97,15 @@ const Post = () => {
           )}
           {show["mobiles"] && (
             <>
-              <AdCategory AdCategory={"Mobile Phones"} />
-              <AdCategory AdCategory={"Accessories"} />
-              <AdCategory AdCategory={"Tablets"} />
+              <Link to={"/post/mobilephone"}>
+                <AdCategory AdCategory={"Mobile Phones"} />
+              </Link>
+              <Link to={"/post/accessories"}>
+                <AdCategory AdCategory={"Accessories"} />
+              </Link>
+              <Link to={"/post/tablet"}>
+                <AdCategory AdCategory={"Tablets"} />
+              </Link>
             </>
           )}
           {show["electronics & Appliances"] && (
