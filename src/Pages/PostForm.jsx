@@ -1,12 +1,11 @@
 import React from 'react'
-import Details from './Post Ad/Details'
 import LocationAdder from './Post Ad/LocationAdder'
 import PhotoUploader from './Post Ad/PhotoUploader'
 import PostNowBtn from './Post Ad/PostNowBtn'
 import ReviewDetails from './Post Ad/ReviewDetails'
 import SetPrice from './Post Ad/SetPrice'
 
-const PostForm = () => {
+const PostForm = ({children}) => {
   return (
     <div className='w-full h-auto pb-20 bg-slate-200 flex flex-col items-center font-poppins'>
         <h1 className='text-3xl font-bold mt-20'>POST YOUR AD</h1>
@@ -17,7 +16,7 @@ const PostForm = () => {
             </div>
             <div className=''>
                 <h1 className='text-2xl font-semibold mt-5 ml-5'>INCLUDE SOME DETAILS</h1>
-                <Details/>
+                <div>{children}</div>
                 <SetPrice/>
                 <PhotoUploader />
                 <LocationAdder />

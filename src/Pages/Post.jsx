@@ -75,16 +75,24 @@ const Post = () => {
           />
         </div>
         <div className="w-1/2">
-          <Link to={"/post/postform"}>
+          <Link to={"/post/cars"}>
             {show["cars"] && <AdCategory AdCategory={"Cars"} />}
           </Link>
 
           {show["bikes"] && (
             <>
-              <AdCategory AdCategory={"Motorcycles"} />
-              <AdCategory AdCategory={"Scooters"} />
-              <AdCategory AdCategory={"Spare Parts"} />
-              <AdCategory AdCategory={"Bicycles"} />
+              <Link to={"/post/motorcycle"}>
+                <AdCategory AdCategory={"Motorcycles"} />
+              </Link>
+              <Link to={"/post/scooter"}>
+                <AdCategory AdCategory={"Scooters"} />
+              </Link>
+              <Link to={"/post/sparepart"}>
+                <AdCategory AdCategory={"Spare Parts"} />
+              </Link>
+              <Link to={"/post/bicycle"}>
+                <AdCategory AdCategory={"Bicycles"} />
+              </Link>
             </>
           )}
           {show["mobiles"] && (
