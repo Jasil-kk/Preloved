@@ -32,7 +32,7 @@ const Banner = () => {
             {/* <button className="w-32 h-10 bg-green-600  text-white mt-1 border-none rounded-3xl hover:bg-green-700 transition duration-150">
               add to cart
             </button> */}
-            <span className="absolute right-2 bottom-1 text-xs sm:text-sm">Yestardey</span>
+            <span className="absolute right-2 bottom-1 text-xs sm:text-sm">Yestarday</span>
           </div>
         </div>
       ))}

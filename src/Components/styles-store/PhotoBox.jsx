@@ -1,19 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 const PhotoBox = () => {
+  const [imageSrc, setImageSrc] = useState("");
+
+  const handleFileSelection = (e) => {
+    const file = e.target.files[0];
+    setImageSrc(URL.createObjectURL(file));
+  };
+
   return (
     <div>
-      <div className="w-14 h-14 flex justify-center items-center border border-slate-500">
-        <IconButton
-          color="primary"
-          aria-label="upload picture"
-          component="label"
-        >
-          <input hidden accept="image/*" type="file" />
-          <PhotoCamera />
-        </IconButton>
+      <div className="w-20 h-20 flex justify-center items-center overflow-hidden border border-slate-500 relative">
+        <div className="absolute">
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="label"
+          >
+            <input
+              hidden
+              accept="image/*"
+              type="file"
+              onChange={handleFileSelection}
+            />
+            <PhotoCamera />
+          </IconButton>
+        </div>
+        {imageSrc && <img src={imageSrc} alt="Selected" />}
       </div>
     </div>
   );

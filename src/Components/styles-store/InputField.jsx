@@ -4,7 +4,7 @@ import TextField from "@mui/material/TextField";
 const InputField = (props) => {
   return (
     <div>
-      <TextField
+      <TextField 
         sx={{ width: 400 }}
         type={props.type}
         id="outlined-basic"
