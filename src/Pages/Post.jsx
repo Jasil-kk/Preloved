@@ -123,8 +123,11 @@ const Post = () => {
           )}
           {show["spares"] && (
             <>
-              <AdCategory AdCategory={"Commercial & Other Vehicles"} />
+            <Link to={"/post/commercial-spare"}>
+              <AdCategory AdCategory={"Commercial & Other Vehicles"} /></Link>
+              <Link to={"/post/spare"}>
               <AdCategory AdCategory={"Spare Parts"} />
+              </Link>
             </>
           )}
           {show["furniture"] && (

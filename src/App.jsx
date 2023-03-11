@@ -9,6 +9,8 @@ import TVsVideoAudio from "./Pages/DetailsForm/Electronics/TVsVideoAudio";
 import AccessoriesDetails from "./Pages/DetailsForm/Mobiles/AccessoriesDetails";
 import MobilePhoneDetails from "./Pages/DetailsForm/Mobiles/MobilePhoneDetails";
 import TabletsDetails from "./Pages/DetailsForm/Mobiles/TabletsDetails";
+import CommercialVehicles from "./Pages/DetailsForm/Spare/CommercialVehicles";
+import SpareParts from "./Pages/DetailsForm/Spare/SpareParts";
 import Pages from "./Pages/Pages";
 import Post from "./Pages/Post";
 import PostForm from "./Pages/PostForm";
@@ -28,6 +30,8 @@ function App() {
         <Route path="/post/accessories" element={<AccessoriesDetails />} />
         <Route path="/post/tablet" element={<TabletsDetails/>}/>
         <Route path="/post/electronic&appliances" element={<TVsVideoAudio/>}/>
+        <Route path="/post/commercial-spare" element={<CommercialVehicles/>}/>
+        <Route path="/post/spare" element={<SpareParts/>}/>
       </Routes>
     </div>
   );
