@@ -110,6 +110,7 @@ const Post = () => {
           )}
           {show["electronics & Appliances"] && (
             <>
+            <Link to={"/post/electronic&appliances"}>
               <AdCategory AdCategory={"TVs, Video - Audio"} />
               <AdCategory AdCategory={"Kitchen & Other Appliances"} />
               <AdCategory AdCategory={"Computers & Laptops"} />
@@ -117,6 +118,7 @@ const Post = () => {
               <AdCategory AdCategory={"Fridges"} />
               <AdCategory AdCategory={"ACs"} />
               <AdCategory AdCategory={"Washing Machines"} />
+              </Link>
             </>
           )}
           {show["spares"] && (

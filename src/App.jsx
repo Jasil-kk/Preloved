@@ -5,6 +5,7 @@ import MotorCycleDetails from "./Pages/DetailsForm/Bikes/MotorCycleDetails";
 import ScootersDetails from "./Pages/DetailsForm/Bikes/ScootersDetails";
 import SparePartsDetails from "./Pages/DetailsForm/Bikes/SparePartsDetails";
 import CarsDetails from "./Pages/DetailsForm/Cars/CarsDetails";
+import TVsVideoAudio from "./Pages/DetailsForm/Electronics/TVsVideoAudio";
 import AccessoriesDetails from "./Pages/DetailsForm/Mobiles/AccessoriesDetails";
 import MobilePhoneDetails from "./Pages/DetailsForm/Mobiles/MobilePhoneDetails";
 import TabletsDetails from "./Pages/DetailsForm/Mobiles/TabletsDetails";
@@ -26,6 +27,7 @@ function App() {
         <Route path="/post/mobilephone" element={<MobilePhoneDetails />} />
         <Route path="/post/accessories" element={<AccessoriesDetails />} />
         <Route path="/post/tablet" element={<TabletsDetails/>}/>
+        <Route path="/post/electronic&appliances" element={<TVsVideoAudio/>}/>
       </Routes>
     </div>
   );
