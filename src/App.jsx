@@ -6,9 +6,12 @@ import ScootersDetails from "./Pages/DetailsForm/Bikes/ScootersDetails";
 import SparePartsDetails from "./Pages/DetailsForm/Bikes/SparePartsDetails";
 import CarsDetails from "./Pages/DetailsForm/Cars/CarsDetails";
 import TVsVideoAudio from "./Pages/DetailsForm/Electronics/TVsVideoAudio";
+import FashionDetails from "./Pages/DetailsForm/Fashion/FashionDetails";
+import SofaDetails from "./Pages/DetailsForm/Furniture/SofaDetails";
 import AccessoriesDetails from "./Pages/DetailsForm/Mobiles/AccessoriesDetails";
 import MobilePhoneDetails from "./Pages/DetailsForm/Mobiles/MobilePhoneDetails";
 import TabletsDetails from "./Pages/DetailsForm/Mobiles/TabletsDetails";
+import PetsDetails from "./Pages/DetailsForm/Pets/PetsDetails";
 import CommercialVehicles from "./Pages/DetailsForm/Spare/CommercialVehicles";
 import SpareParts from "./Pages/DetailsForm/Spare/SpareParts";
 import Pages from "./Pages/Pages";
@@ -32,6 +35,9 @@ function App() {
         <Route path="/post/electronic&appliances" element={<TVsVideoAudio/>}/>
         <Route path="/post/commercial-spare" element={<CommercialVehicles/>}/>
         <Route path="/post/spare" element={<SpareParts/>}/>
+        <Route path="/post/furniture" element={<SofaDetails/>}/>
+        <Route path="/post/fashion" element={<FashionDetails/>}/>
+        <Route path="/post/pets" element={<PetsDetails/>}/>
       </Routes>
     </div>
   );

@@ -110,47 +110,54 @@ const Post = () => {
           )}
           {show["electronics & Appliances"] && (
             <>
-            <Link to={"/post/electronic&appliances"}>
-              <AdCategory AdCategory={"TVs, Video - Audio"} />
-              <AdCategory AdCategory={"Kitchen & Other Appliances"} />
-              <AdCategory AdCategory={"Computers & Laptops"} />
-              <AdCategory AdCategory={"Cameras & Lenses"} />
-              <AdCategory AdCategory={"Fridges"} />
-              <AdCategory AdCategory={"ACs"} />
-              <AdCategory AdCategory={"Washing Machines"} />
+              <Link to={"/post/electronic&appliances"}>
+                <AdCategory AdCategory={"TVs, Video - Audio"} />
+                <AdCategory AdCategory={"Kitchen & Other Appliances"} />
+                <AdCategory AdCategory={"Computers & Laptops"} />
+                <AdCategory AdCategory={"Cameras & Lenses"} />
+                <AdCategory AdCategory={"Fridges"} />
+                <AdCategory AdCategory={"ACs"} />
+                <AdCategory AdCategory={"Washing Machines"} />
               </Link>
             </>
           )}
           {show["spares"] && (
             <>
-            <Link to={"/post/commercial-spare"}>
-              <AdCategory AdCategory={"Commercial & Other Vehicles"} /></Link>
+              <Link to={"/post/commercial-spare"}>
+                <AdCategory AdCategory={"Commercial & Other Vehicles"} />
+              </Link>
               <Link to={"/post/spare"}>
-              <AdCategory AdCategory={"Spare Parts"} />
+                <AdCategory AdCategory={"Spare Parts"} />
               </Link>
             </>
           )}
           {show["furniture"] && (
             <>
-              <AdCategory AdCategory={"Sofa & Dining"} />
-              <AdCategory AdCategory={"Beds & Wardrobes"} />
-              <AdCategory AdCategory={"Kids Furniture"} />
-              <AdCategory AdCategory={"Home Decor & Garden"} />
+              <Link to={"/post/furniture"}>
+                <AdCategory AdCategory={"Sofa & Dining"} />
+                <AdCategory AdCategory={"Beds & Wardrobes"} />
+                <AdCategory AdCategory={"Kids Furniture"} />
+                <AdCategory AdCategory={"Home Decor & Garden"} />
+              </Link>
             </>
           )}
           {show["fashion"] && (
             <>
-              <AdCategory AdCategory={"Men"} />
-              <AdCategory AdCategory={"Women"} />
-              <AdCategory AdCategory={"Kids"} />
+              <Link to={"/post/fashion"}>
+                <AdCategory AdCategory={"Men"} />
+                <AdCategory AdCategory={"Women"} />
+                <AdCategory AdCategory={"Kids"} />
+              </Link>
             </>
           )}
           {show["pets"] && (
             <>
-              <AdCategory AdCategory={"Fishes & Aquarium"} />
-              <AdCategory AdCategory={"Pet Food & Accessories"} />
-              <AdCategory AdCategory={"Dogs"} />
-              <AdCategory AdCategory={"Other Pets"} />
+              <Link to={"/post/pets"}>
+                <AdCategory AdCategory={"Fishes & Aquarium"} />
+                <AdCategory AdCategory={"Pet Food & Accessories"} />
+                <AdCategory AdCategory={"Dogs"} />
+                <AdCategory AdCategory={"Other Pets"} />
+              </Link>
             </>
           )}
         </div>
