@@ -17,12 +17,14 @@ import SpareParts from "./Pages/DetailsForm/Spare/SpareParts";
 import Pages from "./Pages/Pages";
 import Post from "./Pages/Post";
 import PostForm from "./Pages/PostForm";
+import SinglePage from "./Pages/SinglePages/SinglePage";
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Pages />} />
+        <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars" element={<CarsDetails />} />
         <Route path="/post/motorcycle" element={<MotorCycleDetails />} />

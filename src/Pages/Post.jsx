@@ -23,7 +23,7 @@ const Post = () => {
       <h1 className="text-2xl sm:text-3xl font-bold font-poppins text-slate-900 mb-5">
         POST YOUR AD
       </h1>
-      <div className="w-1/2 h-auto bg-blue-200 rounded-lg flex overflow-hidden">
+      <div className="w-1/2 h-auto rounded-lg flex">
         <div className="w-1/2 bg-black">
           <Ad
             handleClick={handleClick}
