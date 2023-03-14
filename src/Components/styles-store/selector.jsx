@@ -9,7 +9,7 @@ const Selector = (props) => {
         id="combo-box-demo"
         options={props.brands}
         sx={{ width: 400 }}
-        renderInput={(params) => <TextField {...params} label={props.label} />}
+        renderInput={(params) => <TextField {...params} label={props.label}/>}
       />
     </div>
   );

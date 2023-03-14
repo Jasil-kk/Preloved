@@ -1,4 +1,3 @@
-import { Favorite } from "@mui/icons-material";
 import React, { useState } from "react";
 import { MdOutlineFavoriteBorder } from "react-icons/md"
 import { Link } from "react-router-dom";
@@ -14,9 +13,9 @@ const Banner = () => {
   return (
     <div className="w-full h-auto flex flex-wrap justify-center gap-10 px-10 pt-16 pb-24  sm:pt-28 sm:px-40 relative">
       
-      {Array.from({ length: itemsToShow }).map((_, idx) => (
+      {Array.from({ length: itemsToShow }).map((_, idx,index) => (
         <Link to={"/singlepage"}>
-        <div className="banner-card w-80 h-96 rounded-xl border border-gray-300 overflow-hidden relative">
+        <div className="banner-card w-80 h-96 rounded-xl border border-gray-300 overflow-hidden relative" key={index}>
             <span className="absolute right-3 top-3 text-3xl cursor-pointer z-10"><MdOutlineFavoriteBorder className="text-slate-500 hover:text-pink-500"/></span>
           <div className="image-section w-full h-1/2 overflow-hidden">
             <img

@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import LoginPage from "./Components/LoginPage";
+import RegisterPage from "./Components/RegisterPage";
 import BicyclesDetails from "./Pages/DetailsForm/Bikes/BicyclesDetails";
 import MotorCycleDetails from "./Pages/DetailsForm/Bikes/MotorCycleDetails";
 import ScootersDetails from "./Pages/DetailsForm/Bikes/ScootersDetails";
@@ -16,14 +18,16 @@ import CommercialVehicles from "./Pages/DetailsForm/Spare/CommercialVehicles";
 import SpareParts from "./Pages/DetailsForm/Spare/SpareParts";
 import Pages from "./Pages/Pages";
 import Post from "./Pages/Post";
-import PostForm from "./Pages/PostForm";
 import SinglePage from "./Pages/SinglePages/SinglePage";
+
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path="/" element={<Pages />} />
+        <Route path="/register" element={<RegisterPage/>}/>
+        <Route path="/login" element={<LoginPage/>}/>
         <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars" element={<CarsDetails />} />

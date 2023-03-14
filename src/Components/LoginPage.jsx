@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -8,8 +8,24 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import { GoogleLogin } from '@react-oauth/google';
+import { GoogleOAuthProvider } from '@react-oauth/google';
+import { useDispatch } from "react-redux";
+import { signInApi } from "../Store/AuthSlice";
+import { Link, useNavigate } from "react-router-dom";
 
 const LoginPage = ({ setShowModal }) => {
+
+  const [data, setData] = useState();
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(signInApi({data,navigate}))
+  }
+
 
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -21,6 +37,11 @@ const LoginPage = ({ setShowModal }) => {
 
   return (
     <>
+
+<GoogleOAuthProvider clientId="92970027491-m7arhevv6ub2hgq19i6jj8q0f0ft47ub.apps.googleusercontent.com">
+         
+         
+
       <div className="fixed flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
         <div className="w-96 h-auto bg-slate-50 m-5 pt-8 rounded-lg relative">
           <span
@@ -36,9 +57,10 @@ const LoginPage = ({ setShowModal }) => {
             <TextField
               type="text"
               id="outlined-basic"
-              label="Email"
+              label="Username"
               variant="outlined"
               className="w-full h-10 sm:h-12 text-xl pl-4 font-poppins"
+              onChange={(e) => setData({...data , username : e.target.value})}
             />
             <FormControl  variant="outlined" className="w-full h-10 sm:h-12 text-xl pl-4 font-poppins">
               <InputLabel htmlFor="outlined-adornment-password">
@@ -60,9 +82,19 @@ const LoginPage = ({ setShowModal }) => {
                   </InputAdornment>
                 }
                 label="Password"
+                onChange={(e) => setData({...data , password : e.target.value})}
               />
             </FormControl>
-            <button
+            <GoogleLogin
+            onSuccess={credentialResponse => {
+              console.log(credentialResponse);
+            }}
+            onError={() => {
+              console.log('Login Failed');
+            }}
+          />
+          <Link to={"/register"}>Register</Link>
+            <button onClick={handleSubmit}
               type="submit"
               className="w-52 h-10 sm:h-12 bg-blue-500 rounded-lg text-xl text-white font-poppins hover:bg-blue-600"
             >
@@ -70,8 +102,10 @@ const LoginPage = ({ setShowModal }) => {
             </button>
           </form>
         </div>
+      
       </div>
       <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
+      </GoogleOAuthProvider>
     </>
   );
 };
