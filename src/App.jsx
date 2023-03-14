@@ -16,6 +16,7 @@ import TabletsDetails from "./Pages/DetailsForm/Mobiles/TabletsDetails";
 import PetsDetails from "./Pages/DetailsForm/Pets/PetsDetails";
 import CommercialVehicles from "./Pages/DetailsForm/Spare/CommercialVehicles";
 import SpareParts from "./Pages/DetailsForm/Spare/SpareParts";
+import EditProfile from "./Pages/EditProfile";
 import Pages from "./Pages/Pages";
 import Post from "./Pages/Post";
 import SinglePage from "./Pages/SinglePages/SinglePage";
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Pages />} />
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/profile" element={<EditProfile/>}/>
         <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars" element={<CarsDetails />} />

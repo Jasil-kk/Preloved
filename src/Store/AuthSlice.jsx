@@ -9,6 +9,7 @@ export const registerApi = createAsyncThunk("auth/registerApi", async(input) => 
     const respond = await axiosApi.post("/user/signup", input.data);
     console.log(respond);
     input.navigate("/")
+    return respond.data
 })
 
 // login
@@ -21,7 +22,7 @@ export const signInApi = createAsyncThunk("auth/signInApi", async(input) => {
         localStorage.setItem("token",respond?.data?.tokenRole?.token);
         input.navigate("/post")
     }
-    return respond.data
+    // return respond.data
 })
 
 // logout
@@ -33,7 +34,7 @@ export const signOutApi = createAsyncThunk("auth/signOutApi", async({navigate}) 
     localStorage.removeItem("token");
     navigate("/");
 
-    return respond.data
+    // return respond.data
 })
 
 
@@ -56,6 +57,7 @@ const authSlice = createSlice({
             console.log("register pending");
         },
         [registerApi.fulfilled]:(state, action) => {
+            state.user = action.payload
             console.log("register success");
         },
         [registerApi.pending]:(state) => {

@@ -12,7 +12,7 @@ axiosApi.interceptors.request.use(function(config){
     if(token) {
         config.headers["Authorization"] = "Token" + token;
     } else {
-        console.log("something went wrong");
+        console.log("error");
     }
     return config
 })

@@ -5,7 +5,7 @@ import LoginPage from "./LoginPage";
 import Avatar from "@mui/material/Avatar";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
 import { signOutApi } from "../Store/AuthSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -19,6 +19,11 @@ const NavBar = () => {
   const handleLogout = () => {
     dispatch(signOutApi(navigate));
   };
+
+  const { user } = useSelector((state) => state.auth);
+
+  const profile = user?.result;
+  console.log(profile);
 
   return (
     <nav className="w-full bg-blue-500 h-32 sm:h-20 md:h-16 flex flex-wrap justify-around items-center fixed top-0 left-0 z-20">
@@ -40,26 +45,20 @@ const NavBar = () => {
         onClick={() => setShow(!show)}
         className="relative cursor-pointer font-poppins"
       >
-        <Avatar
-          alt="Remy Sharp"
-          src=""
-          sx={{ width: 50, height: 50 }}
-        />
+        <Avatar alt="Remy Sharp" src="" sx={{ width: 50, height: 50 }} />
         {show && (
           <div className="absolute top-14 left-0 w-60 h-auto p-5 bg-slate-50 border border-slate-600 flex flex-col justify-center rounded-lg">
             <span className="flex items-center justify-between">
               <div>
                 <p className="text-slate-600 text-sm">Hello,</p>
-                <h1 className="text-slate-800 text-3xl font-semibold">Jasil</h1>
+                <h1 className="text-slate-800 text-3xl font-semibold">
+                  {profile?.name}
+                </h1>
               </div>
-              <Avatar
-                alt="Remy Sharp"
-                src=""
-                sx={{ width: 70, height: 70 }}
-              />
+              <Avatar alt="Remy Sharp" src="" sx={{ width: 70, height: 70 }} />
             </span>
             <Link
-              to={""}
+              to={"/profile"}
               className="text-slate-600 text-md underline underline-offset-2"
             >
               edit profile
@@ -70,7 +69,10 @@ const NavBar = () => {
               </span>{" "}
               My ADS
             </button>
-            <button onClick={handleLogout} className="mt-2 w-full h-10 bg-red-600 text-slate-50 text-lg rounded-lg">
+            <button
+              onClick={handleLogout}
+              className="mt-2 w-full h-10 bg-red-600 text-slate-50 text-lg rounded-lg"
+            >
               Logout
             </button>
           </div>

@@ -11,6 +11,7 @@ const InputField = (props) => {
         label={props.label}
         variant="outlined"
         helperText={props.helperText}
+        value={props.value}
       />
     </div>
   );
