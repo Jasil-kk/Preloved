@@ -20,9 +20,10 @@ export const signInApi = createAsyncThunk("auth/signInApi", async(input) => {
     if (respond?.data?.tokenRole?.token) {
         console.log(respond?.data?.tokenRole?.token);
         localStorage.setItem("token",respond?.data?.tokenRole?.token);
+        localStorage.setItem("name",respond?.data?.userD?.name);
         input.navigate("/post")
     }
-    // return respond.data
+    return respond.data
 })
 
 // logout
@@ -32,6 +33,7 @@ export const signOutApi = createAsyncThunk("auth/signOutApi", async({navigate}) 
     const respond = await axiosApi.post("/auth/user-logout",token);
     console.log(respond);
     localStorage.removeItem("token");
+    localStorage.removeItem("name");
     navigate("/");
 
     // return respond.data
@@ -69,7 +71,9 @@ const authSlice = createSlice({
         },
         [signInApi.fulfilled]:(state, action) => {
             console.log("login success");
-            state.token = action.payload.tokenRole.token;
+            state.user = action.payload.tokenRole;
+            // state.token = action.payload.tokenRole.token;
+           
         },
         [signInApi.rejected]:(state) => {
             console.log("login rejected");

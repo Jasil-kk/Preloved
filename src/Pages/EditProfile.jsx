@@ -3,6 +3,7 @@ import IconInput from "../Components/styles-store/IconInput";
 import InputField from "../Components/styles-store/InputField";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import BackNav from "../Components/BackNav";
 
 const EditProfile = () => {
   const [imageSrc, setImageSrc] = useState("");
@@ -13,6 +14,8 @@ const EditProfile = () => {
   };
 
   return (
+    <>
+    <BackNav />
     <div className="w-full h-auto py-10 bg-slate-200 flex justify-center items-center">
       <div className="w-1/3 h-auto bg-slate-50 border border-slate-400">
         <div className="p-3 border-b border-slate-400">
@@ -67,6 +70,7 @@ const EditProfile = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

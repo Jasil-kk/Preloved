@@ -21,7 +21,7 @@ const CarsDetails = () => {
     <>
       <PostForm>
         <div className="p-5 border-b border-blue-500">
-          <Selector brands={Brands} label={"Brand *"} />
+          <Selector brands={Brands} label={"Brand *"} value={"jasil"}/>
           <YearPicker />
           <FuelSelector />
           <Transmission />

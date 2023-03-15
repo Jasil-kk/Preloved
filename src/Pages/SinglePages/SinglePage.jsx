@@ -1,8 +1,11 @@
 import React from "react";
+import BackNav from "../../Components/BackNav";
 import ImageSwiper from "../../Components/styles-store/ImageSwiper";
 
 const SinglePage = () => {
   return (
+    <>
+    <BackNav/>
     <div className="w-full h-auto bg-slate-50 p-10 flex justify-center items-center font-poppins">
       <div className="flex flex-col gap-2 justify-center items-center md:items-start">
         <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-5">
@@ -33,6 +36,7 @@ const SinglePage = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
