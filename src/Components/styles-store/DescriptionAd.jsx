@@ -1,16 +1,20 @@
-import React from "react";
-import TextField from "@mui/material/TextField";
+import React, { useState } from "react";
+import DescriptionInput from "./DescriptionInput";
 
 const DescriptionAd = () => {
+  const [inputValue, setInputValue] = useState();
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+  console.log(inputValue);
   return (
     <div className="mt-8">
-      <TextField
-        id="outlined-multiline-static"
-        label="Description *"
-        multiline
-        rows={4}
-        sx={{ width: 400 }}
-        helperText="Include condition, features and reason for selling"
+      <DescriptionInput
+        label={"Description *"}
+        helperText={"Include condition, features and reason for selling"}
+        value={inputValue}
+        onChange={handleChange}
       />
     </div>
   );

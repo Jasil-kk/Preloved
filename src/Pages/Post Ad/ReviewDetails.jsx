@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import IconInput from "../../Components/styles-store/IconInput";
 import InputField from "../../Components/styles-store/InputField";
 import IconButton from "@mui/material/IconButton";
@@ -6,6 +6,18 @@ import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 const ReviewDetails = () => {
   const [imageSrc, setImageSrc] = useState("");
+  const [inputValue, setInputValue] = useState();
+  const [inputValue2, setInputValue2] = useState();
+
+  const handleChange = (e) => {
+    setInputValue(e.target.value);
+  };
+  console.log(inputValue);
+
+  const handleChange2 = (e) => {
+    setInputValue2(e.target.value);
+  };
+  console.log(inputValue2);
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
@@ -38,7 +50,12 @@ const ReviewDetails = () => {
             </div>
             {imageSrc && <img className="" src={imageSrc} alt="Selected" />}
           </div>
-          <InputField type={"text"} label={"Name"} />
+          <InputField
+            type={"text"}
+            label={"Name"}
+            value={inputValue}
+            onChange={handleChange}
+          />
         </div>
         <h3 className="text-xl mt-8 font-semibold">
           Let's verify your account
@@ -51,6 +68,8 @@ const ReviewDetails = () => {
           startAdornment={"+91"}
           label={"Mobile Phone Number"}
           type={"number"}
+          value={inputValue2}
+          onChange={handleChange2}
         />
       </div>
     </div>

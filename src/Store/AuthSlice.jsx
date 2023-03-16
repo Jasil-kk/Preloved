@@ -34,6 +34,7 @@ export const signOutApi = createAsyncThunk("auth/signOutApi", async({navigate}) 
     console.log(respond);
     localStorage.removeItem("token");
     localStorage.removeItem("name");
+    window.location.reload()
     navigate("/");
 
     // return respond.data
@@ -72,7 +73,7 @@ const authSlice = createSlice({
         [signInApi.fulfilled]:(state, action) => {
             console.log("login success");
             state.user = action.payload.tokenRole;
-            // state.token = action.payload.tokenRole.token;
+            state.token = action.payload.tokenRole.token;
            
         },
         [signInApi.rejected]:(state) => {

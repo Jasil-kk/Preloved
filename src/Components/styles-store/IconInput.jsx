@@ -20,6 +20,8 @@ const IconInput = (props) => {
           }
           label={props.label}
           type={props.type}
+          value={props.value}
+          onChange={props.onChange}
         />
       </FormControl>
     </div>

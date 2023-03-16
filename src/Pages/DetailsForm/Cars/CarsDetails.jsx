@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PostForm from "../../PostForm";
 import DescriptionAd from "../../../Components/styles-store/DescriptionAd";
 import FuelSelector from "../../../Components/styles-store/FuelSelector";
@@ -10,19 +10,29 @@ import Transmission from "../../../Components/styles-store/Transmission";
 import YearPicker from "../../../Components/styles-store/YearPicker";
 
 const CarsDetails = () => {
+
+const [inputValue, setInputValue] = useState("");
+
+const handleChange = (e,newvalue) => {
+  setInputValue(newvalue);
+}
+console.log(inputValue);
+
+
   const Brands = [
-    { label: "Honda" },
-    { label: "maruti-suzuki" },
-    { label: "Hyundai" },
-    { label: "Tata" },
+     "Honda",
+     "maruti-suzuki",
+     "Hyundai",
+     "Tata",
   ];
+
 
   return (
     <>
       <PostForm>
         <div className="p-5 border-b border-blue-500">
-          <Selector brands={Brands} label={"Brand *"} value={"jasil"}/>
-          <YearPicker />
+          <Selector brands={Brands} label={"Brand *"} onChange={handleChange} value={inputValue}/>
+          <YearPicker/>
           <FuelSelector />
           <Transmission />
           <KMdriven />

@@ -20,9 +20,7 @@ const NavBar = () => {
 
   const handleLogout = () => {
     dispatch(signOutApi(navigate));
-    window.location.reload();
   };
-  useEffect(() => {}, [token]);
 
   return (
     <nav className="w-full bg-blue-500 h-32 sm:h-20 md:h-16 flex flex-wrap justify-around items-center fixed top-0 left-0 z-20">
@@ -52,7 +50,11 @@ const NavBar = () => {
             onClick={() => setShow(!show)}
             className="relative cursor-pointer font-poppins"
           >
-            <Avatar alt="Remy Sharp" src="" sx={{ width: 50, height: 50 }} />
+            <Avatar
+              alt="Remy Sharp"
+              src="https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=1600"
+              sx={{ width: 50, height: 50 }}
+            />
             {show && (
               <div className="absolute top-14 -left-24 w-60 h-auto p-5 bg-slate-50 border border-slate-600 flex flex-col justify-center rounded-lg">
                 <span className="flex items-center justify-between">
@@ -64,7 +66,7 @@ const NavBar = () => {
                   </div>
                   <Avatar
                     alt="Remy Sharp"
-                    src=""
+                    src="https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     sx={{ width: 70, height: 70 }}
                   />
                 </span>

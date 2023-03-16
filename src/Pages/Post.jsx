@@ -8,6 +8,7 @@ import { GiCarDoor } from "react-icons/gi";
 import Ad from "../Components/styles-store/ad";
 import AdCategory from "../Components/styles-store/adCategory";
 import { Link } from "react-router-dom";
+import BackNav from "../Components/BackNav";
 
 const Post = () => {
   const [show, setShow] = useState({});
@@ -19,6 +20,8 @@ const Post = () => {
   };
 
   return (
+    <>
+    <BackNav/>
     <div className="w-full h-screen bg-slate-100 flex justify-center items-center flex-col">
       <h1 className="text-2xl sm:text-3xl font-bold font-poppins text-slate-900 mb-5">
         POST YOUR AD
@@ -163,6 +166,7 @@ const Post = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

@@ -1,43 +1,57 @@
-import React from "react";
+import React, { useState } from "react";
 import Selector from "../../Components/styles-store/selector";
 
 const LocationAdder = () => {
+
+  const [inputValue, setInputValue] = useState("");
+  const [inputValue2, setInputValue2] = useState("");
+
+  const handleChange = (e,newvalue) => {
+    setInputValue(newvalue);
+  }
+  console.log(inputValue);
+
+  const handleChange2 = (e,newvalue2) => {
+    setInputValue2(newvalue2);
+  }
+  console.log(inputValue2);
+
   const Districts = [
-    { label: "Kozhikkode" },
-    { label: "Malappuram" },
-    { label: "Wayanad" },
-    { label: "kasarkode" },
-    { label: "Thiruvanathapuram" },
-    { label: "Kannur" },
-    { label: "Thrissur" },
-    { label: "Eranakulam" },
-    { label: "Alappuzha" },
-    { label: "Pathanmthitta" },
-    { label: "Idukki" },
-    { label: "Palakkad" },
-    { label: "Kottayam" },
+     "Kozhikkode" ,
+     "Malappuram" ,
+     "Wayanad" ,
+     "kasarkode" ,
+     "Thiruvanathapuram" ,
+     "Kannur" ,
+     "Thrissur" ,
+     "Eranakulam" ,
+     "Alappuzha" ,
+     "Pathanmthitta" ,
+     "Idukki" ,
+     "Palakkad" ,
+     "Kottayam" ,
   ];
   const City = [
-    { label: "Malappuram" },
-    { label: "Kozhikkode" },
-    { label: "Kakkodi" },
-    { label: "Kottakkal" },
-    { label: "Tirur" },
-    { label: "Tanur" },
-    { label: "Ponnani" },
-    { label: "Kondotty" },
-    { label: "Edappal" },
-    { label: "Chalakkudy" },
-    { label: "Kochi" },
-    { label: "Trivantrum" },
-    { label: "Mannarkad" },
-    { label: "Pandikkad" },
-    { label: "Melattur" },
-    { label: "Panakkad" },
-    { label: "Kunnummal" },
-    { label: "Kunnamkulam" },
-    { label: "Pookotur" },
-    { label: "Chelari" },
+     "Malappuram" ,
+     "Kozhikkode" ,
+     "Kakkodi" ,
+     "Kottakkal" ,
+     "Tirur" ,
+     "Tanur" ,
+     "Ponnani" ,
+     "Kondotty" ,
+     "Edappal" ,
+     "Chalakkudy" ,
+     "Kochi" ,
+     "Trivantrum" ,
+     "Mannarkad" ,
+     "Pandikkad" ,
+     "Melattur" ,
+     "Panakkad" ,
+     "Kunnummal" ,
+     "Kunnamkulam" ,
+     "Pookotur" ,
+     "Chelari" ,
   ];
 
   return (
@@ -45,8 +59,8 @@ const LocationAdder = () => {
       <h2 className="text-2xl font-semibold text-slate-800 ">
         CONFIRM YOUR LOCATION
       </h2>
-      <Selector brands={Districts} label={"District *"} />
-      <Selector brands={City} label={"City *"} />
+      <Selector brands={Districts} label={"District *"} onChange={handleChange} value={inputValue}/>
+      <Selector brands={City} label={"City *"} onChange={handleChange2} value={inputValue2}/>
     </div>
   );
 };
