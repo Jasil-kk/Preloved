@@ -37,7 +37,12 @@ export const signOutApi = createAsyncThunk("auth/signOutApi", async({navigate}) 
     window.location.reload()
     navigate("/");
 
-    // return respond.data
+    return respond.data
+})
+
+export const forgetPasswordApi = createAsyncThunk("auth/forgetPasswordApi", async(input) => {
+    const respond = await axiosApi.post("/user/forgotpassword",input);
+    return respond.data
 })
 
 
@@ -90,6 +95,18 @@ const authSlice = createSlice({
         },
         [signOutApi.rejected]:(state) => {
             console.log("logout rejected");
+        },
+          // forgotPassword
+          [forgetPasswordApi.pending]:(state) => {
+            console.log("forgot pending");
+        },
+        [forgetPasswordApi.fulfilled]:(state, action) => {
+            state.message = action.payload.message;
+            console.log("forgot success");
+           
+        },
+        [forgetPasswordApi.rejected]:(state) => {
+            console.log("forgot rejected");
         },
     }
 })

@@ -1,38 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import DescriptionAd from "../../../Components/styles-store/DescriptionAd";
 import Selector from "../../../Components/styles-store/selector";
 import TitleAd from "../../../Components/styles-store/TitleAd";
 import PostForm from "../../PostForm";
 
 const MobilePhoneDetails = () => {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleChange = (e, newvalue) => {
+    setInputValue(newvalue);
+  };
+  console.log(inputValue);
+
   const Brands = [
-    { label: "Iphone" },
-    { label: "Samsung" },
-    { label: "Mi" },
-    { label: "Vivo" },
-    { label: "Oppo" },
-    { label: "Realme" },
-    { label: "Asus" },
-    { label: "Blackberry" },
-    { label: "Infix" },
-    { label: "Oneplus" },
-    { label: "Nothing" },
-    { label: "Nokia"},
-    { label: "Google pixel"},
-    { label: "Lenovo"},
-    { label: "Others"},
+    "Iphone",
+    "Samsung",
+    "Mi",
+    "Vivo",
+    "Oppo",
+    "Realme",
+    "Asus",
+    "Blackberry",
+    "Infix",
+    "Oneplus",
+    "Nothing",
+    "Nokia",
+    "Google pixel",
+    "Lenovo",
+    "Others",
   ];
 
   return (
     <>
       <PostForm>
         <div className="p-5 border-b border-blue-500">
-          <Selector brands={Brands} label={"Brand *"} />
-          <TitleAd/>
-        <DescriptionAd />
+          <Selector
+            brands={Brands}
+            label={"Brand *"}
+            onChange={handleChange}
+            value={inputValue}
+          />
+          <TitleAd />
+          <DescriptionAd />
         </div>
       </PostForm>
-
     </>
   );
 };

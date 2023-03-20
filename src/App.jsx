@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
+import ChangePassword from "./Components/ChangePassword";
+import ForgetPassword from "./Components/ForgetPassword";
 import LoginPage from "./Components/LoginPage";
 import RegisterPage from "./Components/RegisterPage";
 import BicyclesDetails from "./Pages/DetailsForm/Bikes/BicyclesDetails";
@@ -29,6 +31,8 @@ function App() {
         <Route path="/" element={<Pages />} />
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/forgetpassword" element={<ForgetPassword/>}/>
+        <Route path="/changepassword" element={<ChangePassword/>}/>
         <Route path="/profile" element={<EditProfile/>}/>
         <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />

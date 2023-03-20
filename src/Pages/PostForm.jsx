@@ -1,4 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { postApi } from '../Store/PostSlice'
 import LocationAdder from './Post Ad/LocationAdder'
 import PhotoUploader from './Post Ad/PhotoUploader'
 import PostNowBtn from './Post Ad/PostNowBtn'
@@ -6,22 +9,42 @@ import ReviewDetails from './Post Ad/ReviewDetails'
 import SetPrice from './Post Ad/SetPrice'
 
 const PostForm = ({children}) => {
+
+  const [input, setInput] = useState({});
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if(input) {
+      dispatch(postApi({input,navigate}))
+    }
+  }
+
+
+
+  const pathName = window.location.pathname;
+  console.log(pathName);
+
+
+
   return (
     <div className='w-full h-auto pb-20 bg-slate-200 flex flex-col items-center font-poppins'>
         <h1 className='text-3xl font-bold mt-20'>POST YOUR AD</h1>
         <div className='w-1/2 h-auto bg-slate-50 border border-blue-300'>
             <div className='border-b p-5 border-blue-500'>
             <h2 className='text-2xl font-semibold text-slate-800'>SELECTED CATEGORY</h2>
-            <h6 className='text-lg text-slate-600 mt-2'>Cars/Car</h6>
+            <h6 className='text-lg text-slate-600 mt-2'>{pathName}</h6>
             </div>
             <div className=''>
                 <h1 className='text-2xl font-semibold mt-5 ml-5'>INCLUDE SOME DETAILS</h1>
                 <div>{children}</div>
-                <SetPrice/>
-                <PhotoUploader />
-                <LocationAdder />
-                <ReviewDetails />
-                <PostNowBtn />
+                <SetPrice setInput={setInput}/>
+                <PhotoUploader setInput={setInput}/>
+                <LocationAdder setInput={setInput}/>
+                <ReviewDetails setInput={setInput}/>
+                <PostNowBtn onClick={handleSubmit}/>
             </div>
         </div>
     </div>

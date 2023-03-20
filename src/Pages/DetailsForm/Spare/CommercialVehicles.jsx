@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import DescriptionAd from "../../../Components/styles-store/DescriptionAd";
 import KMdriven from "../../../Components/styles-store/KMdriven";
 import Selector from "../../../Components/styles-store/selector";
@@ -7,20 +7,32 @@ import YearPicker from "../../../Components/styles-store/YearPicker";
 import PostForm from "../../PostForm";
 
 const CommercialVehicles = () => {
+  const [inputValue, setInputValue] = useState("");
+
+  const handleChange = (e, newvalue) => {
+    setInputValue(newvalue);
+  };
+  console.log(inputValue);
+
   const Brands = [
-    { label: "Auto-rickshas & E-rickshas" },
-    { label: "Buses" },
-    { label: "Trucks" },
-    { label: "Heavy Machinery" },
-    { label: "Scrap Cars" },
-    { label: "Others" },
+    "Auto-rickshas & E-rickshas",
+    "Buses",
+    "Trucks",
+    "Heavy Machinery",
+    "Scrap Cars",
+    "Others",
   ];
 
   return (
     <>
       <PostForm>
         <div className="p-5 border-b border-blue-500">
-          <Selector brands={Brands} label={"Type *"} />
+          <Selector
+            brands={Brands}
+            label={"Type *"}
+            onChange={handleChange}
+            value={inputValue}
+          />
           <YearPicker />
           <KMdriven />
           <TitleAd />

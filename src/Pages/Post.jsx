@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillCar, AiFillMobile } from "react-icons/ai";
 import { RiMotorbikeFill, RiFridgeFill } from "react-icons/ri";
 import { MdChair } from "react-icons/md";
@@ -9,15 +9,44 @@ import Ad from "../Components/styles-store/ad";
 import AdCategory from "../Components/styles-store/adCategory";
 import { Link } from "react-router-dom";
 import BackNav from "../Components/BackNav";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoryApi, getSubCategoryApi } from "../Store/GetCategorySlice";
 
 const Post = () => {
   const [show, setShow] = useState({});
 
-  const handleClick = (id) => {
-    const newShowState = {};
-    newShowState[id] = true;
-    setShow(newShowState);
-  };
+  // const handleClick = (id) => {
+  //   if( categoryID === id) {
+  //   const newShowState = {};
+  //   newShowState[id] = true;
+  //   setShow(newShowState);
+  // };
+  // }
+  const dispatch = useDispatch();
+
+  useEffect(()=> {
+    dispatch(getCategoryApi());
+    dispatch(getSubCategoryApi());
+  },[dispatch])
+
+  const {allCategory,allSubCategory} = useSelector((state) =>({
+    allCategory: state.allCategory.allCategory,
+    allSubCategory: state.allCategory.allSubCategory,
+  }) )
+  const categorys = allCategory?.category;
+  console.log(categorys);
+
+const subCategorys = allSubCategory?.subcategory;
+console.log(subCategorys);
+
+const handleClick = () => {
+  if("Car") {
+    console.log("helloooooo");
+  }
+  else{
+    console.log("nothing happened");
+  }
+}
 
   return (
     <>
@@ -27,14 +56,18 @@ const Post = () => {
         POST YOUR AD
       </h1>
       <div className="w-1/2 h-auto rounded-lg flex">
+        
         <div className="w-1/2 bg-black">
+        {categorys?.map((category,key) => (
           <Ad
-            handleClick={handleClick}
-            id={"cars"}
-            category={"Cars"}
+            // handleClick={handleClick(category?.categoryId?._id)}
+            onClick={handleClick}
+            key={key}
+            category={category?.categoryName}
             icon={<AiFillCar />}
           />
-          <Ad
+          ))}
+          {/* <Ad
             handleClick={handleClick}
             id={"bikes"}
             category={"Bikes"}
@@ -75,8 +108,9 @@ const Post = () => {
             id={"pets"}
             category={"Pets"}
             icon={<TbDog />}
-          />
+          /> */}
         </div>
+       
         <div className="w-1/2">
           <Link to={"/post/cars"}>
             {show["cars"] && <AdCategory AdCategory={"Cars"} />}
