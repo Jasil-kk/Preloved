@@ -21,6 +21,7 @@ import SpareParts from "./Pages/DetailsForm/Spare/SpareParts";
 import EditProfile from "./Pages/EditProfile";
 import Pages from "./Pages/Pages";
 import Post from "./Pages/Post";
+import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
 import SinglePage from "./Pages/SinglePages/SinglePage";
 
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/forgetpassword" element={<ForgetPassword/>}/>
         <Route path="/changepassword" element={<ChangePassword/>}/>
         <Route path="/profile" element={<EditProfile/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars" element={<CarsDetails />} />

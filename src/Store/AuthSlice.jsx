@@ -49,6 +49,7 @@ export const forgetPasswordApi = createAsyncThunk("auth/forgetPasswordApi", asyn
 
 const initialState = {
     user: {},
+    forgot: {},
     token: "",
     loading: false,
     error: "",
@@ -101,7 +102,7 @@ const authSlice = createSlice({
             console.log("forgot pending");
         },
         [forgetPasswordApi.fulfilled]:(state, action) => {
-            state.message = action.payload.message;
+            state.forgot = action.payload.forgot;
             console.log("forgot success");
            
         },
