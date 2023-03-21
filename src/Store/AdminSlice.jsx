@@ -5,6 +5,7 @@ import { axiosApi } from "./Axiosmethod";
 export const categoryApi = createAsyncThunk("admin/categoryApi", async(input) => {
     const respond = await axiosApi.post("/category/new",input);
     console.log(respond);
+    window.location.reload();
     return respond.data
 })
 
