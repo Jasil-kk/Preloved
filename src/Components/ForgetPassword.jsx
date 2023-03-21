@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { forgetPasswordApi } from "../Store/AuthSlice";
 
 const ForgetPassword = () => {
-    const [input, setInput] = useState({});
+    const [input, setInput] = useState();
 
     const dispatch = useDispatch();
 
@@ -25,7 +25,7 @@ const ForgetPassword = () => {
         <TextField
           className="w-full"
           id="outlined-basic"
-          type={"email"}
+          type="email"
           label="Email"
           variant="outlined"
           onChange={(e)=> setInput({...input, email: e.target.value})}

@@ -8,8 +8,8 @@ export const getCategoryApi = createAsyncThunk("get/getCategoryApi", async() => 
     return respond.data
 })
 
-export const getSubCategoryApi = createAsyncThunk("get/getSubCategoryApi", async() => {
-    const respond = await axiosApi.get("/subcategory/all");
+export const getSubCategoryApi = createAsyncThunk("get/getSubCategoryApi", async(categoryID) => {
+    const respond = await axiosApi.get("/subcategory/all",categoryID);
     console.log(respond);
     return respond.data
 })
