@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
-import { categoryApi } from "../../../Store/AdminSlice";
+import { categoryApi } from "../../../../Store/AdminSlice";
 
 const CreateCategory = ({ setShowModal }) => {
   const [input, setInput] = useState();

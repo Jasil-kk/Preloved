@@ -21,8 +21,8 @@ import SpareParts from "./Pages/DetailsForm/Spare/SpareParts";
 import EditProfile from "./Pages/EditProfile";
 import Pages from "./Pages/Pages";
 import Post from "./Pages/Post";
-import CatSingleView from "./Pages/SinglePages/AdminPage/CatSingleView";
-import CreateCategory from "./Pages/SinglePages/AdminPage/CreateCategory";
+import CatSingleView from "./Pages/SinglePages/AdminPage/Category/CatSingleView";
+import CreateCategory from "./Pages/SinglePages/AdminPage/Category/CreateCategory";
 import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
 import SinglePage from "./Pages/SinglePages/SinglePage";
 
