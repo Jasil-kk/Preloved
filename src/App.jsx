@@ -39,7 +39,7 @@ function App() {
         <Route path="/profile" element={<EditProfile/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/createcategory" element={<CreateCategory/>}/>
-        <Route path="/categorysingleView/:id" element={<CatSingleView/>}/>
+        <Route path="/categorysingleView/:name/:id" element={<CatSingleView/>}/>
         <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars" element={<CarsDetails />} />

@@ -29,6 +29,7 @@ const Dashboard = () => {
   const [showModal2, setShowModal2] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [selectedCategoryName, setSelectedCategoryName] = useState("");
 
   const { allCategory } = useSelector((state) => state.allCategory);
 
@@ -44,7 +45,7 @@ const Dashboard = () => {
     dispatch(deleteCategoryApi(selectedCategoryId));
   };
 
-  const handleOpen = () => setOpen(true);
+  // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
@@ -53,7 +54,7 @@ const Dashboard = () => {
       <div className="w-1/2 h-auto bg-slate-50 mt-8 flex flex-col items-center rounded-md">
         <h2 className="text-3xl mt-5 font-bold">Categories</h2>
         <div className="mt-8 w-[70%] flex flex-col items-center">
-          {categorys ? (
+          {categorys?.length > 0 ? (
             <>
               {categorys?.map((category, key) => (
                 <div key={key} className="w-full pb-6 flex items-center">
@@ -61,7 +62,7 @@ const Dashboard = () => {
                     <h3 className="text-xl text-slate-50">
                       {category?.categoryName}
                     </h3>
-                    <Link to={`/categorysingleView/${category?._id}`}>
+                    <Link to={`/categorysingleView/${category?.categoryName}/${category?._id}`}>
                       <button className="w-auto p-4 h-6 flex items-center rounded-md bg-blue-600 text-slate-50 transform transition duration-500 ease-in-out hover:bg-blue-700">
                         <BsFillEyeFill />
                       </button>
@@ -77,10 +78,11 @@ const Dashboard = () => {
                     <MdEdit />
                   </button>
                   <button
-                  onClick={() => {
-                    setSelectedCategoryId(category._id);
-                    setOpen(true);
-                  }}
+                    onClick={() => {
+                      setSelectedCategoryId(category._id);
+                      setSelectedCategoryName(category.categoryName);
+                      setOpen(true);
+                    }}
                     className="w-14 ml-2  h-12 bg-red-600 text-slate-50 text-2xl flex justify-center items-center rounded-md transform transition duration-500 ease-in-out hover:bg-red-700"
                   >
                     <RiDeleteBin3Fill />
@@ -89,8 +91,8 @@ const Dashboard = () => {
               ))}
             </>
           ) : (
-            <h4 className="text-xl mb-5 text-yellow-700">
-              Add Some Category You wanted
+            <h4 className="text-xl mb-5 text-red-700">
+              No categories found
             </h4>
           )}
           <button
@@ -115,10 +117,15 @@ const Dashboard = () => {
           >
             <Box sx={style}>
               <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-                <p className="font-poppins text-lg text-yellow-700 text-center">
-                  Are you sure do you really want to delete the{" "}
-                  <span className="text-xl font-semibold">Car</span> category
-                </p>
+                {categorys && categorys.length > 0 && (
+                  <p className="font-poppins text-lg text-yellow-700 text-center">
+                    Are you sure do you really want to delete the
+                    <span className="text-xl mx-1 font-semibold">
+                      {selectedCategoryName}
+                    </span>
+                    category
+                  </p>
+                )}
               </Typography>
               <button
                 onClick={handleDelete}

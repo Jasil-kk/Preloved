@@ -34,12 +34,35 @@ export const deleteCategoryApi = createAsyncThunk(
   }
 );
 
-// subCategory
+// subCategory create
 export const subCategoryApi = createAsyncThunk(
   "admin/subCategoryApi",
-  async () => {
-    const respond = await axiosApi.post("/subcategory/new");
+  async (input) => {
+    const respond = await axiosApi.post("/subcategory/new",input);
     console.log(respond);
+    window.location.reload();
+    return respond.data;
+  }
+);
+
+// subCategory update
+export const updateSubCategoryApi = createAsyncThunk(
+  "admin/updateSubCategoryApi",
+  async ({ categoryID, input }) => {
+    const respond = await axiosApi.put(`/subcategory/update/${categoryID}`, input);
+    console.log(respond);
+    window.location.reload();
+    return respond.data;
+  }
+);
+
+// category delete
+export const deleteSubCategoryApi = createAsyncThunk(
+  "admin/deleteSubCategoryApi",
+  async (categoryID) => {
+    const respond = await axiosApi.delete(`/subcategory/delete/${categoryID}`);
+    console.log(respond);
+    window.location.reload();
     return respond.data;
   }
 );
@@ -87,7 +110,7 @@ const adminSlice = createSlice({
     [deleteCategoryApi.rejected]: (state) => {
       console.log("category deletion rejected");
     },
-    // subCategory
+    // subCategory create
     [subCategoryApi.pending]: (state) => {
       console.log("subCategory pending");
     },

@@ -24,9 +24,9 @@ const Banner = () => {
                 alt="card-pic"
               />
             </div>
-            <div className="pt-5 text-section w-full h-1/2 bg-slate-100 font-poppins text-center flex  items-center flex-col">
-              <span className="text-2xl font-bold text-slate-900">Watch</span>
-              <span className="text-2xl font-bold">₹ 120000</span>
+            <div className="pt-5 px-5 text-section w-full h-1/2 bg-slate-100 font-poppins flex justify-start  flex-col">
+              <span className="text-2xl font-semibold text-slate-900">Watch</span>
+              <span className="text-2xl font-bold text-slate-900">₹ 120000</span>
               <p className="text-slate-800">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
                 liberoodi.

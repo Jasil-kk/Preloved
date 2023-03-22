@@ -23,7 +23,7 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="w-full bg-blue-500 h-32 sm:h-20 md:h-16 flex flex-wrap justify-around items-center fixed top-0 left-0 z-20">
+    <nav className="w-full bg-blue-700 h-32 sm:h-20 md:h-16 flex flex-wrap justify-around items-center fixed top-0 left-0 z-20">
       <ul className="flex gap-5 sm:gap-10 md:gap-20 text-white text-lg font-poppins">
         <li className="cursor-pointer hover:text-orange-900">Home</li>
         <li className="cursor-pointer">About</li>
@@ -42,7 +42,7 @@ const NavBar = () => {
       {token ? (
         <>
           <Link to={"/post"}>
-            <button className="w-24 h-9 rounded-xl  text-slate-900 tracking-wider drop-shadow-lg font-poppins transform transition duration-500 ease-in-out hover:scale-105">
+            <button className="bg-slate-50 w-24 h-9 rounded-xl  text-slate-900 tracking-wider drop-shadow-lg font-poppins transform transition duration-500 ease-in-out hover:scale-105">
               SELL
             </button>
           </Link>
@@ -106,3 +106,4 @@ const NavBar = () => {
 };
 
 export default NavBar;
+

@@ -9,7 +9,7 @@ export const getCategoryApi = createAsyncThunk("get/getCategoryApi", async() => 
 })
 
 export const getSubCategoryApi = createAsyncThunk("get/getSubCategoryApi", async(categoryID) => {
-    const respond = await axiosApi.get("/subcategory/all",categoryID);
+    const respond = await axiosApi.get(`/subcategory/all?categoryId=${categoryID}`);
     console.log(respond);
     return respond.data
 })
