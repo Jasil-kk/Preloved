@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { FiSearch } from "react-icons/fi";
 import { Link, useNavigate } from "react-router-dom";
 import LoginPage from "./LoginPage";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
+  const ref = useRef(null);
 
   const token = localStorage.getItem("token");
   const user = localStorage.getItem("name");
@@ -20,6 +21,20 @@ const NavBar = () => {
 
   const handleLogout = () => {
     dispatch(signOutApi(navigate));
+  };
+
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleClickOutside = (event) => {
+    if (ref.current && !ref.current.contains(event.target)) {
+      setShow(false);
+    }
   };
 
   return (
@@ -56,7 +71,7 @@ const NavBar = () => {
               sx={{ width: 50, height: 50 }}
             />
             {show && (
-              <div className="absolute top-14 -left-24 w-60 h-auto p-5 bg-slate-50 border border-slate-600 flex flex-col justify-center rounded-lg">
+              <div ref={ref} className="absolute top-14 -left-24 w-60 h-auto p-5 bg-slate-50 border border-slate-600 flex flex-col justify-center rounded-lg">
                 <span className="flex items-center justify-between">
                   <div>
                     <p className="text-slate-600 text-sm">Hello,</p>

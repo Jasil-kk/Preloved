@@ -8,11 +8,12 @@ export const getCategoryApi = createAsyncThunk("get/getCategoryApi", async() => 
     return respond.data
 })
 
-export const getSubCategoryApi = createAsyncThunk("get/getSubCategoryApi", async(categoryID) => {
-    const respond = await axiosApi.get(`/subcategory/all?categoryId=${categoryID}`);
+export const getSubCategoryApi = createAsyncThunk("get/getSubCategoryApi", async(categoryId) => {
+    const respond = await axiosApi.get(`subcategory/all?categoryId=${categoryId}`);
     console.log(respond);
     return respond.data
 })
+// ?categoryId=${categoryID}
 
 const initialState = {
     allCategory: [],

@@ -13,6 +13,7 @@ const CreateCategory = ({ setShowModal }) => {
     e.preventDefault();
     dispatch(categoryApi(input));
   };
+
   return (
     <>
       <div className="fixed flex justify-center items-center inset-0 z-50 outline-none focus:outline-none font-poppins">
