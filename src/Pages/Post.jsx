@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCategoryApi, getSubCategoryApi } from "../Store/GetCategorySlice";
 
 const Post = () => {
+  const [selectedId, setSelectedId] = useState("");
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -18,14 +19,40 @@ const Post = () => {
     allSubCategory: state.allCategory.allSubCategory,
   }));
   const categorys = allCategory?.category;
-  console.log(categorys);
 
   const subCategorys = allSubCategory?.subcategory;
 
-  console.log(subCategorys);
-
-  const handleClick = (subcategoryID) => {
-    dispatch(getSubCategoryApi(subcategoryID));
+  const handleClick = (categoryID) => {
+    dispatch(getSubCategoryApi(categoryID));
+  };
+  
+  const subcategoryPaths = {
+    car: "/post/cars",
+    motorcycle: "/post/motorcycle",
+    scooter: "/post/motorcycle",
+    sparepart: "/post/sparepart",
+    bicycle: "/post/bicycle",
+    "mobile phone": "/post/mobilephone",
+    accessories: "/post/accessories",
+    tablet: "/post/tablet",
+    "tvs,video-audio": "/post/electronic&appliances",
+    "kitchen & other appliances": "/post/electronic&appliances",
+    "computer & laptops": "/post/electronic&appliances",
+    fridges: "/post/electronic&appliances",
+    acs: "/post/electronic&appliances",
+    "washing machines": "/post/electronic&appliances",
+    "commercial & other vehicles": "/post/commercial-spare",
+    "spare parts": "/post/spare",
+    "sofa & dining": "/post/furniture",
+    "beds & wardrobes": "/post/furniture",
+    "kids furniture": "/post/furniture",
+    "other household items": "/post/furniture",
+    men: "/post/fashion",
+    women: "/post/fashion",
+    kids: "/post/fashion",
+    "fishes & aquarium": "/post/pets",
+    dogs: "/post/pets",
+    "other pets": "/post/pets",
   };
 
   return (
@@ -37,12 +64,13 @@ const Post = () => {
         </h1>
         <div className="w-1/2 h-auto rounded-lg flex">
           <div className="w-1/2">
-            {categorys?.map((category, key) => (
+            {categorys?.map((category) => (
               <Ad
+                key={category._id}
                 onClick={() => {
                   handleClick(category._id);
+                  setSelectedId(category._id);
                 }}
-                key={key}
                 category={category?.categoryName}
                 // icon={<AiFillCar />}
               />
@@ -50,14 +78,14 @@ const Post = () => {
           </div>
 
           <div className="w-1/2">
-            <Link to={"/post/cars"}>
-              {subCategorys?.map((subcategory, key) => (
-                <AdCategory
-                  key={key}
-                  AdCategory={subcategory?.subcategoryName}
-                />
-              ))}
-            </Link>
+            {subCategorys?.map((subcategory, key) => (
+              <Link
+                key={key}
+                to={`${subcategoryPaths[subcategory.subcategoryName.toLowerCase()]}/${selectedId}/${subcategory._id}`}
+              >
+                <AdCategory AdCategory={subcategory?.subcategoryName} />
+              </Link>
+            ))}
           </div>
         </div>
       </div>

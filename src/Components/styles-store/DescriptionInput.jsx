@@ -5,6 +5,7 @@ const DescriptionInput = (props) => {
   return (
     <div>
       <TextField
+        autoComplete="off"
         id="outlined-multiline-static"
         label={props.label}
         multiline

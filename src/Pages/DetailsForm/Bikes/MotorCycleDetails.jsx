@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import DescriptionAd from "../../../Components/styles-store/DescriptionAd";
 import KMdriven from "../../../Components/styles-store/KMdriven";
 import Selector from "../../../Components/styles-store/selector";
-import TitleAd from "../../../Components/styles-store/TitleAd";
 import YearPicker from "../../../Components/styles-store/YearPicker";
 import PostForm from "../../PostForm";
 
 const MotorCycleDetails = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState();
 
-  const handleChange = (e, newvalue) => {
-    setInputValue(newvalue);
-  };
-  console.log(inputValue);
+  // const dispatch = useDispatch();
+  // const handleChange = () => {
+  //   dispatch(saveInput({details:inputValue}));
+  // };
 
   const Brands = [
     "Hero Honda",
@@ -30,17 +28,14 @@ const MotorCycleDetails = () => {
   return (
     <>
       <PostForm>
-        <div className="p-5 border-b border-blue-500">
+        <div>
           <Selector
             brands={Brands}
             label={"Brand *"}
-            onChange={handleChange}
-            value={inputValue}
+            onChange={(items)=>setInputValue({...inputValue,brand:items})}
           />
           <YearPicker />
           <KMdriven />
-          <TitleAd />
-          <DescriptionAd />
         </div>
       </PostForm>
     </>

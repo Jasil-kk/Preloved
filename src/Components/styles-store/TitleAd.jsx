@@ -1,13 +1,19 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import InputField from "./InputField";
 
-const TitleAd = () => {
-  const [inputValue, setInputValue] = useState();
+const TitleAd = ({input,setInput}) => {
+  const [inputValue, setInputValue] = useState("");
+  const dispatch = useDispatch();
+
+  console.log(inputValue);
+
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
+    // dispatch(saveInput({title:inputValue}))
+    setInput({...input,title:e.target.value})
   };
-  console.log(inputValue);
 
   return (
     <div className="mt-8">

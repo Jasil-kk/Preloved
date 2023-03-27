@@ -1,20 +1,21 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import ButtonSelector from "../../../Components/styles-store/ButtonSelector";
-import DescriptionAd from "../../../Components/styles-store/DescriptionAd";
-import TitleAd from "../../../Components/styles-store/TitleAd";
 import PostForm from "../../PostForm";
 
 const SpareParts = () => {
-  const [selectedValue, setSelectedValue] = useState({});
+  const [selectedValue, setSelectedValue] = useState();
 
-  const selectValue = (e) => {
-    setSelectedValue(e.target.value);
-  };
-  console.log(selectedValue);
+  const dispatch = useDispatch();
+
+  // const selectValue = (e) => {
+  //   setSelectedValue(e.target.value);
+  //   dispatch(saveInput({ type: e.target.value }));
+  // };
   return (
     <>
       <PostForm>
-        <div className="p-5 border-b border-blue-500">
+        <div>
           <h2 className="text-md text-slate-600">Type</h2>
           <div className="flex gap-4">
             <ButtonSelector
@@ -33,8 +34,6 @@ const SpareParts = () => {
               content={"Other Spare parts"}
             />
           </div>
-          <TitleAd />
-          <DescriptionAd />
         </div>
       </PostForm>
     </>

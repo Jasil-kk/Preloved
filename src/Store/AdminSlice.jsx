@@ -67,9 +67,18 @@ export const deleteSubCategoryApi = createAsyncThunk(
   }
 );
 
+// get Post
+
+export const getPostApi = createAsyncThunk("admin/getPostApi", async () => {
+  const respond = await axiosApi.get("/product/admin/all");
+  console.log(respond);
+  return respond.data;
+})
+
 const initialState = {
   category: {},
   subCategory: {},
+  getPost: {},
 };
 
 const adminSlice = createSlice({
@@ -120,6 +129,17 @@ const adminSlice = createSlice({
     },
     [subCategoryApi.rejected]: (state) => {
       console.log("subCategory rejected");
+    },
+     // getPost
+     [getPostApi.pending]: (state) => {
+      console.log("getPost pending");
+    },
+    [getPostApi.fulfilled]: (state, action) => {
+      state.getPost = action.payload;
+      console.log("getPost success");
+    },
+    [getPostApi.rejected]: (state) => {
+      console.log("getPost rejected");
     },
   },
 });

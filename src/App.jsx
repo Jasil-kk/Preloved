@@ -6,7 +6,6 @@ import LoginPage from "./Components/LoginPage";
 import RegisterPage from "./Components/RegisterPage";
 import BicyclesDetails from "./Pages/DetailsForm/Bikes/BicyclesDetails";
 import MotorCycleDetails from "./Pages/DetailsForm/Bikes/MotorCycleDetails";
-import ScootersDetails from "./Pages/DetailsForm/Bikes/ScootersDetails";
 import SparePartsDetails from "./Pages/DetailsForm/Bikes/SparePartsDetails";
 import CarsDetails from "./Pages/DetailsForm/Cars/CarsDetails";
 import TVsVideoAudio from "./Pages/DetailsForm/Electronics/TVsVideoAudio";
@@ -24,6 +23,7 @@ import Post from "./Pages/Post";
 import CatSingleView from "./Pages/SinglePages/AdminPage/Category/CatSingleView";
 import CreateCategory from "./Pages/SinglePages/AdminPage/Category/CreateCategory";
 import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
+import Product from "./Pages/SinglePages/AdminPage/Product/Product";
 import SinglePage from "./Pages/SinglePages/SinglePage";
 
 
@@ -40,22 +40,22 @@ function App() {
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/createcategory" element={<CreateCategory/>}/>
         <Route path="/categorysingleView/:name/:id" element={<CatSingleView/>}/>
+        <Route path="/dashboard/product" element={<Product/>}/>
         <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
-        <Route path="/post/cars" element={<CarsDetails />} />
-        <Route path="/post/motorcycle" element={<MotorCycleDetails />} />
-        <Route path="/post/scooter" element={<ScootersDetails />} />
-        <Route path="/post/sparepart" element={<SparePartsDetails />} />
-        <Route path="/post/bicycle" element={<BicyclesDetails />} />
-        <Route path="/post/mobilephone" element={<MobilePhoneDetails />} />
-        <Route path="/post/accessories" element={<AccessoriesDetails />} />
-        <Route path="/post/tablet" element={<TabletsDetails/>}/>
-        <Route path="/post/electronic&appliances" element={<TVsVideoAudio/>}/>
-        <Route path="/post/commercial-spare" element={<CommercialVehicles/>}/>
-        <Route path="/post/spare" element={<SpareParts/>}/>
-        <Route path="/post/furniture" element={<SofaDetails/>}/>
-        <Route path="/post/fashion" element={<FashionDetails/>}/>
-        <Route path="/post/pets" element={<PetsDetails/>}/>
+        <Route path="/post/cars/:catId/:subId" element={<CarsDetails />} />
+        <Route path="/post/motorcycle/:catId/:subId" element={<MotorCycleDetails />} />
+        <Route path="/post/sparepart/:catId/:subId" element={<SparePartsDetails />} />
+        <Route path="/post/bicycle/:catId/:subId" element={<BicyclesDetails />} />
+        <Route path="/post/mobilephone/:catId/:subId" element={<MobilePhoneDetails />} />
+        <Route path="/post/accessories/:catId/:subId" element={<AccessoriesDetails />} />
+        <Route path="/post/tablet/:catId/:subId" element={<TabletsDetails/>}/>
+        <Route path="/post/electronic&appliances/:catId/:subId" element={<TVsVideoAudio/>}/>
+        <Route path="/post/commercial-spare/:catId/:subId" element={<CommercialVehicles/>}/>
+        <Route path="/post/spare/:catId/:subId" element={<SpareParts/>}/>
+        <Route path="/post/furniture/:catId/:subId" element={<SofaDetails/>}/>
+        <Route path="/post/fashion/:catId/:subId" element={<FashionDetails/>}/>
+        <Route path="/post/pets/:catId/:subId" element={<PetsDetails/>}/>
       </Routes>
     </div>
   );

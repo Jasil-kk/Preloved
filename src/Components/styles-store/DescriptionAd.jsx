@@ -1,13 +1,17 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import DescriptionInput from "./DescriptionInput";
 
-const DescriptionAd = () => {
+const DescriptionAd = ({input,setInput}) => {
   const [inputValue, setInputValue] = useState();
+
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
+    // dispatch(saveInput({description:inputValue}))
+    setInput({...input,description:e.target.value})
   };
-  console.log(inputValue);
   return (
     <div className="mt-8">
       <DescriptionInput

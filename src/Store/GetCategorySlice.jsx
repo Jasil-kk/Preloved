@@ -13,7 +13,6 @@ export const getSubCategoryApi = createAsyncThunk("get/getSubCategoryApi", async
     console.log(respond);
     return respond.data
 })
-// ?categoryId=${categoryID}
 
 const initialState = {
     allCategory: [],

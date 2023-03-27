@@ -1,20 +1,22 @@
 import React, { useState } from "react";
-import DescriptionAd from "../../../Components/styles-store/DescriptionAd";
+import { useDispatch } from "react-redux";
 import KMdriven from "../../../Components/styles-store/KMdriven";
 import Selector from "../../../Components/styles-store/selector";
-import TitleAd from "../../../Components/styles-store/TitleAd";
 import YearPicker from "../../../Components/styles-store/YearPicker";
 import PostForm from "../../PostForm";
 
 const CommercialVehicles = () => {
-  const [inputValue, setInputValue] = useState("");
+  const [inputValue, setInputValue] = useState();
 
-  const handleChange = (e, newvalue) => {
-    setInputValue(newvalue);
-  };
+  const dispatch = useDispatch();
+
+  // const handleChange = (e, newvalue) => {
+  //   setInputValue(newvalue);
+  //   dispatch(saveInput({ type: newvalue }));
+  // };
   console.log(inputValue);
 
-  const Brands = [
+  const Types = [
     "Auto-rickshas & E-rickshas",
     "Buses",
     "Trucks",
@@ -26,17 +28,15 @@ const CommercialVehicles = () => {
   return (
     <>
       <PostForm>
-        <div className="p-5 border-b border-blue-500">
+        <div>
           <Selector
-            brands={Brands}
+            brands={Types}
             label={"Type *"}
             onChange={handleChange}
             value={inputValue}
           />
           <YearPicker />
           <KMdriven />
-          <TitleAd />
-          <DescriptionAd />
         </div>
       </PostForm>
     </>

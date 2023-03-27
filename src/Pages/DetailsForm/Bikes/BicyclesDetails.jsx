@@ -1,23 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import ButtonSelector from "../../../Components/styles-store/ButtonSelector";
-import DescriptionAd from "../../../Components/styles-store/DescriptionAd";
-import TitleAd from "../../../Components/styles-store/TitleAd";
 import PostForm from "../../PostForm";
 
 const BicyclesDetails = () => {
+const [selectedValue, setSelectedValue] = useState();
+
+const dispatch = useDispatch();
+
+// const selecterValue = (e) => {
+//   setSelectedValue(e.target.value);
+//   dispatch(saveInput({ brand: e.target.value }));
+// };
+
   return (
     <>
       <PostForm>
-        <div className="p-5 border-b border-blue-500">
-        <h2 className="text-md text-slate-600">Brand *</h2>
-        <div className="flex gap-4">
-          <ButtonSelector content={"Hercules"} />
-          <ButtonSelector content={"Hero"} />
-          <ButtonSelector content={"Other Brands"} />
+        <div>
+          <h2 className="text-md text-slate-600">Brand *</h2>
+          <div className="flex gap-4">
+            <ButtonSelector onClick={selecterValue} value="Hercules" content={"Hercules"} />
+            <ButtonSelector onClick={selecterValue} value="Hero" content={"Hero"} />
+            <ButtonSelector onClick={selecterValue} value="Other Brands" content={"Other Brands"} />
           </div>
-          <TitleAd />
-         
-          <DescriptionAd />
         </div>
       </PostForm>
     </>

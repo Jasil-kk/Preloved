@@ -1,14 +1,14 @@
 import React from "react";
 
-const ButtonSelector = (props) => {
+const ButtonSelector = ({ onClick, value, content }) => {
   return (
     <div>
       <button
-      onClick={props.onClick}
-        value={props.value}
+        onClick={onClick}
+        value={value}
         className="h-10 px-3 border border-slate-400 rounded-md hover:bg-blue-200 active:bg-blue-300 focus:bg-blue-300"
       >
-        {props.content}
+        {content}
       </button>
     </div>
   );

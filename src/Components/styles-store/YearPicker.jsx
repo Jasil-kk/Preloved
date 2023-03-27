@@ -1,13 +1,16 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import InputField from "./InputField";
 
-const YearPicker = () => {
+const YearPicker = ({onChange}) => {
   const [inputValue, setInputValue] = useState();
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
-  console.log(inputValue);
+  const dispatch = useDispatch();
+
+  // const handleChange = (e) => {
+  //   setInputValue(e.target.value);
+  //   dispatch(saveInput(inputValue ));
+  // };
 
   return (
     <div className="mt-8">
@@ -15,7 +18,7 @@ const YearPicker = () => {
         type={"number"}
         label={"Year *"}
         value={inputValue}
-        onChange={handleChange}
+        onChange={onChange}
       />
     </div>
   );

@@ -1,11 +1,13 @@
-import React from 'react'
-import PhotoBox from '../../Components/styles-store/PhotoBox';
+import React from "react";
+import PhotoBox from "../../Components/styles-store/PhotoBox";
 
 const PhotoUploader = () => {
   return (
-    <div className='p-5 border-b border-blue-500'>
-        <h2 className='text-2xl font-semibold text-slate-800'>UPLOAD UPTO 5 PHOTOS</h2>
-        <div className='w-96 mt-5 flex flex-wrap gap-5'>
+    <div className="p-5 border-b border-blue-500">
+      <h2 className="text-2xl font-semibold text-slate-800">
+        UPLOAD UPTO 5 PHOTOS
+      </h2>
+      <div className="w-96 mt-5 flex flex-wrap gap-5">
         <PhotoBox />
         <PhotoBox />
         <PhotoBox />
@@ -16,10 +18,9 @@ const PhotoUploader = () => {
         <PhotoBox />
         <PhotoBox />
         <PhotoBox />
-        </div>
-
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default PhotoUploader
+export default PhotoUploader;

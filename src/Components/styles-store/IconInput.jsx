@@ -4,24 +4,24 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 
-const IconInput = (props) => {
+const IconInput = ({inputLabel,label,type,value,onChange,startAdornment}) => {
   return (
     <div>
       <FormControl fullWidth sx={{mt : 2 , width: 400 }}>
         <InputLabel htmlFor="outlined-adornment-amount">
-          {props.inputLabel}
+          {inputLabel}
         </InputLabel>
         <OutlinedInput
           id="outlined-adornment-amount"
           startAdornment={
             <InputAdornment position="start">
-              {props.startAdornment}
+              {startAdornment}
             </InputAdornment>
           }
-          label={props.label}
-          type={props.type}
-          value={props.value}
-          onChange={props.onChange}
+          label={label}
+          type={type}
+          value={value}
+          onChange={onChange}
         />
       </FormControl>
     </div>

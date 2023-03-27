@@ -5,6 +5,7 @@ const InputField = (props) => {
   return (
     <div>
       <TextField
+        autoComplete="off"
         sx={{ width: 400 }}
         type={props.type}
         id="outlined-basic"

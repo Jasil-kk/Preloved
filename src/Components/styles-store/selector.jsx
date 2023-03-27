@@ -1,21 +1,37 @@
-import React from "react";
-import { TextField, Autocomplete } from "@mui/material";
+import React, { useState } from "react";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 
-const Selector = ({brands,label,value,onChange}) => {
+const Selector = ({ brands, label, onChange, name }) => {
+  const [items, setItems] = useState("");
 
-
+  const handleChange = (event) => {
+    const selectedValue = event.target.value;
+    setItems(selectedValue);
+    onChange(selectedValue);
+  };
+  console.log(items);
   return (
     <div className="mt-5">
-      <Autocomplete
-        disablePortal
-        id="combo-box-demo"
-        options={brands}
-        sx={{ width: 400 }}
-        renderInput={(params) => <TextField {...params} label={label}/>}
-        value={value}
-        onChange={onChange}
-        freeSolo
-      />
+      <FormControl sx={{ width: 400 }}>
+        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        <Select
+          name={name}
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={items}
+          label={label}
+          onChange={handleChange}
+        >
+          {brands.map((name) => (
+            <MenuItem key={name} value={name}>
+              {name}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
     </div>
   );
 };
