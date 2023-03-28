@@ -30,7 +30,7 @@ const Post = () => {
     car: "/post/cars",
     motorcycle: "/post/motorcycle",
     scooter: "/post/motorcycle",
-    sparepart: "/post/sparepart",
+    spareparts: "/post/sparepart",
     bicycle: "/post/bicycle",
     "mobile phone": "/post/mobilephone",
     accessories: "/post/accessories",

@@ -75,6 +75,15 @@ export const getPostApi = createAsyncThunk("admin/getPostApi", async () => {
   return respond.data;
 })
 
+// delete Post
+
+export const deletePostApi = createAsyncThunk("admin/deletePostApi", async (productId) => {
+  const respond = await axiosApi.delete(`/product/admin/delete/${productId}`);
+  console.log(respond);
+  window.location.reload();
+  return respond.data;
+})
+
 const initialState = {
   category: {},
   subCategory: {},
@@ -139,6 +148,17 @@ const adminSlice = createSlice({
       console.log("getPost success");
     },
     [getPostApi.rejected]: (state) => {
+      console.log("getPost rejected");
+    },
+     // deletePost
+     [deletePostApi.pending]: (state) => {
+      console.log("getPost pending");
+    },
+    [deletePostApi.fulfilled]: (state, action) => {
+      state.getPost = action.payload;
+      console.log("getPost success");
+    },
+    [deletePostApi.rejected]: (state) => {
       console.log("getPost rejected");
     },
   },

@@ -6,16 +6,16 @@ import PostForm from "../../PostForm";
 const BicyclesDetails = () => {
 const [selectedValue, setSelectedValue] = useState();
 
-const dispatch = useDispatch();
 
-// const selecterValue = (e) => {
-//   setSelectedValue(e.target.value);
-//   dispatch(saveInput({ brand: e.target.value }));
-// };
+const selecterValue = (e) => {
+  setSelectedValue({...selectedValue,brand: e.target.value});
+};
+
+console.log(selectedValue);
 
   return (
     <>
-      <PostForm>
+      <PostForm inputValue={selectedValue}>
         <div>
           <h2 className="text-md text-slate-600">Brand *</h2>
           <div className="flex gap-4">

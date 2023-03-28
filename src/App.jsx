@@ -24,6 +24,7 @@ import CatSingleView from "./Pages/SinglePages/AdminPage/Category/CatSingleView"
 import CreateCategory from "./Pages/SinglePages/AdminPage/Category/CreateCategory";
 import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
 import Product from "./Pages/SinglePages/AdminPage/Product/Product";
+import ProductView from "./Pages/SinglePages/AdminPage/Product/ProductView";
 import SinglePage from "./Pages/SinglePages/SinglePage";
 
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/createcategory" element={<CreateCategory/>}/>
         <Route path="/categorysingleView/:name/:id" element={<CatSingleView/>}/>
         <Route path="/dashboard/product" element={<Product/>}/>
+        <Route path="/dashboard/product/:id" element={<ProductView/>}/>
         <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars/:catId/:subId" element={<CarsDetails />} />

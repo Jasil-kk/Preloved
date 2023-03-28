@@ -1,18 +1,13 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import Selector from "../../../Components/styles-store/selector";
 import PostForm from "../../PostForm";
 
 const MobilePhoneDetails = () => {
   const [inputValue, setInputValue] = useState();
 
-  const dispatch = useDispatch();
-
-  // const handleChange = (e, newvalue) => {
-  //   setInputValue(newvalue);
-  //   dispatch(saveInput({brand:newvalue}))
-  // };
-  console.log(inputValue);
+  const handleChange = (e) => {
+    setInputValue({ ...inputValue, brand: e });
+  };
 
   const Brands = [
     "Iphone",
@@ -34,7 +29,7 @@ const MobilePhoneDetails = () => {
 
   return (
     <>
-      <PostForm>
+      <PostForm inputValue={inputValue}>
         <div>
           <Selector
             brands={Brands}

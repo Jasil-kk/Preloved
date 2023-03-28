@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import KMdriven from "../../../Components/styles-store/KMdriven";
 import Selector from "../../../Components/styles-store/selector";
 import YearPicker from "../../../Components/styles-store/YearPicker";
@@ -8,13 +7,9 @@ import PostForm from "../../PostForm";
 const CommercialVehicles = () => {
   const [inputValue, setInputValue] = useState();
 
-  const dispatch = useDispatch();
-
-  // const handleChange = (e, newvalue) => {
-  //   setInputValue(newvalue);
-  //   dispatch(saveInput({ type: newvalue }));
-  // };
-  console.log(inputValue);
+  const handleChange = (e) => {
+    setInputValue({ ...inputValue, type: e });
+  };
 
   const Types = [
     "Auto-rickshas & E-rickshas",
@@ -27,7 +22,7 @@ const CommercialVehicles = () => {
 
   return (
     <>
-      <PostForm>
+      <PostForm inputValue={inputValue}>
         <div>
           <Selector
             brands={Types}
@@ -35,8 +30,8 @@ const CommercialVehicles = () => {
             onChange={handleChange}
             value={inputValue}
           />
-          <YearPicker />
-          <KMdriven />
+          <YearPicker onChange={(e)=>setInputValue({...inputValue,year:e.target.value})}/>
+          <KMdriven onChange={(e)=>setInputValue({...inputValue,kmDriven:e.target.value})}/>
         </div>
       </PostForm>
     </>

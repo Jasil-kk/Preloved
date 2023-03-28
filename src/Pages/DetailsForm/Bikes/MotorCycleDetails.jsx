@@ -7,11 +7,6 @@ import PostForm from "../../PostForm";
 const MotorCycleDetails = () => {
   const [inputValue, setInputValue] = useState();
 
-  // const dispatch = useDispatch();
-  // const handleChange = () => {
-  //   dispatch(saveInput({details:inputValue}));
-  // };
-
   const Brands = [
     "Hero Honda",
     "Bajaj",
@@ -27,15 +22,15 @@ const MotorCycleDetails = () => {
 
   return (
     <>
-      <PostForm>
+      <PostForm inputValue={inputValue}>
         <div>
           <Selector
             brands={Brands}
             label={"Brand *"}
             onChange={(items)=>setInputValue({...inputValue,brand:items})}
           />
-          <YearPicker />
-          <KMdriven />
+          <YearPicker onChange={(e)=>setInputValue({...inputValue,year:e.target.value})}/>
+          <KMdriven onChange={(e)=>setInputValue({...inputValue,kmDriven:e.target.value})}/>
         </div>
       </PostForm>
     </>

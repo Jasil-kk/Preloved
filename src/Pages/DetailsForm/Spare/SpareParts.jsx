@@ -1,20 +1,16 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import ButtonSelector from "../../../Components/styles-store/ButtonSelector";
 import PostForm from "../../PostForm";
 
 const SpareParts = () => {
   const [selectedValue, setSelectedValue] = useState();
 
-  const dispatch = useDispatch();
-
-  // const selectValue = (e) => {
-  //   setSelectedValue(e.target.value);
-  //   dispatch(saveInput({ type: e.target.value }));
-  // };
+  const selectValue = (e) => {
+    setSelectedValue({ ...selectedValue, type: e.target.value });
+  };
   return (
     <>
-      <PostForm>
+      <PostForm inputValue={selectedValue}>
         <div>
           <h2 className="text-md text-slate-600">Type</h2>
           <div className="flex gap-4">
