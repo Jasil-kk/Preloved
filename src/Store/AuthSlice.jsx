@@ -21,7 +21,6 @@ export const signInApi = createAsyncThunk("auth/signInApi", async (input) => {
   if (respond?.data?.tokenRole?.token) {
     console.log(respond?.data?.tokenRole?.token);
     localStorage.setItem("token", respond?.data?.tokenRole?.token);
-    localStorage.setItem("name", respond?.data?.userD?.name);
     input.navigate("/post");
   }
   return respond.data;
@@ -36,7 +35,6 @@ export const signOutApi = createAsyncThunk(
     const respond = await axiosApi.post("/auth/user-logout", token);
     console.log(respond);
     localStorage.removeItem("token");
-    localStorage.removeItem("name");
     window.location.reload();
     navigate("/");
 
@@ -64,6 +62,14 @@ export const changePasswordApi = createAsyncThunk(
   }
 );
 
+// profile
+
+export const userProfileApi = createAsyncThunk("auth/userProfileApi", async (token) => {
+  const respond = await axiosApi.get("/user/get",token);
+  console.log(respond);
+  return respond.data
+})
+
 const initialState = {
   user: {},
   email: "",
@@ -72,6 +78,7 @@ const initialState = {
   loading: false,
   error: "",
   message: "",
+  profile: {}
 };
 
 const authSlice = createSlice({
@@ -96,7 +103,6 @@ const authSlice = createSlice({
     },
     [signInApi.fulfilled]: (state, action) => {
       console.log("login success");
-      state.user = action.payload.tokenRole;
       state.token = action.payload.tokenRole.token;
     },
     [signInApi.rejected]: (state) => {
@@ -135,6 +141,17 @@ const authSlice = createSlice({
     [changePasswordApi.rejected]: (state) => {
       console.log("change password rejected");
     },
+       // user profile
+       [userProfileApi.pending]: (state) => {
+        console.log("user profile pending");
+      },
+      [userProfileApi.fulfilled]: (state, action) => {
+        state.profile = action.payload;
+        console.log("user profile success");
+      },
+      [userProfileApi.rejected]: (state) => {
+        console.log("user profile rejected");
+      },
   },
 });
 

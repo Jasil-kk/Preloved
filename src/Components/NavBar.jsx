@@ -4,7 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import LoginPage from "./LoginPage";
 import Avatar from "@mui/material/Avatar";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
-import { signOutApi } from "../Store/AuthSlice";
+import { signOutApi, userProfileApi } from "../Store/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const NavBar = () => {
@@ -12,9 +12,9 @@ const NavBar = () => {
   const [show, setShow] = useState(false);
   const ref = useRef(null);
 
+const {profile} = useSelector((state) => state.auth)
+
   const token = localStorage.getItem("token");
-  const user = localStorage.getItem("name");
-  console.log(user);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +23,12 @@ const NavBar = () => {
     dispatch(signOutApi(navigate));
   };
 
+  useEffect(()=> {
+    dispatch(userProfileApi(token))
+  },[token])
+
+  const Userprofile = profile?.result;
+  console.log(Userprofile);
 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
@@ -72,11 +78,14 @@ const NavBar = () => {
             />
             {show && (
               <div ref={ref} className="absolute top-14 -left-24 w-60 h-auto p-5 bg-slate-50 border border-slate-600 flex flex-col justify-center rounded-lg">
+                {Userprofile?.map((user,key) => (
+                  <div key={key}>
                 <span className="flex items-center justify-between">
+                  
                   <div>
                     <p className="text-slate-600 text-sm">Hello,</p>
                     <h1 className="text-slate-800 text-3xl font-semibold">
-                      {user}
+                      {user?.name}
                     </h1>
                   </div>
                   <Avatar
@@ -91,6 +100,8 @@ const NavBar = () => {
                 >
                   edit profile
                 </Link>
+                </div>
+                ))}
                 <button className="flex justify-center items-center gap-3 mt-5 w-full h-10 bg-pink-400 text-slate-50 text-lg rounded-lg">
                   <span className="text-2xl">
                     <MdOutlineFavoriteBorder />

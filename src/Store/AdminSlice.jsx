@@ -69,12 +69,11 @@ export const deleteSubCategoryApi = createAsyncThunk(
 
 // get Post
 
-export const getPostApi = createAsyncThunk("admin/getPostApi", async () => {
-  const respond = await axiosApi.get("/product/admin/all");
+export const getPostApi = createAsyncThunk("admin/getPostApi", async ({page,pageLimit}) => {
+  const respond = await axiosApi.get(`/product/admin/all?page=${page}&limit=${pageLimit}`);
   console.log(respond);
   return respond.data;
 })
-
 // delete Post
 
 export const deletePostApi = createAsyncThunk("admin/deletePostApi", async (productId) => {
@@ -84,10 +83,19 @@ export const deletePostApi = createAsyncThunk("admin/deletePostApi", async (prod
   return respond.data;
 })
 
+// post SingleView
+
+export const singlePostApi = createAsyncThunk("admin/singlePostApi", async (productID) => {
+  const respond = await axiosApi.get(`/product/seller/all/${productID}`);
+  console.log(respond);
+  return respond.data;
+})
+
 const initialState = {
   category: {},
   subCategory: {},
   getPost: {},
+  singleProduct: {},
 };
 
 const adminSlice = createSlice({
@@ -160,6 +168,17 @@ const adminSlice = createSlice({
     },
     [deletePostApi.rejected]: (state) => {
       console.log("getPost rejected");
+    },
+    // single product
+    [singlePostApi.pending]: (state) => {
+      console.log("single product pending");
+    },
+    [singlePostApi.fulfilled]: (state, action) => {
+      state.singleProduct = action.payload;
+      console.log("single product success");
+    },
+    [singlePostApi.rejected]: (state) => {
+      console.log("single product rejected");
     },
   },
 });

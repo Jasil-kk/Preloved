@@ -14,6 +14,7 @@ const InputField = (props) => {
         helperText={props.helperText}
         onChange={props.onChange}
         value={props.value}
+        defaultValue={props.defaultValue}
       />
     </div>
   );

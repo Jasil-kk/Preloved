@@ -1,12 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import IconInput from "../Components/styles-store/IconInput";
 import InputField from "../Components/styles-store/InputField";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import BackNav from "../Components/BackNav";
+import { useDispatch, useSelector } from "react-redux";
+import { userProfileApi } from "../Store/AuthSlice";
 
 const EditProfile = () => {
+  const [data, setdata] = useState("");
   const [imageSrc, setImageSrc] = useState("");
+
+  const {profile} = useSelector((state) => state.auth)
+
+  const token = localStorage.getItem("token");
+
+  const dispatch = useDispatch();
+
+  useEffect(()=> {
+    dispatch(userProfileApi(token))
+  },[token])
+
+  const userData = profile?.result ;
+
+  console.log(userData);
+
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
@@ -17,7 +35,8 @@ const EditProfile = () => {
     <>
     <BackNav />
     <div className="w-full h-auto py-10 bg-slate-200 flex justify-center items-center">
-      <div className="w-1/3 h-auto bg-slate-50 border border-slate-400">
+      {userData?.map((user,key) => (
+      <div key={key} className="w-1/3 h-auto bg-slate-50 border border-slate-400">
         <div className="p-3 border-b border-slate-400">
           <h1 className="text-2xl font-semibold">Edit Profile</h1>
         </div>
@@ -43,7 +62,7 @@ const EditProfile = () => {
 
           <h2 className="mt-7 text-lg font-semibold">Basic information</h2>
           <div className="mt-7">
-            <InputField label={"Name"} />
+            <InputField label={"Name"}  defaultValue={user?.name}/>
           </div>
           <div className="mt-7">
             <InputField label={"About me (optional)"} />
@@ -55,9 +74,10 @@ const EditProfile = () => {
             type={"number"}
             label={"Phone Number"}
             startAdornment={"+91"}
+            defaultValue={user?.mobileNo}
           />
           <div className="mt-5">
-            <InputField label={"Email"} type={"email"} />
+            <InputField label={"Email"} type={"email"} defaultValue={user?.email}/>
           </div>
         </div>
         <div className="p-6 flex justify-between">
@@ -69,6 +89,7 @@ const EditProfile = () => {
           </button>
         </div>
       </div>
+      ))}
     </div>
     </>
   );

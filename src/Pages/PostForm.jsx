@@ -57,7 +57,7 @@ const PostForm = ({ children, inputValue }) => {
             <DescriptionAd input={inputSelector} setInput={setInputSelector} />
           </div>
           <SetPrice input={inputSelector} setInput={setInputSelector} />
-          <PhotoUploader />
+          <PhotoUploader input={inputSelector} setInput={setInputSelector} />
           <LocationAdder input={inputSelector} setInput={setInputSelector} />
           <ReviewDetails />
           <PostNowBtn onClick={handleSubmit} />

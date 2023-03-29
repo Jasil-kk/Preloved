@@ -37,37 +37,39 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     backgroundColor: theme.palette.common.black,
     color: theme.palette.common.white,
     fontSize: 18,
-    fontFamily:"poppins"
+    fontFamily: "poppins",
   },
   [`&.${tableCellClasses.body}`]: {
     fontSize: 18,
-    fontFamily:"poppins"
+    fontFamily: "poppins",
   },
 }));
 
 const StyledTableRow = styled(TableRow)(({ theme }) => ({
   "&:nth-of-type(odd)": {
     backgroundColor: theme.palette.action.hover,
-  }
+  },
 }));
 
 const Product = () => {
   const [open, setOpen] = useState(false);
   const [selectedProductName, setSelectedProductName] = useState("");
   const [selectedProductId, setSelectedProductId] = useState("");
-
-
+  const [page, setPage] = useState(1);
 
   const { getPost } = useSelector((state) => state.adminWork);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getPostApi());
-  }, [dispatch]);
+    dispatch(getPostApi({ page, pageLimit }));
+  }, [page]);
 
+  const count = getPost?.total;
   const products = getPost?.product;
 
-  console.log(products);
+  const pageLimit = 5; // page limit
+
+  const totalPages = Math.ceil(count / pageLimit);
 
   const handleDelete = () => {
     dispatch(deletePostApi(selectedProductId));
@@ -76,6 +78,10 @@ const Product = () => {
   // const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
+  const handleChange = (e, value) => {
+    setPage(value);
+  };
+
   return (
     <div className="w-full min-h-screen bg-slate-300 flex items-center flex-col font-poppins">
       <h1 className="mt-5 text-4xl font-extrabold">Admin Dashboard</h1>
@@ -83,48 +89,26 @@ const Product = () => {
         <h2 className="text-3xl my-5 font-bold">Products</h2>
         {products?.length > 0 ? (
           <>
-              <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                  <TableHead>
-                    <TableRow>
-                      <StyledTableCell
-                      >
-                        User
-                      </StyledTableCell>
-                      <StyledTableCell
-                        align="right"
-                      >
-                        Category
-                      </StyledTableCell>
-                      <StyledTableCell
-                        align="right"
-                      >
-                        SubCategory
-                      </StyledTableCell>
-                      <StyledTableCell
-                        align="right"
-                      >
-                        Action
-                      </StyledTableCell>
-                    </TableRow>
-                  </TableHead>
-                  {products?.map((product,key) => (
+            <TableContainer component={Paper}>
+              <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                <TableHead>
+                  <TableRow>
+                    <StyledTableCell>User</StyledTableCell>
+                    <StyledTableCell align="right">Category</StyledTableCell>
+                    <StyledTableCell align="right">SubCategory</StyledTableCell>
+                    <StyledTableCell align="right">Action</StyledTableCell>
+                  </TableRow>
+                </TableHead>
+                {products?.map((product, key) => (
                   <TableBody key={key}>
                     <StyledTableRow>
-                      <StyledTableCell
-                        component="th"
-                        scope="row"
-                      >
+                      <StyledTableCell component="th" scope="row">
                         {product?.userId?.name}
                       </StyledTableCell>
-                      <StyledTableCell
-                        align="right"
-                      >
+                      <StyledTableCell align="right">
                         {product?.categoryId?.categoryName}
                       </StyledTableCell>
-                      <StyledTableCell
-                        align="right"
-                      >
+                      <StyledTableCell align="right">
                         {product?.subcategoryId?.subcategoryName}
                       </StyledTableCell>
                       <StyledTableCell
@@ -134,8 +118,10 @@ const Product = () => {
                         <button
                           onClick={() => {
                             setOpen(true);
-                            setSelectedProductName(product?.categoryId?.categoryName);
-                            setSelectedProductId(product?._id)
+                            setSelectedProductName(
+                              product?.categoryId?.categoryName
+                            );
+                            setSelectedProductId(product?._id);
                           }}
                           className="w-auto p-4 h-6 text-red-700 text-2xl flex justify-center items-center rounded-full transform transition duration-500 ease-in-out hover:bg-red-700 hover:text-slate-50"
                         >
@@ -149,12 +135,17 @@ const Product = () => {
                       </StyledTableCell>
                     </StyledTableRow>
                   </TableBody>
-            ))}
-                </Table>
-              </TableContainer>
+                ))}
+              </Table>
+            </TableContainer>
             {/* pagination */}
             <Stack marginTop={3} spacing={2}>
-              <Pagination count={10} color="secondary" />
+              <Pagination
+                count={totalPages}
+                page={page}
+                color="secondary"
+                onChange={handleChange}
+              />
             </Stack>
           </>
         ) : (
@@ -172,7 +163,7 @@ const Product = () => {
               <p className="font-poppins text-lg text-yellow-700 text-center">
                 Are you sure do you really want to delete the
                 <span className="text-xl mx-1 font-semibold">
-                {selectedProductName}
+                  {selectedProductName}
                 </span>
                 product
               </p>

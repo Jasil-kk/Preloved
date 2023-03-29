@@ -4,7 +4,7 @@ import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
 
-const IconInput = ({inputLabel,label,type,value,onChange,startAdornment}) => {
+const IconInput = ({inputLabel,label,type,value,onChange,startAdornment,defaultValue}) => {
   return (
     <div>
       <FormControl fullWidth sx={{mt : 2 , width: 400 }}>
@@ -22,6 +22,7 @@ const IconInput = ({inputLabel,label,type,value,onChange,startAdornment}) => {
           type={type}
           value={value}
           onChange={onChange}
+          defaultValue={defaultValue}
         />
       </FormControl>
     </div>

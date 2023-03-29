@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useState } from "react";
 import IconInput from "../../Components/styles-store/IconInput";
 
 const SetPrice = ({input,setInput}) => {
   const [inputValue, setInputValue] = useState("");
 
-const dispatch = useDispatch();
 
   const handleChange = (e) => {
     const priceValue = e.target.value;

@@ -1,11 +1,27 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
+import { singlePostApi } from "../../../../Store/AdminSlice";
+import { useParams } from "react-router-dom";
 
 const ProductView = () => {
-  const { getPost } = useSelector((state) => state.adminWork);
-  console.log(getPost);
+  const { singleProduct } = useSelector((state) => state.adminWork);
+
+  const dispatch = useDispatch();
+  const params = useParams();
+
+  const productID = params.id;
+
+  const singleProducts = singleProduct?.product;
+  console.log(singleProducts);
+
+  const Details = singleProducts?.details;
+
+  useEffect(() => {
+    dispatch(singlePostApi(productID));
+  }, [dispatch]);
+
   const itemData = [
     {
       img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
@@ -42,7 +58,7 @@ const ProductView = () => {
   ];
   return (
     <div className="w-full min-h-screen p-10 bg-slate-300 flex items-center flex-col font-poppins">
-      <div className="p-5 w-1/2 h-auto bg-slate-50 rounded">
+      <div className="p-5 w-1/2 h-auto bg-slate-50 rounded-xl">
         <h2 className="text-slate-900 text-3xl font-bold text-center">
           Post Item Details
         </h2>
@@ -50,7 +66,7 @@ const ProductView = () => {
           <div className="mt-5 flex">
             <h3 className="w-48 text-blue-700 text-xl font-semibold">User :</h3>
             <h5 className="text-slate-800 text-xl font-medium capitalize">
-              jasil
+              {singleProducts?.userId?.name}
             </h5>
           </div>
           <div className="mt-5 flex">
@@ -58,7 +74,7 @@ const ProductView = () => {
               Category :
             </h3>
             <h5 className="text-slate-800 text-xl font-medium capitalize">
-              Mobile
+              {singleProducts?.categoryId?.categoryName}
             </h5>
           </div>
           <div className="mt-5 flex">
@@ -66,7 +82,7 @@ const ProductView = () => {
               SubCategory :
             </h3>
             <h5 className="text-slate-800 text-xl font-medium capitalize">
-              Mobile Phone
+              {singleProducts?.subcategoryId?.subcategoryName}
             </h5>
           </div>
           <div className="mt-5 flex">
@@ -74,13 +90,13 @@ const ProductView = () => {
               District :
             </h3>
             <h5 className="text-slate-800 text-xl font-medium capitalize">
-              malappuram
+              {singleProducts?.district}
             </h5>
           </div>
           <div className="mt-5 flex">
             <h3 className="w-48 text-blue-700 text-xl font-semibold">City :</h3>
             <h5 className="text-slate-800 text-xl font-medium capitalize">
-              kondotty
+              {singleProducts?.city}
             </h5>
           </div>
           <div className="mt-5 flex">
@@ -88,7 +104,7 @@ const ProductView = () => {
               Title :
             </h3>
             <h5 className="text-slate-800 text-xl font-medium capitalize">
-              i phone 14 pro max
+              {singleProducts?.title}
             </h5>
           </div>
           <div className="mt-5 flex">
@@ -96,73 +112,96 @@ const ProductView = () => {
               Description :
             </h3>
             <h5 className="text-slate-800 text-xl font-medium capitalize">
-              APPLE iPhone 14 Pro Max (Space Black, 128 GB)
+              {singleProducts?.description}
             </h5>
           </div>
-          <div className="mt-5 flex flex-col">
+          <div className="mt-5 flex">
             <h3 className="w-48 text-blue-700 text-xl font-semibold">
-              Details :
+              Price :
             </h3>
-            {/* ₹1,28,099 */}
-            <div className="ml-20">
-              <div className="ml-3 mt-4 flex">
-                <h4 className="w-52 text-blue-500 text-lg font-semibold">
-                  Brand :
-                </h4>
-                <h5 className="text-slate-800 text-xl font-medium capitalize">
-                  i phone
-                </h5>
-              </div>
-              <div className="ml-3  mt-4 flex">
-                <h4 className="w-52 text-blue-500 text-lg font-semibold">
-                  Type :
-                </h4>
-                <h5 className="text-slate-800 text-xl font-medium capitalize">
-                  phone
-                </h5>
-              </div>
-              <div className="ml-3  mt-4 flex">
-                <h4 className="w-52 text-blue-500 text-lg font-semibold">
-                  Year :
-                </h4>
-                <h5 className="text-slate-800 text-xl font-medium capitalize">
-                  2023
-                </h5>
-              </div>
-              <div className="ml-3  mt-4 flex">
-                <h4 className="w-52 text-blue-500 text-lg font-semibold">
-                  Fuel :
-                </h4>
-                <h5 className="text-slate-800 text-xl font-medium capitalize">
-                  petrol
-                </h5>
-              </div>
-              <div className="ml-3  mt-4 flex">
-                <h4 className="w-52 text-blue-500 text-lg font-semibold">
-                  KM Driver :
-                </h4>
-                <h5 className="text-slate-800 text-xl font-medium capitalize">
-                  2500 km
-                </h5>
-              </div>
-              <div className="ml-3  mt-4 flex">
-                <h4 className="w-52 text-blue-500 text-lg font-semibold">
-                  No. of Owner :
-                </h4>
-                <h5 className="text-slate-800 text-xl font-medium capitalize">
-                  2nd
-                </h5>
-              </div>
-              <div className="ml-3  mt-4 flex">
-                <h4 className="w-52 text-blue-500 text-lg font-semibold">
-                  Transmission Type :
-                </h4>
-                <h5 className="text-slate-800 text-xl font-medium capitalize">
-                  manual
-                </h5>
+            <h5 className="text-slate-800 text-xl font-medium capitalize">
+              ₹ {singleProducts?.price}
+            </h5>
+          </div>
+          {Details ? (
+            <div className="mt-5 flex flex-col">
+              <h3 className="w-48 text-blue-700 text-xl font-semibold">
+                Details :
+              </h3>
+              <div className="ml-20">
+                {Details?.brand ? (
+                  <div className="ml-3 mt-4 flex">
+                    <h4 className="w-52 text-blue-500 text-lg font-semibold">
+                      Brand :
+                    </h4>
+                    <h5 className="text-slate-800 text-xl font-medium capitalize">
+                      {Details?.brand}
+                    </h5>
+                  </div>
+                ) : null}
+                {Details?.type ? (
+                <div className="ml-3  mt-4 flex">
+                  <h4 className="w-52 text-blue-500 text-lg font-semibold">
+                    Type :
+                  </h4>
+                  <h5 className="text-slate-800 text-xl font-medium capitalize">
+                    {Details?.type}
+                  </h5>
+                </div>
+                ) : null}
+                {Details?.year ? (
+                <div className="ml-3  mt-4 flex">
+                  <h4 className="w-52 text-blue-500 text-lg font-semibold">
+                    Year :
+                  </h4>
+                  <h5 className="text-slate-800 text-xl font-medium capitalize">
+                    {Details?.year}
+                  </h5>
+                </div>
+                ) : null}
+                {Details?.fuel ? (
+                <div className="ml-3  mt-4 flex">
+                  <h4 className="w-52 text-blue-500 text-lg font-semibold">
+                    Fuel :
+                  </h4>
+                  <h5 className="text-slate-800 text-xl font-medium capitalize">
+                    {Details?.fuel}
+                  </h5>
+                </div>
+                ) : null}
+                {Details?.kmDriven ? (
+                <div className="ml-3  mt-4 flex">
+                  <h4 className="w-52 text-blue-500 text-lg font-semibold">
+                    KM Driver :
+                  </h4>
+                  <h5 className="text-slate-800 text-xl font-medium capitalize">
+                    {Details?.kmDriven} km
+                  </h5>
+                </div>
+                ) : null}
+                {Details?.noOfOwner ? (
+                <div className="ml-3  mt-4 flex">
+                  <h4 className="w-52 text-blue-500 text-lg font-semibold">
+                    No. of Owner :
+                  </h4>
+                  <h5 className="text-slate-800 text-xl font-medium capitalize">
+                    {Details?.noOfOwner}
+                  </h5>
+                </div>
+                ) : null}
+                {Details?.transmissionType ? (
+                <div className="ml-3  mt-4 flex">
+                  <h4 className="w-52 text-blue-500 text-lg font-semibold">
+                    Transmission Type :
+                  </h4>
+                  <h5 className="text-slate-800 text-xl font-medium capitalize">
+                    manual
+                  </h5>
+                </div>
+                ) : null}
               </div>
             </div>
-          </div>
+          ) : null}
           <div className="mt-5 flex flex-col">
             <h3 className="w-48 text-blue-700 text-xl font-semibold mb-1">
               Photos :

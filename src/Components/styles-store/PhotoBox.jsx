@@ -1,17 +1,14 @@
 import React, { useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
-import { useDispatch } from "react-redux";
 
-const PhotoBox = () => {
+const PhotoBox = ({setInputValue}) => {
   const [imageSrc, setImageSrc] = useState();
-
-  const dispatch = useDispatch();
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
     setImageSrc(URL.createObjectURL(file));
-    // dispatch(saveInput({ photos: file }));
+  setInputValue(file);
   };
   return (
     <div>
