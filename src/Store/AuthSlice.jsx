@@ -70,6 +70,23 @@ export const userProfileApi = createAsyncThunk("auth/userProfileApi", async (tok
   return respond.data
 })
 
+// profile update
+
+export const profileUpdateApi = createAsyncThunk("auth/profileUpdateApi", async ({inputValue,navigate}) => {
+  const respond = await axiosApi.post("/user/update",inputValue);
+  console.log(respond);
+  navigate("/");
+  return respond.data
+})
+
+// profile delete
+export const profileDeleteApi = createAsyncThunk("auth/profileDeleteApi", async ({token,navigate}) => {
+  const respond = await axiosApi.post("/user/delete",token);
+  console.log(respond);
+  navigate("/")
+  return respond.data
+})
+
 const initialState = {
   user: {},
   email: "",
@@ -152,6 +169,28 @@ const authSlice = createSlice({
       [userProfileApi.rejected]: (state) => {
         console.log("user profile rejected");
       },
+           //profile update
+           [profileUpdateApi.pending]: (state) => {
+            console.log("profile update pending");
+          },
+          [profileUpdateApi.fulfilled]: (state, action) => {
+            state.profile = action.payload;
+            console.log("profile update success");
+          },
+          [profileUpdateApi.rejected]: (state) => {
+            console.log("profile update rejected");
+          },
+             //profile delete
+             [profileDeleteApi.pending]: (state) => {
+              console.log("profile delete pending");
+            },
+            [profileDeleteApi.fulfilled]: (state, action) => {
+              state.profile = action.payload;
+              console.log("profile delete success");
+            },
+            [profileDeleteApi.rejected]: (state) => {
+              console.log("profile delete rejected");
+            },
   },
 });
 
