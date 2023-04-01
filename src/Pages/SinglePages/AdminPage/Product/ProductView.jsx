@@ -169,22 +169,22 @@ const ProductView = () => {
               </div>
             </div>
           ) : null}
-          <div className="mt-5 flex flex-col">
-            <h3 className="w-48 text-blue-700 text-xl font-semibold mb-1">
-              Photos :
-            </h3>
-            <ImageList
-              sx={{ width: 500, height: 450 }}
-              cols={3}
-              rowHeight={164}
-            >
-              {photos?.map((item, key) => (
-                <ImageListItem key={key}>
+          {photos?.map((item, key) => (
+            <div key={key} className="mt-5 flex flex-col">
+              <h3 className="w-48 text-blue-700 text-xl font-semibold mb-1">
+                Photos :
+              </h3>
+              <ImageList
+                sx={{ width: 500, height: 400 }}
+                cols={3}
+                rowHeight={164}
+              >
+                <ImageListItem>
                   <img src={item?.url} alt="photos" />
                 </ImageListItem>
-              ))}
-            </ImageList>
-          </div>
+              </ImageList>
+            </div>
+          ))}
         </div>
       </div>
     </div>

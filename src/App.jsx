@@ -22,10 +22,13 @@ import Pages from "./Pages/Pages";
 import Post from "./Pages/Post";
 import CatSingleView from "./Pages/SinglePages/AdminPage/Category/CatSingleView";
 import CreateCategory from "./Pages/SinglePages/AdminPage/Category/CreateCategory";
-import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
 import Product from "./Pages/SinglePages/AdminPage/Product/Product";
 import ProductView from "./Pages/SinglePages/AdminPage/Product/ProductView";
 import SinglePage from "./Pages/SinglePages/SinglePage";
+import DashLayout from "./Pages/SinglePages/AdminPage/DashLayout";
+import Categories from "./Pages/SinglePages/AdminPage/Categories";
+import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
+import Users from "./Pages/SinglePages/AdminPage/Users/Users";
 
 
 function App() {
@@ -38,11 +41,7 @@ function App() {
         <Route path="/forgetpassword" element={<ForgetPassword/>}/>
         <Route path="/resetpassword/:id" element={<ChangePassword/>}/>
         <Route path="/profile" element={<EditProfile/>}/>
-        <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/createcategory" element={<CreateCategory/>}/>
-        <Route path="/categorysingleView/:name/:id" element={<CatSingleView/>}/>
-        <Route path="/dashboard/product" element={<Product/>}/>
-        <Route path="/dashboard/product/:id" element={<ProductView/>}/>
         <Route path="/singlepage" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars/:catId/:subId" element={<CarsDetails />} />
@@ -58,6 +57,16 @@ function App() {
         <Route path="/post/furniture/:catId/:subId" element={<SofaDetails/>}/>
         <Route path="/post/fashion/:catId/:subId" element={<FashionDetails/>}/>
         <Route path="/post/pets/:catId/:subId" element={<PetsDetails/>}/>
+        {/* admin */}
+        <Route element={<DashLayout/>}>
+        {/* <Route path="/sidebar" element={<DashLayout/>}/> */}
+        <Route path="/dashboard" element={<Dashboard/>}/>
+        <Route path="/dashboard/users" element={<Users/>}/>
+        <Route path="/dashboard/categories" element={<Categories/>}/>
+        <Route path="/dashboard/categories/:name/:id" element={<CatSingleView/>}/>
+        <Route path="/dashboard/products" element={<Product/>}/>
+        <Route path="/dashboard/product/:id" element={<ProductView/>}/>
+        </Route>
       </Routes>
     </div>
   );
