@@ -91,11 +91,19 @@ export const singlePostApi = createAsyncThunk("admin/singlePostApi", async (prod
   return respond.data;
 })
 
+// user
+export const usersGetApi = createAsyncThunk("admin/usersGetApi", async () => {
+  const respond = await axiosApi.get("/user/user-all")
+  console.log(respond);
+  return respond.data;
+})
+
 const initialState = {
   category: {},
   subCategory: {},
   getPost: {},
   singleProduct: {},
+  users: {},
 };
 
 const adminSlice = createSlice({
@@ -180,6 +188,17 @@ const adminSlice = createSlice({
     [singlePostApi.rejected]: (state) => {
       console.log("single product rejected");
     },
+       // users
+       [usersGetApi.pending]: (state) => {
+        console.log("users getting pending");
+      },
+      [usersGetApi.fulfilled]: (state, action) => {
+        state.users = action.payload;
+        console.log("users getting success");
+      },
+      [usersGetApi.rejected]: (state) => {
+        console.log("users getting rejected");
+      },
   },
 });
 

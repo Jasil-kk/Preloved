@@ -26,7 +26,7 @@ import Product from "./Pages/SinglePages/AdminPage/Product/Product";
 import ProductView from "./Pages/SinglePages/AdminPage/Product/ProductView";
 import SinglePage from "./Pages/SinglePages/SinglePage";
 import DashLayout from "./Pages/SinglePages/AdminPage/DashLayout";
-import Categories from "./Pages/SinglePages/AdminPage/Categories";
+import Categories from "./Pages/SinglePages/AdminPage/Category/Categories";
 import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
 import Users from "./Pages/SinglePages/AdminPage/Users/Users";
 

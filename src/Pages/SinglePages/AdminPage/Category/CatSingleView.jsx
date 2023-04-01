@@ -55,7 +55,7 @@ const CatSingleView = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="w-full min-h-screen bg-slate-300 flex justify-center items-start font-poppins">
+    <div className="w-full min-h-screen bg-slate-50 flex justify-center items-start font-poppins">
       <div className="w-1/2 mt-20 h-auto p-5 bg-slate-50 flex flex-col items-center rounded-xl">
         <h1 className="text-4xl font-bold">{categoryName}</h1>
         <h2 className="text-2xl font-semibold mt-7">Sub Categories</h2>

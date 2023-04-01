@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { getCategoryApi } from "../../../Store/GetCategorySlice";
-import CreateCategory from "./Category/CreateCategory";
+import { getCategoryApi } from "../../../../Store/GetCategorySlice";
+import CreateCategory from "./CreateCategory";
 import { RiEditFill } from "react-icons/ri";
 import { BsFillEyeFill } from "react-icons/bs";
 import { RiDeleteBin3Fill } from "react-icons/ri";
-import UpdateCategory from "./Category/UpdateCategory";
+import UpdateCategory from "./UpdateCategory";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { deleteCategoryApi } from "../../../Store/AdminSlice";
+import { deleteCategoryApi } from "../../../../Store/AdminSlice";
 
 const style = {
   position: "absolute",
@@ -51,11 +51,10 @@ const Categories = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="w-full min-h-screen bg-slate-300 flex items-center flex-col font-poppins">
-      <h1 className="mt-5 text-4xl font-extrabold">Admin Dashboard</h1>
+    <div className="w-full min-h-screen bg-slate-50 flex items-center flex-col font-poppins">
       <div className="w-1/2 h-auto bg-slate-50 mt-8 flex flex-col items-center rounded-md">
         <h2 className="text-3xl mt-5 font-bold">Categories</h2>
-        <div className="mt-6 w-[70%] flex flex-col items-center border border-slate-700 border-b-0 drop-shadow-xl">
+        <div className="mt-6 w-4/5 flex flex-col items-center border border-slate-700 border-b-0 drop-shadow-xl">
           {categorys?.length > 0 ? (
             <>
               {categorys?.map((category, key) => (

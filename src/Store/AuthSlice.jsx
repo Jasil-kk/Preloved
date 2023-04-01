@@ -21,7 +21,15 @@ export const signInApi = createAsyncThunk("auth/signInApi", async (input) => {
   if (respond?.data?.tokenRole?.token) {
     console.log(respond?.data?.tokenRole?.token);
     localStorage.setItem("token", respond?.data?.tokenRole?.token);
+    localStorage.setItem("role", respond?.data?.tokenRole?.role);
     input.navigate("/post");
+
+    if (respond?.data?.tokenRole?.role === "admin") {
+      input.navigate("/dashboard");
+    } else {
+      input.navigate("/post");
+    }
+  
   }
   return respond.data;
 });
@@ -35,9 +43,9 @@ export const signOutApi = createAsyncThunk(
     const respond = await axiosApi.post("/auth/user-logout", token);
     console.log(respond);
     localStorage.removeItem("token");
+    localStorage.removeItem("role");
     window.location.reload();
     navigate("/");
-
     return respond.data;
   }
 );

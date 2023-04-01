@@ -34,7 +34,7 @@ const style = {
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
-    backgroundColor: theme.palette.common.black,
+    backgroundColor: "#1ca7e8",
     color: theme.palette.common.white,
     fontSize: 18,
     fontFamily: "poppins",
@@ -83,9 +83,8 @@ const Product = () => {
   };
 
   return (
-    <div className="w-full min-h-screen bg-slate-300 flex items-center flex-col font-poppins">
-      <h1 className="mt-5 text-4xl font-extrabold">Admin Dashboard</h1>
-      <div className="w-auto h-auto bg-slate-50 mt-8 p-5 flex flex-col items-center rounded-md">
+    <div className="w-full p-5 min-h-screen bg-slate-50 flex items-center flex-col font-poppins">
+      <div className="w-full h-auto bg-slate-50 mt-4 p-20 flex flex-col items-center rounded-md">
         <h2 className="text-3xl my-5 font-bold">Products</h2>
         {products?.length > 0 ? (
           <>
