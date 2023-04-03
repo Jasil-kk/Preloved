@@ -3,6 +3,7 @@ import { CgClose } from "react-icons/cg";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { subCategoryApi } from "../../../../Store/AdminSlice";
+import { getSubCategoryApi } from "../../../../Store/GetCategorySlice";
 
 const CreateSubCategory = ({ categoryID, setShowModal }) => {
   const [input, setInput] = useState();
@@ -13,7 +14,9 @@ const CreateSubCategory = ({ categoryID, setShowModal }) => {
   }, []);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(subCategoryApi(input));
+    dispatch(subCategoryApi(input)).then(()=> {
+      dispatch(getSubCategoryApi())
+    });
   };
   return (
     <>

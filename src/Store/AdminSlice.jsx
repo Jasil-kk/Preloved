@@ -7,7 +7,6 @@ export const categoryApi = createAsyncThunk(
   async (input) => {
     const respond = await axiosApi.post("/category/new", input);
     console.log(respond);
-    window.location.reload();
     return respond.data;
   }
 );
@@ -18,7 +17,6 @@ export const updateCategoryApi = createAsyncThunk(
   async ({ categoryID, input }) => {
     const respond = await axiosApi.put(`/category/update/${categoryID}`, input);
     console.log(respond);
-    window.location.reload();
     return respond.data;
   }
 );
@@ -29,7 +27,6 @@ export const deleteCategoryApi = createAsyncThunk(
   async (categoryID) => {
     const respond = await axiosApi.delete(`/category/delete/${categoryID}`);
     console.log(respond);
-    window.location.reload();
     return respond.data;
   }
 );
@@ -40,7 +37,6 @@ export const subCategoryApi = createAsyncThunk(
   async (input) => {
     const respond = await axiosApi.post("/subcategory/new",input);
     console.log(respond);
-    window.location.reload();
     return respond.data;
   }
 );
@@ -51,7 +47,6 @@ export const updateSubCategoryApi = createAsyncThunk(
   async ({ categoryID, input }) => {
     const respond = await axiosApi.put(`/subcategory/update/${categoryID}`, input);
     console.log(respond);
-    window.location.reload();
     return respond.data;
   }
 );
@@ -62,7 +57,6 @@ export const deleteSubCategoryApi = createAsyncThunk(
   async (categoryID) => {
     const respond = await axiosApi.delete(`/subcategory/delete/${categoryID}`);
     console.log(respond);
-    window.location.reload();
     return respond.data;
   }
 );
@@ -88,7 +82,6 @@ export const getPostAllApi = createAsyncThunk("admin/getPostApi", async () => {
 export const deletePostApi = createAsyncThunk("admin/deletePostApi", async (productId) => {
   const respond = await axiosApi.delete(`/product/admin/delete/${productId}`);
   console.log(respond);
-  window.location.reload();
   return respond.data;
 })
 

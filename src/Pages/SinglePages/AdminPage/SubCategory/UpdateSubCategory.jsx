@@ -3,6 +3,7 @@ import { CgClose } from "react-icons/cg";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
 import { updateCategoryApi, updateSubCategoryApi } from "../../../../Store/AdminSlice";
+import { getSubCategoryApi } from "../../../../Store/GetCategorySlice";
 
 const UpdateSubCategory = ({ setShowModal, categoryID }) => {
   const [input, setInput] = useState();
@@ -11,7 +12,9 @@ const UpdateSubCategory = ({ setShowModal, categoryID }) => {
 
   const handleUpdate = (e) => {
     e.preventDefault();
-    dispatch(updateSubCategoryApi({ categoryID, input }));
+    dispatch(updateSubCategoryApi({ categoryID, input })).then(()=> {
+      dispatch(getSubCategoryApi())
+    });
   };
 
   return (

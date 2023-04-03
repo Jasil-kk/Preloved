@@ -14,7 +14,6 @@ import Profile from "./Profile";
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
 
-
   const { profile, users, getPost, allCategory } = useSelector((state) => ({
     profile: state.auth.profile,
     users: state.adminWork.users,
@@ -47,14 +46,13 @@ const Dashboard = () => {
               <h3 className="text-blue-500 text-md">Welcome Back !</h3>
               <p className="text-blue-600 text-2xl font-semibold">Jasil</p>
             </div>
-            <img
-              className="w-80 h-72"
-              src={cardImg}
-              alt="bgimage"
-            />
+            <img className="w-80 h-72" src={cardImg} alt="bgimage" />
           </div>
           <div className="w-full h-1/2 flex items-center justify-end px-5">
-            <button onClick={handleOpen} className="mt-20 w-auto flex items-center px-2 h-9 bg-slate-50 text-sm text-blue-700 font-semibold border-2 border-blue-600 rounded-lg transform transition duration-500 ease-in-out hover:bg-blue-700 hover:text-slate-50">
+            <button
+              onClick={handleOpen}
+              className="mt-20 w-auto flex items-center px-2 h-9 bg-slate-50 text-sm text-blue-700 font-semibold border-2 border-blue-600 rounded-lg transform transition duration-500 ease-in-out hover:bg-blue-700 hover:text-slate-50"
+            >
               View profile
             </button>
           </div>
@@ -112,7 +110,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <Profile open={open} setOpen={setOpen}/>
+      <Profile open={open} setOpen={setOpen} />
     </div>
   );
 };

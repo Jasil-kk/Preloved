@@ -38,13 +38,12 @@ export const signInApi = createAsyncThunk("auth/signInApi", async (input) => {
 
 export const signOutApi = createAsyncThunk(
   "auth/signOutApi",
-  async ({ navigate }) => {
+  async ( navigate ) => {
     const token = localStorage.getItem("token");
     const respond = await axiosApi.post("/auth/user-logout", token);
     console.log(respond);
     localStorage.removeItem("token");
     localStorage.removeItem("role");
-    window.location.reload();
     navigate("/");
     return respond.data;
   }

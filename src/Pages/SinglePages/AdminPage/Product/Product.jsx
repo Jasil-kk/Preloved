@@ -72,7 +72,9 @@ const Product = () => {
   const totalPages = Math.ceil(count / pageLimit);
 
   const handleDelete = () => {
-    dispatch(deletePostApi(selectedProductId));
+    dispatch(deletePostApi(selectedProductId)).then(()=> {
+      dispatch(getPostApi({ page, pageLimit }))
+    });
   };
 
   // const handleOpen = () => setOpen(true);

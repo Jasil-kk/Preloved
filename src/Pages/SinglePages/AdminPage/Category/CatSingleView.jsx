@@ -49,7 +49,9 @@ const CatSingleView = () => {
   console.log(subCategorys);
 
   const handleDelete = () => {
-    dispatch(deleteSubCategoryApi(selectedCategoryId));
+    dispatch(deleteSubCategoryApi(selectedCategoryId)).then(()=> {
+      dispatch(getSubCategoryApi(categoryID))
+    });
   };
 
   const handleClose = () => setOpen(false);

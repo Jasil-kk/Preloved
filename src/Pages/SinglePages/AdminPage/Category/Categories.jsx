@@ -89,7 +89,9 @@ export default function Categories() {
   console.log(categorys);
 
   const handleDelete = () => {
-    dispatch(deleteCategoryApi(selectedCategoryId));
+    dispatch(deleteCategoryApi(selectedCategoryId)).then(()=> {
+      dispatch(getCategoryApi());
+    });
   };
 
   // const handleOpen = () => setOpen(true);
