@@ -74,6 +74,15 @@ export const getPostApi = createAsyncThunk("admin/getPostApi", async ({page,page
   console.log(respond);
   return respond.data;
 })
+
+// get PostAll 
+
+export const getPostAllApi = createAsyncThunk("admin/getPostApi", async () => {
+  const respond = await axiosApi.get(`/product/admin/all`);
+  console.log(respond);
+  return respond.data;
+})
+
 // delete Post
 
 export const deletePostApi = createAsyncThunk("admin/deletePostApi", async (productId) => {

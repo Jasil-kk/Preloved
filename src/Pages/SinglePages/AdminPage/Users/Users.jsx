@@ -49,7 +49,7 @@ const Users = () => {
   return (
     <div className="w-full p-5 font-poppins">
       <div className="flex flex-col items-center p-20">
-        <h1 className="mt-5 mb-2 text-3xl font-semibold">User Details</h1>
+        <h1 className="mb-2 text-3xl font-bold">User Details</h1>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
             <TableHead>

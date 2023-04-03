@@ -5,9 +5,9 @@ import { Outlet } from 'react-router-dom'
 
 const DashLayout = () => {
   return (
-    <div className='w-full h-full fixed'>
+    <div className='w-full h-full'>
         <Header/>
-        <div className='flex'>
+        <div className='flex pt-20 pl-80'>
         <Sidebar/>
         <Outlet/>
         </div>

@@ -11,7 +11,7 @@ const Sidebar = () => {
   };
 
   return (
-    <div className="w-80 min-h-screen bg-slate-900 text-slate-50 font-poppins">
+    <div className="w-80 px-2 min-h-screen bg-slate-900 text-slate-50 font-poppins fixed left-0">
       <nav className="flex flex-col gap-5 pt-16">
         <NavLink
           className={`flex items-center justify-start pl-6 py-2 text-lg rounded-xl hover:bg-gray-700 hover:text-slate-50 ${isActive(

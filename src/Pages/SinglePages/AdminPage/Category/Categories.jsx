@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
-import { getCategoryApi } from "../../../../Store/GetCategorySlice";
-import CreateCategory from "./CreateCategory";
-import { RiEditFill } from "react-icons/ri";
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import { MdEdit } from "react-icons/md";
 import { BsFillEyeFill } from "react-icons/bs";
 import { RiDeleteBin3Fill } from "react-icons/ri";
-import UpdateCategory from "./UpdateCategory";
+import Paper from "@mui/material/Paper";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoryApi } from "../../../../Store/GetCategorySlice";
+import { deleteCategoryApi } from "../../../../Store/AdminSlice";
+import { Link } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { deleteCategoryApi } from "../../../../Store/AdminSlice";
+import CreateCategory from "./CreateCategory";
+import UpdateCategory from "./UpdateCategory";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 const style = {
   position: "absolute",
@@ -26,7 +36,42 @@ const style = {
   pb: 1,
 };
 
-const Categories = () => {
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: "#1ca7e8",
+    color: theme.palette.common.white,
+    fontSize: 18,
+    fontFamily: "poppins",
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 18,
+    fontFamily: "poppins",
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  "&:nth-of-type(odd)": {
+    backgroundColor: theme.palette.action.hover,
+  },
+  // hide last border
+  "&:last-child td, &:last-child th": {
+    border: 0,
+  },
+}));
+
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData("Frozen yoghurt", 159, 6.0, 24, 4.0),
+  createData("Ice cream sandwich", 237, 9.0, 37, 4.3),
+  createData("Eclair", 262, 16.0, 24, 6.0),
+  createData("Cupcake", 305, 3.7, 67, 4.3),
+  createData("Gingerbread", 356, 16.0, 49, 3.9),
+];
+
+export default function Categories() {
   const [showModal, setShowModal] = useState(false);
   const [showModal2, setShowModal2] = useState(false);
   const [open, setOpen] = useState(false);
@@ -51,63 +96,76 @@ const Categories = () => {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="w-full min-h-screen bg-slate-50 flex items-center flex-col font-poppins">
-      <div className="w-1/2 h-auto bg-slate-50 mt-8 flex flex-col items-center rounded-md">
-        <h2 className="text-3xl mt-5 font-bold">Categories</h2>
-        <div className="mt-6 w-4/5 flex flex-col items-center border border-slate-700 border-b-0 drop-shadow-xl">
-          {categorys?.length > 0 ? (
-            <>
-              {categorys?.map((category, key) => (
-                <div
-                  key={key}
-                  className="w-full bg-slate-50 flex items-center border-b border-slate-700"
-                >
-                  <div className="w-full h-14 bg-transparent p-3 flex items-center justify-between">
-                    <h3 className="text-xl text-slate-800">
+    <div className="w-full min-h-screen px-40 py-20 bg-slate-50 flex items-center flex-col font-poppins">
+      <h2 className="text-3xl font-bold">Categories</h2>
+      <button
+          onClick={() => setShowModal(!showModal)}
+          className="ml-auto mb-2 w-auto px-4 h-12 text-lg bg-blue-500 border text-slate-50 transform transition duration-500 ease-in-out hover:bg-blue-700  hover:text-slate-50 rounded-lg"
+        >
+          Create New Category
+        </button>
+      {categorys?.length > 0 ? (
+        <>
+          <TableContainer component={Paper}>
+            <Table sx={{ minWidth: 700 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell>Category</StyledTableCell>
+                  <StyledTableCell align="right">Actions</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {categorys?.map((category, key) => (
+                  <StyledTableRow key={key}>
+                    <StyledTableCell component="th" scope="row">
                       {category?.categoryName}
-                    </h3>
-                    <div className="flex gap-3">
-                      <Link
-                        to={`/dashboard/categories/${category?.categoryName}/${category?._id}`}
-                      >
-                        <button className="w-auto p-4 h-6 flex items-center rounded-md bg-blue-600 text-slate-50 transform transition duration-500 ease-in-out hover:bg-blue-700">
-                          <BsFillEyeFill />
-                        </button>
-                      </Link>
-                      <button
-                        onClick={() => {
-                          setSelectedCategoryId(category._id);
-                          setShowModal2(true);
-                        }}
-                        className="w-auto p-4 h-6 bg-green-600 text-slate-50 text-xl flex justify-center items-center rounded-md transform transition duration-500 ease-in-out hover:bg-green-700"
-                      >
-                        <RiEditFill />
-                      </button>
+                    </StyledTableCell>
+                    <StyledTableCell
+                      align="right"
+                      sx={{ display: "flex", gap: "5px" }}
+                    >
                       <button
                         onClick={() => {
                           setSelectedCategoryId(category._id);
                           setSelectedCategoryName(category.categoryName);
                           setOpen(true);
                         }}
-                        className="w-auto p-4 h-6 bg-red-600 text-slate-50 text-xl flex justify-center items-center rounded-md transform transition duration-500 ease-in-out hover:bg-red-700"
+                        className="w-auto px-3 h-8 text-red-600 text-xl flex justify-center items-center rounded-full transform transition duration-500 ease-in-out hover:bg-red-600 hover:text-slate-50"
                       >
                         <RiDeleteBin3Fill />
                       </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </>
-          ) : (
-            <h4 className="text-xl mb-5 text-red-700">No categories found</h4>
-          )}
-        </div>
-        <button
-          onClick={() => setShowModal(!showModal)}
-          className="mb-5 mt-4 w-1/2 h-12 text-lg text-blue-500 border border-blue-500 transform transition duration-500 ease-in-out hover:bg-blue-500  hover:text-slate-50 rounded-lg"
-        >
-          Create New Category
-        </button>
+
+                      <button
+                        onClick={() => {
+                          setSelectedCategoryId(category._id);
+                          setShowModal2(true);
+                        }}
+                        className="w-auto px-3 h-8 text-green-600 text-xl flex justify-center items-center rounded-full transform transition duration-500 ease-in-out hover:bg-green-600 hover:text-slate-50"
+                      >
+                        <MdEdit />
+                      </button>
+                      <Link
+                        to={`/dashboard/categories/${category?.categoryName}/${category?._id}`}
+                      >
+                        <button className="w-auto px-3 h-8 flex text-xl items-center rounded-full text-blue-600 transform transition duration-500 ease-in-out hover:bg-blue-600 hover:text-slate-50">
+                          <BsFillEyeFill />
+                        </button>
+                      </Link>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+          <Stack marginTop={3} spacing={2}>
+            <Pagination count={10} color="primary" />
+          </Stack>
+        </>
+      ) : (
+        <h4 className="text-xl mb-5 text-red-700">No categories found</h4>
+      )}
+      <div>
+    
         {showModal ? <CreateCategory setShowModal={setShowModal} /> : null}
         {showModal2 ? (
           <UpdateCategory
@@ -151,6 +209,4 @@ const Categories = () => {
       </div>
     </div>
   );
-};
-
-export default Categories;
+}

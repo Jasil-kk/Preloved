@@ -83,9 +83,9 @@ const Product = () => {
   };
 
   return (
-    <div className="w-full p-5 min-h-screen bg-slate-50 flex items-center flex-col font-poppins">
-      <div className="w-full h-auto bg-slate-50 mt-4 p-20 flex flex-col items-center rounded-md">
-        <h2 className="text-3xl my-5 font-bold">Products</h2>
+    <div className="w-full min-h-screen bg-slate-50 flex items-center flex-col font-poppins">
+      <div className="w-full h-auto bg-slate-50 p-20 flex flex-col items-center rounded-md">
+        <h2 className="text-3xl my-3 font-bold">Products</h2>
         {products?.length > 0 ? (
           <>
             <TableContainer component={Paper}>
@@ -122,12 +122,12 @@ const Product = () => {
                             );
                             setSelectedProductId(product?._id);
                           }}
-                          className="w-auto p-4 h-6 text-red-700 text-2xl flex justify-center items-center rounded-full transform transition duration-500 ease-in-out hover:bg-red-700 hover:text-slate-50"
+                          className="w-auto px-3 h-8 text-red-700 text-2xl flex justify-center items-center rounded-full transform transition duration-500 ease-in-out hover:bg-red-700 hover:text-slate-50"
                         >
                           <RiDeleteBin3Fill />
                         </button>
                         <Link to={`/dashboard/product/${product?._id}`}>
-                          <button className="w-auto p-4 h-6 flex items-center text-2xl rounded-md  text-blue-700 transform transition duration-500 ease-in-out hover:bg-blue-700 hover:text-slate-50">
+                          <button className="w-auto px-3 h-8 flex items-center text-2xl rounded-full  text-blue-700 transform transition duration-500 ease-in-out hover:bg-blue-700 hover:text-slate-50">
                             <BsFillEyeFill />
                           </button>
                         </Link>

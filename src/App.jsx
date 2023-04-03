@@ -26,9 +26,9 @@ import Product from "./Pages/SinglePages/AdminPage/Product/Product";
 import ProductView from "./Pages/SinglePages/AdminPage/Product/ProductView";
 import SinglePage from "./Pages/SinglePages/SinglePage";
 import DashLayout from "./Pages/SinglePages/AdminPage/DashLayout";
-import Categories from "./Pages/SinglePages/AdminPage/Category/Categories";
 import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
 import Users from "./Pages/SinglePages/AdminPage/Users/Users";
+import Categories from "./Pages/SinglePages/AdminPage/Category/Categories";
 
 
 function App() {
@@ -59,7 +59,6 @@ function App() {
         <Route path="/post/pets/:catId/:subId" element={<PetsDetails/>}/>
         {/* admin */}
         <Route element={<DashLayout/>}>
-        {/* <Route path="/sidebar" element={<DashLayout/>}/> */}
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/dashboard/users" element={<Users/>}/>
         <Route path="/dashboard/categories" element={<Categories/>}/>
