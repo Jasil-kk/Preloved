@@ -2,19 +2,16 @@ import React, { useState } from "react";
 import { CgClose } from "react-icons/cg";
 import TextField from "@mui/material/TextField";
 import { useDispatch } from "react-redux";
-import { updateCategoryApi, updateSubCategoryApi } from "../../../../Store/AdminSlice";
+import { updateSubCategoryApi } from "../../../../Store/AdminSlice";
 import { getSubCategoryApi } from "../../../../Store/GetCategorySlice";
 
-const UpdateSubCategory = ({ setShowModal, categoryID }) => {
+const UpdateSubCategory = ({ categoryID, setShowModal , setSelectedSubCategoryName}) => {
   const [input, setInput] = useState();
 
   const dispatch = useDispatch();
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
-    dispatch(updateSubCategoryApi({ categoryID, input })).then(()=> {
-      dispatch(getSubCategoryApi())
-    });
+  const handleUpdate = () => {
+    dispatch(updateSubCategoryApi({ categoryID, input }))
   };
 
   return (
@@ -27,20 +24,22 @@ const UpdateSubCategory = ({ setShowModal, categoryID }) => {
           >
             <CgClose />
           </span>
-          <p className="text-xl text-slate-500 mb-5">
+          <h5 className="text-xl text-slate-500 mb-5">
             Modify your sub-category name
-          </p>
+          </h5>
           <TextField
             className="w-full"
             id="outlined-basic"
             label="Category"
             variant="outlined"
+            defaultValue={setSelectedSubCategoryName}
             onChange={(e) =>
               setInput({ ...input, subcategoryName: e.target.value })
             }
           />
           <button
-            onClick={handleUpdate}
+            onClick={()=>{handleUpdate();
+            setShowModal(false)}}
             className="w-auto mt-4 px-4 h-10 bg-blue-500 text-slate-50 rounded-md"
           >
             Update

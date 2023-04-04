@@ -10,10 +10,9 @@ const CreateCategory = ({ setShowModal }) => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const handleSubmit = () => {
     dispatch(categoryApi(input)).then(() => {
-      dispatch(getCategoryApi())
+      dispatch(getCategoryApi());
     });
   };
 
@@ -40,7 +39,10 @@ const CreateCategory = ({ setShowModal }) => {
             }
           />
           <button
-            onClick={handleSubmit}
+            onClick={() => {
+              handleSubmit();
+              setShowModal(false);
+            }}
             className="w-auto mt-4 px-4 h-10 bg-blue-500 text-slate-50 rounded-md"
           >
             Add

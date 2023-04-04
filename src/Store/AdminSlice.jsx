@@ -44,14 +44,15 @@ export const subCategoryApi = createAsyncThunk(
 // subCategory update
 export const updateSubCategoryApi = createAsyncThunk(
   "admin/updateSubCategoryApi",
-  async ({ categoryID, input }) => {
-    const respond = await axiosApi.put(`/subcategory/update/${categoryID}`, input);
+  async ({categoryID,input}) => {
+    const respond = await axiosApi.put(`/subcategory/update/${categoryID}`,input);
+    window.location.reload(false);
     console.log(respond);
     return respond.data;
   }
 );
 
-// category delete
+// sub category delete
 export const deleteSubCategoryApi = createAsyncThunk(
   "admin/deleteSubCategoryApi",
   async (categoryID) => {
@@ -100,12 +101,21 @@ export const usersGetApi = createAsyncThunk("admin/usersGetApi", async () => {
   return respond.data;
 })
 
+// get count
+
+export const getCountApi = createAsyncThunk("admin/getCountApi",async () => {
+  const respond = await axiosApi.get("/count/all")
+  console.log(respond);
+  return respond.data;
+})
+
 const initialState = {
   category: {},
   subCategory: {},
   getPost: {},
   singleProduct: {},
   users: {},
+  count: {},
 };
 
 const adminSlice = createSlice({
@@ -148,14 +158,36 @@ const adminSlice = createSlice({
     },
     // subCategory create
     [subCategoryApi.pending]: (state) => {
-      console.log("subCategory pending");
+      console.log("subCategory create pending");
     },
     [subCategoryApi.fulfilled]: (state, action) => {
       state.subCategory = action.payload;
-      console.log("subCategory success");
+      console.log("subCategory create success");
     },
     [subCategoryApi.rejected]: (state) => {
-      console.log("subCategory rejected");
+      console.log("subCategory create rejected");
+    },
+    // subCategory update
+    [updateSubCategoryApi.pending]: (state) => {
+      console.log("subCategory update pending");
+    },
+    [updateSubCategoryApi.fulfilled]: (state, action) => {
+      state.subCategory = action.payload;
+      console.log("subCategory update success");
+    },
+    [updateSubCategoryApi.rejected]: (state) => {
+      console.log("subCategory update rejected");
+    },
+    // subCategory delete
+    [deleteSubCategoryApi.pending]: (state) => {
+      console.log("subCategory delete pending");
+    },
+    [deleteSubCategoryApi.fulfilled]: (state, action) => {
+      state.subCategory = action.payload;
+      console.log("subCategory delete success");
+    },
+    [deleteSubCategoryApi.rejected]: (state) => {
+      console.log("subCategory delete rejected");
     },
      // getPost
      [getPostApi.pending]: (state) => {
@@ -201,6 +233,17 @@ const adminSlice = createSlice({
       [usersGetApi.rejected]: (state) => {
         console.log("users getting rejected");
       },
+          // get count
+          [getCountApi.pending]: (state) => {
+            console.log("count getting pending");
+          },
+          [getCountApi.fulfilled]: (state, action) => {
+            state.count = action.payload;
+            console.log("count getting success");
+          },
+          [getCountApi.rejected]: (state) => {
+            console.log("count getting rejected");
+          },
   },
 });
 

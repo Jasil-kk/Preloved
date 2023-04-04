@@ -72,8 +72,8 @@ const Product = () => {
   const totalPages = Math.ceil(count / pageLimit);
 
   const handleDelete = () => {
-    dispatch(deletePostApi(selectedProductId)).then(()=> {
-      dispatch(getPostApi({ page, pageLimit }))
+    dispatch(deletePostApi(selectedProductId)).then(() => {
+      dispatch(getPostApi({ page, pageLimit }));
     });
   };
 
@@ -171,7 +171,10 @@ const Product = () => {
             )}
             <div className="flex justify-around">
               <button
-                onClick={handleDelete}
+                onClick={() => {
+                  handleDelete();
+                  handleClose();
+                }}
                 className="font-poppins mt-3 w-auto h-7 px-3 rounded-md bg-transparent text-red-500 hover:border border-red-500"
               >
                 Delete

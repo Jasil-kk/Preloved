@@ -6,7 +6,11 @@ import { FiUser } from "react-icons/fi";
 import { BiCategory } from "react-icons/bi";
 import { userProfileApi } from "../../../Store/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { getPostAllApi, usersGetApi } from "../../../Store/AdminSlice";
+import {
+  getCountApi,
+  getPostAllApi,
+  usersGetApi,
+} from "../../../Store/AdminSlice";
 import { getCategoryApi } from "../../../Store/GetCategorySlice";
 import cardImg from "../../../assets/sapiens.svg";
 import Profile from "./Profile";
@@ -14,37 +18,31 @@ import Profile from "./Profile";
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
 
-  const { profile, users, getPost, allCategory } = useSelector((state) => ({
+  const { profile, count } = useSelector((state) => ({
     profile: state.auth.profile,
-    users: state.adminWork.users,
-    getPost: state.adminWork.getPost,
-    allCategory: state.allCategory.allCategory,
+    count: state.adminWork.count,
   }));
 
   const dispatch = useDispatch();
-  const userDetail = profile?.result;
-  console.log(userDetail);
 
   useEffect(() => {
     dispatch(userProfileApi());
-    dispatch(getPostAllApi());
-    dispatch(getCategoryApi());
-    dispatch(usersGetApi());
+    dispatch(getCountApi());
   }, []);
-  const usersCount = users?.result?.length;
-  const productCount = getPost?.total;
-  const categoryCount = allCategory?.category?.length;
 
+  console.log(count);
   const handleOpen = () => setOpen(true);
 
   return (
     <div className="w-full p-5 font-poppins">
       <div className="flex flex-wrap gap-10 p-5">
         <div className="w-96 xl:w-1/3 h-72 bg-slate-50 rounded-xl overflow-hidden relative drop-shadow-xl">
-          <div className="w-full h-1/2 flex justify-between bg-slate-300">
+          <div className="w-full h-1/2 flex justify-between bg-violet-200">
             <div className="mt-5 ml-5">
               <h3 className="text-blue-500 text-md">Welcome Back !</h3>
-              <p className="text-blue-600 text-2xl font-semibold">Jasil</p>
+              <p className="text-blue-600 text-2xl font-semibold capitalize">
+                {profile?.name}
+              </p>
             </div>
             <img className="w-80 h-72" src={cardImg} alt="bgimage" />
           </div>
@@ -79,7 +77,7 @@ const Dashboard = () => {
             <div className="flex flex-col">
               <h4 className="text-md text-slate-600">Users</h4>
               <h3 className="text-xl text-slate-700 font-semibold">
-                {usersCount}
+                {count?.userCount}
               </h3>
             </div>
             <div className="w-14 h-14 text-2xl text-slate-50 flex items-center justify-center rounded-full bg-blue-500">
@@ -90,7 +88,7 @@ const Dashboard = () => {
             <div className="flex flex-col">
               <h4 className="text-md text-slate-600">Categories</h4>
               <h3 className="text-xl text-slate-700 font-semibold">
-                {categoryCount}
+                {count?.categoryCount}
               </h3>
             </div>
             <div className="w-14 h-14 text-2xl text-slate-50 flex items-center justify-center rounded-full bg-blue-500">
@@ -101,7 +99,7 @@ const Dashboard = () => {
             <div className="flex flex-col">
               <h4 className="text-md text-slate-600">Products</h4>
               <h3 className="text-xl text-slate-700 font-semibold">
-                {productCount}
+                {count?.productCount}
               </h3>
             </div>
             <div className="w-14 h-14 text-2xl text-slate-50 flex items-center justify-center rounded-full bg-blue-500">

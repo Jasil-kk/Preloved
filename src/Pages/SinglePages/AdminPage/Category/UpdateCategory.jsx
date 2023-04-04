@@ -10,8 +10,7 @@ const UpdateCategory = ({ setShowModal, categoryID }) => {
 
   const dispatch = useDispatch();
 
-  const handleUpdate = (e) => {
-    e.preventDefault();
+  const handleUpdate = () => {
     dispatch(updateCategoryApi({ categoryID, input })).then(() => {
       dispatch(getCategoryApi())
     });
@@ -40,7 +39,9 @@ const UpdateCategory = ({ setShowModal, categoryID }) => {
             }
           />
           <button
-            onClick={handleUpdate}
+            onClick={()=>{handleUpdate();
+              setShowModal(false);
+            }}
             className="w-auto mt-4 px-4 h-10 bg-blue-500 text-slate-50 rounded-md"
           >
             Update

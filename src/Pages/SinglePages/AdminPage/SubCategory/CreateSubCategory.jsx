@@ -12,10 +12,9 @@ const CreateSubCategory = ({ categoryID, setShowModal }) => {
   useEffect(() => {
     setInput({ ...input, categoryId: categoryID });
   }, []);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    dispatch(subCategoryApi(input)).then(()=> {
-      dispatch(getSubCategoryApi())
+  const handleSubmit = () => {
+    dispatch(subCategoryApi(input)).then(() => {
+      dispatch(getSubCategoryApi(categoryID));
     });
   };
   return (
@@ -41,7 +40,10 @@ const CreateSubCategory = ({ categoryID, setShowModal }) => {
             }
           />
           <button
-            onClick={handleSubmit}
+            onClick={() => {
+              handleSubmit();
+              setShowModal(false);
+            }}
             className="w-auto mt-4 px-4 h-10 bg-blue-500 text-slate-50 rounded-md"
           >
             Add

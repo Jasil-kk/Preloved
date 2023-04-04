@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Avatar from "@mui/material/Avatar";
+import { useSelector } from "react-redux";
 
 const style = {
   position: "absolute",
@@ -20,6 +21,9 @@ const style = {
 };
 
 const Profile = ({ open, setOpen }) => {
+
+const {profile} = useSelector((state)=> state.auth)
+
   const handleClose = () => setOpen(false);
   return (
     <div className="font-poppins">
@@ -42,15 +46,15 @@ const Profile = ({ open, setOpen }) => {
           <div className="ml-7 flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <p className="w-24 text-slate-500">name :</p>
-              <h2 className="text-2xl text-slate-800 font-semibold">Jasil</h2>
+              <h2 className="text-2xl text-slate-800 font-semibold">{profile?.name}</h2>
             </div>
             <div className="flex items-center gap-3">
               <p className="w-24 text-slate-500">email :</p>
-              <h2 className="text-lg text-slate-800">jasikk2522@gmail.com</h2>
+              <h2 className="text-lg text-slate-800">{profile?.email}</h2>
             </div>
             <div className="flex items-center gap-3">
               <p className="w-24 text-slate-500">mobile No :</p>
-              <h2 className="text-lg text-slate-800 font-medium">9987456756</h2>
+              <h2 className="text-lg text-slate-800 font-medium">{profile?.mobileNo}</h2>
             </div>
           </div>
           <button className="absolute w-auto px-3 h-8 rounded bg-blue-400 text-slate-50 right-5 bottom-5 hover:bg-blue-500">Edit Profile</button>

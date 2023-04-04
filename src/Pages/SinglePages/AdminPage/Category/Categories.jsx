@@ -89,7 +89,7 @@ export default function Categories() {
   console.log(categorys);
 
   const handleDelete = () => {
-    dispatch(deleteCategoryApi(selectedCategoryId)).then(()=> {
+    dispatch(deleteCategoryApi(selectedCategoryId)).then(() => {
       dispatch(getCategoryApi());
     });
   };
@@ -98,14 +98,14 @@ export default function Categories() {
   const handleClose = () => setOpen(false);
 
   return (
-    <div className="w-full min-h-screen px-40 py-20 bg-slate-50 flex items-center flex-col font-poppins">
+    <div className="w-full min-h-screen px-40 py-12 bg-slate-50 flex items-center flex-col font-poppins">
       <h2 className="text-3xl font-bold">Categories</h2>
       <button
-          onClick={() => setShowModal(!showModal)}
-          className="ml-auto mb-2 w-auto px-4 h-12 text-lg bg-blue-500 border text-slate-50 transform transition duration-500 ease-in-out hover:bg-blue-700  hover:text-slate-50 rounded-lg"
-        >
-          Create New Category
-        </button>
+        onClick={() => setShowModal(!showModal)}
+        className="ml-auto mb-2 w-auto px-4 h-12 text-lg bg-blue-500 border text-slate-50 transform transition duration-500 ease-in-out hover:bg-blue-700  hover:text-slate-50 rounded-lg"
+      >
+        Create New Category
+      </button>
       {categorys?.length > 0 ? (
         <>
           <TableContainer component={Paper}>
@@ -167,7 +167,6 @@ export default function Categories() {
         <h4 className="text-xl mb-5 text-red-700">No categories found</h4>
       )}
       <div>
-    
         {showModal ? <CreateCategory setShowModal={setShowModal} /> : null}
         {showModal2 ? (
           <UpdateCategory
@@ -194,7 +193,10 @@ export default function Categories() {
             )}
             <div className="flex justify-around">
               <button
-                onClick={handleDelete}
+                onClick={() => {
+                  handleDelete();
+                  handleClose();
+                }}
                 className="font-poppins mt-3 w-auto h-7 px-3 rounded-md bg-transparent text-red-500 hover:border border-red-500"
               >
                 Delete

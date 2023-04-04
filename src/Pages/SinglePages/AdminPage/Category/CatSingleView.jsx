@@ -34,23 +34,21 @@ const CatSingleView = () => {
 
   const params = useParams();
   const dispatch = useDispatch();
-
+  const categoryID = params.id;
   useEffect(() => {
     dispatch(getSubCategoryApi(categoryID));
-  }, [dispatch]);
+  }, []);
 
   const categoryName = params.name;
-  const categoryID = params.id;
   console.log(categoryName);
-  console.log(categoryID);
 
   const subCategorys = allSubCategory?.subcategory;
 
   console.log(subCategorys);
 
   const handleDelete = () => {
-    dispatch(deleteSubCategoryApi(selectedCategoryId)).then(()=> {
-      dispatch(getSubCategoryApi(categoryID))
+    dispatch(deleteSubCategoryApi(selectedCategoryId)).then(() => {
+      dispatch(getSubCategoryApi(categoryID));
     });
   };
 
@@ -76,6 +74,7 @@ const CatSingleView = () => {
                 <button
                   onClick={() => {
                     setSelectedCategoryId(subcategory?._id);
+                    setSelectedSubCategoryName(subcategory?.subcategoryName);
                     setShowModal2(true);
                   }}
                   className="w-12 ml-2 h-12 bg-green-600 text-slate-50 text-2xl flex justify-center items-center rounded-md transform transition duration-500 ease-in-out hover:bg-green-700"
@@ -114,6 +113,7 @@ const CatSingleView = () => {
           <UpdateSubCategory
             categoryID={selectedCategoryId}
             setShowModal={setShowModal2}
+            setSelectedSubCategoryName={selectedSubCategoryName}
           />
         ) : null}
         <Modal
@@ -136,7 +136,10 @@ const CatSingleView = () => {
               )}
             </Typography>
             <button
-              onClick={handleDelete}
+              onClick={() => {
+                handleDelete();
+                handleClose();
+              }}
               className="ml-72 mt-3 w-auto h-8 px-3 rounded-md bg-red-500 text-slate-50"
             >
               Delete
