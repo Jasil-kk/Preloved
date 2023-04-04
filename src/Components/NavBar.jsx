@@ -22,14 +22,10 @@ const {profile} = useSelector((state) => state.auth)
   const handleLogout = () => {
     dispatch(signOutApi(navigate));
   };
-
   useEffect(()=> {
     dispatch(userProfileApi(token))
   },[token])
-
-  const Userprofile = profile?.result;
-  console.log(Userprofile);
-
+ 
   useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
@@ -78,14 +74,13 @@ const {profile} = useSelector((state) => state.auth)
             />
             {show && (
               <div ref={ref} className="absolute top-14 -left-24 w-60 h-auto p-5 bg-slate-50 border border-slate-600 flex flex-col justify-center rounded-lg">
-                {Userprofile?.map((user,key) => (
-                  <div key={key}>
+                  <div>
                 <span className="flex items-center justify-between">
                   
                   <div>
                     <p className="text-slate-600 text-sm">Hello,</p>
-                    <h1 className="text-slate-800 text-3xl font-semibold">
-                      {user?.name}
+                    <h1 className="text-slate-800 text-3xl font-semibold capitalize">
+                      {profile?.name}
                     </h1>
                   </div>
                   <Avatar
@@ -101,7 +96,6 @@ const {profile} = useSelector((state) => state.auth)
                   edit profile
                 </Link>
                 </div>
-                ))}
                 <button className="flex justify-center items-center gap-3 mt-5 w-full h-10 bg-pink-400 text-slate-50 text-lg rounded-lg">
                   <span className="text-2xl">
                     <MdOutlineFavoriteBorder />

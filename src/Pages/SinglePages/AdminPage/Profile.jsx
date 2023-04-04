@@ -3,6 +3,7 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Avatar from "@mui/material/Avatar";
 import { useSelector } from "react-redux";
+import UpdateProfile from "./UpdateProfile";
 
 const style = {
   position: "absolute",
@@ -21,10 +22,15 @@ const style = {
 };
 
 const Profile = ({ open, setOpen }) => {
+  const [opener, setOpener] = useState(false);
 
-const {profile} = useSelector((state)=> state.auth)
+  const { profile } = useSelector((state) => state.auth);
 
   const handleClose = () => setOpen(false);
+
+  const handleClickOpen = () => {
+    setOpener(true);
+  };
   return (
     <div className="font-poppins">
       <Modal
@@ -46,7 +52,9 @@ const {profile} = useSelector((state)=> state.auth)
           <div className="ml-7 flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <p className="w-24 text-slate-500">name :</p>
-              <h2 className="text-2xl text-slate-800 font-semibold">{profile?.name}</h2>
+              <h2 className="text-2xl text-slate-800 font-semibold capitalize">
+                {profile?.name}
+              </h2>
             </div>
             <div className="flex items-center gap-3">
               <p className="w-24 text-slate-500">email :</p>
@@ -54,12 +62,21 @@ const {profile} = useSelector((state)=> state.auth)
             </div>
             <div className="flex items-center gap-3">
               <p className="w-24 text-slate-500">mobile No :</p>
-              <h2 className="text-lg text-slate-800 font-medium">{profile?.mobileNo}</h2>
+              <h2 className="text-lg text-slate-800 font-medium">
+                {profile?.mobileNo}
+              </h2>
             </div>
           </div>
-          <button className="absolute w-auto px-3 h-8 rounded bg-blue-400 text-slate-50 right-5 bottom-5 hover:bg-blue-500">Edit Profile</button>
+          <button
+            onClick={handleClickOpen}
+            className="absolute w-auto px-3 h-8 rounded bg-blue-400 text-slate-50 right-5 bottom-5 hover:bg-blue-500"
+          >
+            Edit Profile
+          </button>
         </Box>
       </Modal>
+      {/* update profile */}
+      <UpdateProfile opener={opener} setOpener={setOpener} name={profile?.name} email={profile?.email} mobileNo={profile?.mobileNo}/>
     </div>
   );
 };

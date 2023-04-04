@@ -6,12 +6,7 @@ import { FiUser } from "react-icons/fi";
 import { BiCategory } from "react-icons/bi";
 import { userProfileApi } from "../../../Store/AuthSlice";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getCountApi,
-  getPostAllApi,
-  usersGetApi,
-} from "../../../Store/AdminSlice";
-import { getCategoryApi } from "../../../Store/GetCategorySlice";
+import { getCountApi } from "../../../Store/AdminSlice";
 import cardImg from "../../../assets/sapiens.svg";
 import Profile from "./Profile";
 
@@ -24,11 +19,12 @@ const Dashboard = () => {
   }));
 
   const dispatch = useDispatch();
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
-    dispatch(userProfileApi());
+    dispatch(userProfileApi(token));
     dispatch(getCountApi());
-  }, []);
+  }, [dispatch]);
 
   console.log(count);
   const handleOpen = () => setOpen(true);

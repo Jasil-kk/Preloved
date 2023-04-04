@@ -1,20 +1,29 @@
-import React, { useState } from "react";
+import React from "react";
 import TextField from "@mui/material/TextField";
 
-const InputField = (props) => {
+const InputField = ({
+  type,
+  label,
+  helperText,
+  onChange,
+  value,
+  defaultValue,
+}) => {
   return (
     <div>
       <TextField
         autoComplete="off"
         sx={{ width: 400 }}
-        type={props.type}
+        type={type}
         id="outlined-basic"
-        label={props.label}
+        label={label}
         variant="outlined"
-        helperText={props.helperText}
-        onChange={props.onChange}
-        value={props.value}
-        defaultValue={props.defaultValue}
+        helperText={helperText}
+        onChange={onChange}
+        value={value}
+        defaultValue={defaultValue}
+        inputProps={{ style: { fontFamily: "poppins" } }}
+        InputLabelProps={{ style: { fontFamily: "poppins" } }}
       />
     </div>
   );
