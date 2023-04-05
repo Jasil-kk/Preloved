@@ -16,7 +16,7 @@ const Selector = ({ brands, label, onChange, name }) => {
   return (
     <div className="mt-5">
       <FormControl sx={{ width: 400 }}>
-        <InputLabel id="demo-simple-select-label">{label}</InputLabel>
+        <InputLabel style={{ fontFamily: "poppins" }} id="demo-simple-select-label">{label}</InputLabel>
         <Select
           name={name}
           labelId="demo-simple-select-label"
@@ -26,7 +26,7 @@ const Selector = ({ brands, label, onChange, name }) => {
           onChange={handleChange}
         >
           {brands.map((name) => (
-            <MenuItem key={name} value={name}>
+            <MenuItem style={{ fontFamily: "poppins" }} key={name} value={name}>
               {name}
             </MenuItem>
           ))}

@@ -8,8 +8,19 @@ const PhotoBox = ({setInputValue}) => {
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
     setImageSrc(URL.createObjectURL(file));
-  setInputValue(file);
+    setInputValue(file);
+    e.forEach((file,key)=>{
+      const reader = new FileReader()
+      reader.onload = async ()=>{
+        if(reader.readyState === 2){
+          setInputValue(reader.result)
+        }
+      }
+      reader.readAsDataURL(file)
+    })
   };
+
+
   return (
     <div>
       <div className="w-20 h-20 flex justify-center items-center overflow-hidden border border-slate-500 relative">

@@ -3,6 +3,7 @@ import PhotoBox from "../../Components/styles-store/PhotoBox";
 
 const PhotoUploader = ({input,setInput}) => {
   const [inputValue, setInputValue] = useState();
+console.log(inputValue);
 
   useEffect(()=> {
     setInput({...input,photos:inputValue})

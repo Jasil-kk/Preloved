@@ -95,8 +95,8 @@ export const singlePostApi = createAsyncThunk("admin/singlePostApi", async (prod
 })
 
 // user
-export const usersGetApi = createAsyncThunk("admin/usersGetApi", async () => {
-  const respond = await axiosApi.get("/user/user-all")
+export const usersGetApi = createAsyncThunk("admin/usersGetApi", async ({page,pageLimit}) => {
+  const respond = await axiosApi.get(`/user/user-all?page=${page}&limit=${pageLimit}`)
   console.log(respond);
   return respond.data;
 })

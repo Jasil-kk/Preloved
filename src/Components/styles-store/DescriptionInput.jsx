@@ -1,19 +1,21 @@
 import React from "react";
 import TextField from "@mui/material/TextField";
 
-const DescriptionInput = (props) => {
+const DescriptionInput = ({label,helperText,onChange,value}) => {
   return (
     <div>
       <TextField
         autoComplete="off"
         id="outlined-multiline-static"
-        label={props.label}
+        label={label}
         multiline
         rows={4}
         sx={{ width: 400 }}
-        helperText={props.helperText}
-        value={props.value}
-        onChange={props.onChange}
+        helperText={helperText}
+        value={value}
+        onChange={onChange}
+        inputProps={{ style: { fontFamily: "poppins" } }}
+        InputLabelProps={{ style: { fontFamily: "poppins" } }}
       />
     </div>
   );

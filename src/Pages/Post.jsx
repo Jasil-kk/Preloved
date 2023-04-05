@@ -11,7 +11,7 @@ const Post = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getCategoryApi());
+    dispatch(getCategoryApi({}));
   }, [dispatch]);
 
   const { allCategory, allSubCategory } = useSelector((state) => ({

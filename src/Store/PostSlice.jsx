@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosApi } from "./Axiosmethod";
 
 
-export const postApi = createAsyncThunk("post/postApi", async(categoryId,subcategoryId,product,navigate) => {
-    const respond = await axiosApi.post("/product/new",categoryId,subcategoryId,product);
+export const postApi = createAsyncThunk("post/postApi", async({inputSelector}) => {
+    const respond = await axiosApi.post("/product/new",inputSelector);
     console.log(respond);
     navigate("/")
     return respond.data

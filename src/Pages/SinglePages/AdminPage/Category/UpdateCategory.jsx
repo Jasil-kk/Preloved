@@ -5,14 +5,20 @@ import { useDispatch } from "react-redux";
 import { updateCategoryApi } from "../../../../Store/AdminSlice";
 import { getCategoryApi } from "../../../../Store/GetCategorySlice";
 
-const UpdateCategory = ({ setShowModal, categoryID }) => {
+const UpdateCategory = ({
+  setShowModal,
+  categoryID,
+  selectedCategoryName,
+  pageLimit,
+  page,
+}) => {
   const [input, setInput] = useState();
 
   const dispatch = useDispatch();
 
   const handleUpdate = () => {
     dispatch(updateCategoryApi({ categoryID, input })).then(() => {
-      dispatch(getCategoryApi())
+      dispatch(getCategoryApi({ page, pageLimit }));
     });
   };
 
@@ -34,12 +40,14 @@ const UpdateCategory = ({ setShowModal, categoryID }) => {
             id="outlined-basic"
             label="Category"
             variant="outlined"
+            defaultValue={selectedCategoryName}
             onChange={(e) =>
               setInput({ ...input, categoryName: e.target.value })
             }
           />
           <button
-            onClick={()=>{handleUpdate();
+            onClick={() => {
+              handleUpdate();
               setShowModal(false);
             }}
             className="w-auto mt-4 px-4 h-10 bg-blue-500 text-slate-50 rounded-md"

@@ -3,21 +3,13 @@ import IconInput from "../../Components/styles-store/IconInput";
 import InputField from "../../Components/styles-store/InputField";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
+import { useSelector } from "react-redux";
 
-const ReviewDetails = () => {
+const ReviewDetails = ({handleUpdate,name,mobileNo}) => {
   const [imageSrc, setImageSrc] = useState("");
   const [inputValue, setInputValue] = useState();
-  const [inputValue2, setInputValue2] = useState();
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
-  console.log(inputValue);
-
-  const handleChange2 = (e) => {
-    setInputValue2(e.target.value);
-  };
-  console.log(inputValue2);
+  handleUpdate(inputValue);
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
@@ -53,8 +45,8 @@ const ReviewDetails = () => {
           <InputField
             type={"text"}
             label={"Name"}
-            value={inputValue}
-            onChange={handleChange}
+            onChange={(e)=>setInputValue({...inputValue,name:e.target.value})}
+            defaultValue={name}
           />
         </div>
         <h3 className="text-xl mt-8 font-semibold">
@@ -68,8 +60,8 @@ const ReviewDetails = () => {
           startAdornment={"+91"}
           label={"Mobile Phone Number"}
           type={"number"}
-          value={inputValue2}
-          onChange={handleChange2}
+          onChange={(e)=>setInputValue({...inputValue,mobileNo:e.target.value})}
+          defaultValue={mobileNo}
         />
       </div>
     </div>

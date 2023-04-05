@@ -144,7 +144,7 @@ const Product = () => {
               <Pagination
                 count={totalPages}
                 page={page}
-                color="secondary"
+                color="primary"
                 onChange={handleChange}
               />
             </Stack>

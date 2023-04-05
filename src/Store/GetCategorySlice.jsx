@@ -2,8 +2,8 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { axiosApi } from "./Axiosmethod";
 
 
-export const getCategoryApi = createAsyncThunk("get/getCategoryApi", async() => {
-    const respond = await axiosApi.get("/category/all");
+export const getCategoryApi = createAsyncThunk("get/getCategoryApi", async({page,pageLimit}) => {
+    const respond = await axiosApi.get(`/category/all?page=${page}&limit=${pageLimit}`);
     console.log(respond);
     return respond.data
 })

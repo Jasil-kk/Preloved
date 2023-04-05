@@ -5,14 +5,14 @@ import { useDispatch } from "react-redux";
 import { categoryApi } from "../../../../Store/AdminSlice";
 import { getCategoryApi } from "../../../../Store/GetCategorySlice";
 
-const CreateCategory = ({ setShowModal }) => {
+const CreateCategory = ({ setShowModal, pageLimit, page }) => {
   const [input, setInput] = useState();
 
   const dispatch = useDispatch();
 
   const handleSubmit = () => {
     dispatch(categoryApi(input)).then(() => {
-      dispatch(getCategoryApi());
+      dispatch(getCategoryApi({ page, pageLimit }));
     });
   };
 

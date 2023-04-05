@@ -77,24 +77,35 @@ export default function Categories() {
   const [open, setOpen] = useState(false);
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
   const [selectedCategoryName, setSelectedCategoryName] = useState("");
+  const [page, setPage] = useState(1);
 
   const { allCategory } = useSelector((state) => state.allCategory);
 
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCategoryApi());
-  }, [dispatch]);
+    dispatch(getCategoryApi({ page, pageLimit }));
+  }, [page]);
+
+  const count = allCategory?.total;
+
+  const pageLimit = 5; // page limit
+
+  const totalPages = Math.ceil(count / pageLimit);
 
   const categorys = allCategory?.category;
   console.log(categorys);
 
   const handleDelete = () => {
     dispatch(deleteCategoryApi(selectedCategoryId)).then(() => {
-      dispatch(getCategoryApi());
+      dispatch(getCategoryApi({ page, pageLimit }));
     });
   };
+  const handleChange = (e, value) => {
+    setPage(value);
+  };
+  console.log(selectedCategoryId);
 
-  // const handleOpen = () => setOpen(true);
+  const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   return (
@@ -130,7 +141,7 @@ export default function Categories() {
                         onClick={() => {
                           setSelectedCategoryId(category._id);
                           setSelectedCategoryName(category.categoryName);
-                          setOpen(true);
+                          handleOpen();
                         }}
                         className="w-auto px-3 h-8 text-red-600 text-xl flex justify-center items-center rounded-full transform transition duration-500 ease-in-out hover:bg-red-600 hover:text-slate-50"
                       >
@@ -140,6 +151,7 @@ export default function Categories() {
                       <button
                         onClick={() => {
                           setSelectedCategoryId(category._id);
+                          setSelectedCategoryName(category.categoryName);
                           setShowModal2(true);
                         }}
                         className="w-auto px-3 h-8 text-green-600 text-xl flex justify-center items-center rounded-full transform transition duration-500 ease-in-out hover:bg-green-600 hover:text-slate-50"
@@ -160,18 +172,32 @@ export default function Categories() {
             </Table>
           </TableContainer>
           <Stack marginTop={3} spacing={2}>
-            <Pagination count={10} color="primary" />
+            <Pagination
+              count={totalPages}
+              page={page}
+              color="primary"
+              onChange={handleChange}
+            />
           </Stack>
         </>
       ) : (
         <h4 className="text-xl mb-5 text-red-700">No categories found</h4>
       )}
       <div>
-        {showModal ? <CreateCategory setShowModal={setShowModal} /> : null}
+        {showModal ? (
+          <CreateCategory
+            setShowModal={setShowModal}
+            pageLimit={pageLimit}
+            page={page}
+          />
+        ) : null}
         {showModal2 ? (
           <UpdateCategory
             categoryID={selectedCategoryId}
             setShowModal={setShowModal2}
+            selectedCategoryName={selectedCategoryName}
+            pageLimit={pageLimit}
+            page={page}
           />
         ) : null}
         <Modal

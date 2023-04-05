@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
@@ -36,15 +36,25 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 const Users = () => {
+  const [page, setPage] = useState(1);
   const { users } = useSelector((state) => state.adminWork);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(usersGetApi());
-  }, [dispatch]);
+    dispatch(usersGetApi({ page, pageLimit }));
+  }, [page]);
 
   const userCollection = users?.result;
   console.log(userCollection);
+
+  const count = users?.total;
+  const pageLimit = 5; // page limit
+
+  const totalPages = Math.ceil(count / pageLimit);
+
+  const handleChange = (e, value) => {
+    setPage(value);
+  };
 
   return (
     <div className="w-full p-5 font-poppins">
@@ -82,7 +92,12 @@ const Users = () => {
         </TableContainer>
         {/* Pagination */}
         <Stack spacing={2} marginTop={2}>
-          <Pagination count={10} color="primary" />
+          <Pagination
+            count={totalPages}
+            page={page}
+            onChange={handleChange}
+            color="primary"
+          />
         </Stack>
       </div>
     </div>

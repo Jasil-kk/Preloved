@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import DescriptionAd from "../Components/styles-store/DescriptionAd";
 import TitleAd from "../Components/styles-store/TitleAd";
@@ -9,9 +9,11 @@ import PhotoUploader from "./Post Ad/PhotoUploader";
 import PostNowBtn from "./Post Ad/PostNowBtn";
 import ReviewDetails from "./Post Ad/ReviewDetails";
 import SetPrice from "./Post Ad/SetPrice";
+import { profileUpdateApi, userProfileApi } from "../Store/AuthSlice";
 
 const PostForm = ({ children, inputValue }) => {
   const [inputSelector, setInputSelector] = useState([]);
+  const { profile } = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -19,16 +21,24 @@ const PostForm = ({ children, inputValue }) => {
   const categoryID = params.catId;
   const subCategoryID = params.subId;
 
-  const handleSubmit = () => {
-    dispatch(
-      postApi({
-        ...inputSelector,
-        details: inputValue,
-        categoryId: categoryID,
-        subcategoryId: subCategoryID,
-        navigate,
-      })
-    );
+  const handleUpdate = () => {
+    dispatch(profileUpdateApi({inputValue}))
+  };
+
+  useEffect(()=>{
+    dispatch(userProfileApi())
+  },[dispatch])
+
+  const handleSubmit = async() => {
+    setInputSelector({
+      ...inputSelector,
+      details: inputValue,
+      categoryId: categoryID,
+      subcategoryId: subCategoryID,
+      navigate,
+    })
+   await dispatch(postApi());
+    handleUpdate();
   };
 
   console.log(inputSelector);
@@ -59,8 +69,9 @@ const PostForm = ({ children, inputValue }) => {
           <SetPrice input={inputSelector} setInput={setInputSelector} />
           <PhotoUploader input={inputSelector} setInput={setInputSelector} />
           <LocationAdder input={inputSelector} setInput={setInputSelector} />
-          <ReviewDetails />
-          <PostNowBtn onClick={handleSubmit} />
+          <ReviewDetails handleUpdate={handleUpdate} name={profile?.name} mobileNo={profile?.mobileNo}/>
+   
+          <PostNowBtn onClick={handleSubmit}/>
         </div>
       </div>
     </div>

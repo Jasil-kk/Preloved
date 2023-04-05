@@ -7,8 +7,8 @@ import FormControl from "@mui/material/FormControl";
 const IconInput = ({inputLabel,label,type,value,onChange,startAdornment,defaultValue}) => {
   return (
     <div>
-      <FormControl fullWidth sx={{mt : 2 , width: 400 }}>
-        <InputLabel htmlFor="outlined-adornment-amount">
+      <FormControl fullWidth sx={{mt : 2 , width: 400 }} >
+        <InputLabel sx={{ fontFamily: "poppins" }} htmlFor="outlined-adornment-amount">
           {inputLabel}
         </InputLabel>
         <OutlinedInput
@@ -23,6 +23,7 @@ const IconInput = ({inputLabel,label,type,value,onChange,startAdornment,defaultV
           value={value}
           onChange={onChange}
           defaultValue={defaultValue}
+          inputProps={{ style: { fontFamily: "poppins" } }}
         />
       </FormControl>
     </div>
