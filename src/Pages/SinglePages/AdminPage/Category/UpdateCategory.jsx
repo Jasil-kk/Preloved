@@ -44,6 +44,8 @@ const UpdateCategory = ({
             onChange={(e) =>
               setInput({ ...input, categoryName: e.target.value })
             }
+            inputProps={{ style: { fontFamily: "poppins" } }}
+            InputLabelProps={{ style: { fontFamily: "poppins" } }}
           />
           <button
             onClick={() => {

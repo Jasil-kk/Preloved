@@ -5,11 +5,11 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { useSelector } from "react-redux";
 
-const ReviewDetails = ({handleUpdate,name,mobileNo}) => {
+const ReviewDetails = ({name,mobileNo}) => {
   const [imageSrc, setImageSrc] = useState("");
   const [inputValue, setInputValue] = useState();
 
-  handleUpdate(inputValue);
+  // handleUpdate(inputValue);
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];

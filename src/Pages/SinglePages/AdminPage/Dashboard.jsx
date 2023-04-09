@@ -30,9 +30,9 @@ const Dashboard = () => {
   const handleOpen = () => setOpen(true);
 
   return (
-    <div className="w-full p-5 font-poppins">
+    <div className="w-full bg-slate-50 p-5 font-poppins min-h-screen">
       <div className="flex flex-wrap gap-10 p-5">
-        <div className="w-96 xl:w-1/3 h-72 bg-slate-50 rounded-xl overflow-hidden relative drop-shadow-xl">
+        <div className="w-[500px] h-72 bg-slate-50 rounded-xl overflow-hidden relative drop-shadow-xl">
           <div className="w-full h-1/2 flex justify-between bg-violet-200">
             <div className="mt-5 ml-5">
               <h3 className="text-blue-500 text-md">Welcome Back !</h3>

@@ -13,16 +13,34 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { signInApi } from "../Store/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const LoginPage = ({ setShowModal }) => {
   const [data, setData] = useState();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(signInApi({ data, navigate }));
+  // };
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(signInApi({ data, navigate }));
+    setIsSubmitting(true);
+    try {
+      await dispatch(signInApi({ data, navigate }));
+      // show success notification
+      toast.success("Login successful!");
+    } catch (error) {
+      // show error notification
+      toast.error("An error occurred. Please try again.");
+    }
+    setIsSubmitting(false);
   };
 
   const [showPassword, setShowPassword] = React.useState(false);
@@ -32,6 +50,7 @@ const LoginPage = ({ setShowModal }) => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
 
   return (
     <>
@@ -105,13 +124,22 @@ const LoginPage = ({ setShowModal }) => {
                 No account ?
                 <span className="text-lg text-blue-500 ml-1">register</span>
               </Link>
-              <button
+              {/* <button
                 onClick={handleSubmit}
                 type="submit"
                 className="w-52 h-10 sm:h-12 bg-blue-500 rounded-lg text-xl text-white font-poppins hover:bg-blue-600"
               >
                 Submit
-              </button>
+              </button> */}
+              <button
+  onClick={handleSubmit}
+  type="submit"
+  className="w-52 h-10 sm:h-12 bg-blue-500 rounded-lg text-xl text-white font-poppins hover:bg-blue-600"
+  disabled={isSubmitting}
+>
+  {isSubmitting ? "Submitting..." : "Submit"}
+</button>
+<ToastContainer />
             </form>
           </div>
         </div>

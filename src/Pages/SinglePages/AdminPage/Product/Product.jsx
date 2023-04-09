@@ -87,7 +87,7 @@ const Product = () => {
   return (
     <div className="w-full min-h-screen bg-slate-50 flex items-center flex-col font-poppins">
       <div className="w-full h-auto bg-slate-50 p-20 flex flex-col items-center rounded-md">
-        <h2 className="text-3xl my-3 font-bold">Products</h2>
+        <h2 className="text-3xl text-slate-800 my-3 font-bold">Products</h2>
         {products?.length > 0 ? (
           <>
             <TableContainer component={Paper}>

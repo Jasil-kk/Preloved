@@ -44,9 +44,8 @@ export const subCategoryApi = createAsyncThunk(
 // subCategory update
 export const updateSubCategoryApi = createAsyncThunk(
   "admin/updateSubCategoryApi",
-  async ({categoryID,input}) => {
-    const respond = await axiosApi.put(`/subcategory/update/${categoryID}`,input);
-    window.location.reload(false);
+  async ({selectcategoryID,input}) => {
+    const respond = await axiosApi.put(`/subcategory/update/${selectcategoryID}`,input);
     console.log(respond);
     return respond.data;
   }

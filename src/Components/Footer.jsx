@@ -1,8 +1,8 @@
 import React from "react";
-import wtsp from "../assets/whatsapp.svg";
-import git from "../assets/github.svg";
-import insta from "../assets/instagram.svg";
-import fb from "../assets/facebook.svg";
+import wtsp from "../assets/Footer/whatsapp.svg";
+import git from "../assets/Footer/github.svg";
+import insta from "../assets/Footer/instagram.svg";
+import fb from "../assets/Footer/facebook.svg";
 
 
 const Footer = () => {

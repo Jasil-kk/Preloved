@@ -79,7 +79,7 @@ const Header = () => {
   }
 
   return (
-    <div className="w-full h-20 flex items-center bg-slate-900 text-slate-50 font-poppins fixed">
+    <div className="w-full h-20 flex items-center bg-slate-900 text-slate-50 font-poppins fixed z-10">
       <div className="w-full px-5 flex items-center justify-start">
         <h1 className="ml-10 text-2xl text-slate-50">Prel💓ved</h1>
         <Search>

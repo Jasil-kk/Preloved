@@ -10,7 +10,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full h-auto flex flex-wrap justify-center gap-10 px-10 pt-16 pb-24  sm:pt-28 sm:px-40 relative">
+    <div className="w-full h-auto bg-slate-50 flex flex-wrap justify-center gap-10 px-10 pt-16 pb-24  sm:pt-28 sm:px-40 relative">
       {Array.from({ length: itemsToShow }).map((_, idx) => (
         <Link to={"/singlepage"} key={idx}>
           <div className="banner-card w-80 h-96 rounded-xl border border-gray-300 overflow-hidden relative">
@@ -31,7 +31,7 @@ const Banner = () => {
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
                 liberoodi.
               </p>
-              <span className="absolute right-2 bottom-1 text-xs sm:text-sm">
+              <span className="absolute text-slate-500 right-2 bottom-1 text-xs sm:text-sm">
                 Yesterday
               </span>
             </div>

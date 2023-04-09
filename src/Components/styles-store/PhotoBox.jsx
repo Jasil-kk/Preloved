@@ -1,25 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 
 const PhotoBox = ({setInputValue}) => {
   const [imageSrc, setImageSrc] = useState();
+  const [selectedFile, setSelectedFile] = useState("");
+
+
+//   const handleFileSelection = (e) => {
+//     const file = e.target.files[0];
+//     setImageSrc(URL.createObjectURL(file))
+//     setSelectedFile(e.target.files[0]);
+//     // const formData = new FormData()
+//     // formData.append('photos',imageSrc,imageSrc.name)
+// setInputValue(e.target.files[0]);
+//   };
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
     setImageSrc(URL.createObjectURL(file));
-    setInputValue(file);
-    e.forEach((file,key)=>{
-      const reader = new FileReader()
-      reader.onload = async ()=>{
-        if(reader.readyState === 2){
-          setInputValue(reader.result)
-        }
-      }
-      reader.readAsDataURL(file)
-    })
+    setSelectedFile(e.target.files[0]);
+    const formData = new FormData();
+    formData.append("image", e.target.files[0], e.target.files[0].name);
+    setInputValue(formData);
   };
-
 
   return (
     <div>
@@ -32,6 +36,7 @@ const PhotoBox = ({setInputValue}) => {
           >
             <input
               hidden
+              // multiple
               accept="image/*"
               type="file"
               onChange={handleFileSelection}

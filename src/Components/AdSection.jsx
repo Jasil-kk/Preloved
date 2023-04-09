@@ -1,9 +1,10 @@
 import React from 'react'
+import banner from "../assets/AdSection/Banner.svg"
 
 const AdSection = () => {
   return (
-    <div className='w-full h-32 bg-slate-200'>
-        <img className='w-full h-full' src="https://statics.olx.in/olxin/banners/hero_bg_in_v4@1x.png" alt="" />
+    <div className='w-full h-[196px] bg-transparent mt-[86px]'>
+        <img className='w-full h-full' src={banner} alt="banner" />
     </div>
   )
 }

@@ -110,7 +110,7 @@ export default function Categories() {
 
   return (
     <div className="w-full min-h-screen px-40 py-12 bg-slate-50 flex items-center flex-col font-poppins">
-      <h2 className="text-3xl font-bold">Categories</h2>
+      <h2 className="text-3xl text-slate-800 font-bold">Categories</h2>
       <button
         onClick={() => setShowModal(!showModal)}
         className="ml-auto mb-2 w-auto px-4 h-12 text-lg bg-blue-500 border text-slate-50 transform transition duration-500 ease-in-out hover:bg-blue-700  hover:text-slate-50 rounded-lg"

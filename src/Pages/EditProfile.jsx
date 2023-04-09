@@ -132,7 +132,7 @@ useEffect(()=> {
           <div className="p-6 flex justify-between">
             <Link to={"/"}>
               <button className="h-10 px-4 bg-slate-700 text-slate-50 text-lg rounded-md">
-                Discard
+                Cancel
               </button>
             </Link>
             <button

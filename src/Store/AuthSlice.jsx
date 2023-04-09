@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosApi } from "./Axiosmethod";
 
+
 // registration
 
 export const registerApi = createAsyncThunk(
@@ -29,7 +30,6 @@ export const signInApi = createAsyncThunk("auth/signInApi", async (input) => {
     } else {
       input.navigate("/post");
     }
-  
   }
   return respond.data;
 });

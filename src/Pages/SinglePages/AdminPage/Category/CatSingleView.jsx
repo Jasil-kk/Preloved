@@ -40,11 +40,8 @@ const CatSingleView = () => {
   }, []);
 
   const categoryName = params.name;
-  console.log(categoryName);
 
   const subCategorys = allSubCategory?.subcategory;
-
-  console.log(subCategorys);
 
   const handleDelete = () => {
     dispatch(deleteSubCategoryApi(selectedCategoryId)).then(() => {
@@ -57,8 +54,8 @@ const CatSingleView = () => {
   return (
     <div className="w-full min-h-screen bg-slate-50 flex justify-center items-start font-poppins">
       <div className="w-1/2 mt-20 h-auto p-5 bg-slate-50 flex flex-col items-center rounded-xl">
-        <h1 className="text-4xl font-bold">{categoryName}</h1>
-        <h2 className="text-2xl font-semibold mt-7">Sub Categories</h2>
+        <h1 className="text-4xl font-bold text-slate-800">{categoryName}</h1>
+        <h2 className="text-2xl text-slate-800 font-semibold mt-7">Sub Categories</h2>
         {subCategorys?.length > 0 ? (
           <>
             {subCategorys?.map((subcategory, key) => (
@@ -111,7 +108,8 @@ const CatSingleView = () => {
         ) : null}
         {showModal2 ? (
           <UpdateSubCategory
-            categoryID={selectedCategoryId}
+          categoryID={categoryID}
+            selectcategoryID={selectedCategoryId}
             setShowModal={setShowModal2}
             setSelectedSubCategoryName={selectedSubCategoryName}
           />
@@ -124,17 +122,15 @@ const CatSingleView = () => {
           aria-describedby="keep-mounted-modal-description"
         >
           <Box sx={style}>
+          {subCategorys && subCategorys.length > 0 && (
             <Typography id="keep-mounted-modal-description" sx={{ mt: 2 }}>
-              {subCategorys && subCategorys.length > 0 && (
-                <p className="font-poppins text-lg text-yellow-700 text-center">
                   Are you sure do you really want to delete the
                   <span className="text-xl mx-1 font-semibold">
                     {selectedSubCategoryName}
                   </span>
                   category
-                </p>
-              )}
             </Typography>
+            )}
             <button
               onClick={() => {
                 handleDelete();

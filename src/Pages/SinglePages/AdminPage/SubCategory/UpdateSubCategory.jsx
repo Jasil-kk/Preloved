@@ -5,13 +5,15 @@ import { useDispatch } from "react-redux";
 import { updateSubCategoryApi } from "../../../../Store/AdminSlice";
 import { getSubCategoryApi } from "../../../../Store/GetCategorySlice";
 
-const UpdateSubCategory = ({ categoryID, setShowModal , setSelectedSubCategoryName}) => {
+const UpdateSubCategory = ({ categoryID,selectcategoryID, setShowModal , setSelectedSubCategoryName}) => {
   const [input, setInput] = useState();
 
   const dispatch = useDispatch();
 
   const handleUpdate = () => {
-    dispatch(updateSubCategoryApi({ categoryID, input }))
+    dispatch(updateSubCategoryApi({ selectcategoryID, input })).then(()=>{
+      dispatch(getSubCategoryApi(categoryID))
+    })
   };
 
   return (
@@ -36,6 +38,8 @@ const UpdateSubCategory = ({ categoryID, setShowModal , setSelectedSubCategoryNa
             onChange={(e) =>
               setInput({ ...input, subcategoryName: e.target.value })
             }
+            inputProps={{ style: { fontFamily: "poppins" } }}
+            InputLabelProps={{ style: { fontFamily: "poppins" } }}
           />
           <button
             onClick={()=>{handleUpdate();

@@ -9,8 +9,8 @@ const Pages = () => {
   return (
     <div>
         <NavBar />
-        <NavBar2 />
         <AdSection />
+        <NavBar2 />
         <Banner />
         <Footer />
     </div>
