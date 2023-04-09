@@ -18,7 +18,7 @@ const Banner = () => {
   };
 
   return (
-    <div className="w-full h-auto bg-slate-50 flex flex-wrap justify-center gap-[70px] px-10 pt-16 pb-24  sm:pt-28 sm:px-40 font-outfit relative">
+    <div className="w-full h-auto bg-slate-50 flex flex-wrap justify-center gap-[70px] px-10 pt-16 pb-32  sm:pt-28 sm:px-40 font-outfit relative">
       {Array.from({ length: itemsToShow }).map((_, idx) => (
         <div
           key={idx}
@@ -57,10 +57,11 @@ const Banner = () => {
       ))}
       <button
         onClick={toggle}
-        className="absolute bottom-6 w-[139px] h-10 rounded font-semibold text-xl text-[#3131FF] border-2 border-[#3131FF] transform transition duration-600 ease-in-out hover:bg-[#3131FF] hover:text-slate-50"
+        className="absolute bottom-10 w-[139px] h-10 rounded font-semibold text-xl text-[#3131FF] border-2 border-[#3131FF] transform transition duration-600 ease-in-out hover:bg-[#3131FF] hover:text-slate-50"
       >
         See More
       </button>
+      <div className="absolute bottom-0 w-4/5 h-[1px] bg-[#3131FF]"></div>
     </div>
   );
 };
