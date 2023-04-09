@@ -111,7 +111,7 @@ const NavBar = () => {
             <Avatar
               alt="avatar"
               src={avatar}
-              sx={{ width: 50, height: 50, border:2, borderColor: "#3131FF"}}
+              sx={{ width: 50, height: 50}}
             />
             {show && (
               <div
