@@ -3,12 +3,16 @@ import { axiosApi } from "./Axiosmethod";
 
 
 export const postApi = createAsyncThunk("post/postApi", async(inputSelector) => {
-    console.log(inputSelector);
+    console.log("gfhgf",inputSelector);
+    console.log("nfv",inputSelector.formData);
     const respond = await axiosApi.post("/product/new",inputSelector);
     console.log(respond);
-    navigate("/")
+    const productId = respond.data.product._id;
+    console.log(productId);
+    await axiosApi.post(`/productImage/admin/new/${productId}`,inputSelector.formData)
     return respond.data
 })
+
 
 const initialState = {
     data: [],
@@ -28,7 +32,7 @@ const postSlice = createSlice({
         },
         [postApi.rejected]:(state) => {
             console.log("posting rejected");
-        }
+        },
     }
 })
 

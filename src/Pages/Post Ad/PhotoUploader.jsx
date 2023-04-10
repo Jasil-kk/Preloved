@@ -1,37 +1,16 @@
 import React, { useEffect, useState } from "react";
 import PhotoBox from "../../Components/styles-store/PhotoBox";
 
-// const PhotoUploader = ({input,setInput}) => {
-//   const [inputValue, setInputValue] = useState();
-
-//   useEffect(()=> {
-//     setInput({...input,photos:inputValue})
-//   },[inputValue])
-
-
   const PhotoUploader = ({input, setInput}) => {
-    // const [photos, setPhotos] = useState([]);
-  
-    // useEffect(() => {
-    //   setInput({ ...input, photos });
-    // }, [photos]);
-  
-    // const handleAddPhoto = (photo) => {
-    //   const formData = new FormData()
-    //   formData.append("photos",photo,photo.name)
-    //   setPhotos(formData);
-    // };
+
     const [photos, setPhotos] = useState([]);
 
     useEffect(() => {
-      setInput({ ...input, photos });
+      setInput(photos);
     }, [photos]);
   
     const handleAddPhoto = (photo) => {
-      // const formData = new FormData();
-      // formData.append("photos", photo);
-      // setPhotos([...photos, formData]);
-      setPhotos([...photos, photo])
+      setPhotos(photo)
     };
   
   return (

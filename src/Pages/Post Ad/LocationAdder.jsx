@@ -1,22 +1,17 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
 import Selector from "../../Components/styles-store/selector";
 
 const LocationAdder = ({input,setInput}) => {
   const [inputValue, setInputValue] = useState("");
   const [inputValue2, setInputValue2] = useState("");
 
-  const dispatch = useDispatch();
-
   const handleChange = (e) => {
     setInputValue(e);
-    // dispatch(saveInput({ district: newvalue }));
     setInput({...input,district:e})
   };
 
   const handleChange2 = (e) => {
     setInputValue2(e);
-    // dispatch(saveInput({ city: newvalue2 }));
     setInput({...input,city:e})
   };
 

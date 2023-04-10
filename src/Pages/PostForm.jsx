@@ -12,7 +12,7 @@ import SetPrice from "./Post Ad/SetPrice";
 
 const PostForm = ({ children, inputValue }) => {
   const [inputSelector, setInputSelector] = useState([]);
-  const [image, setImage] = useState();
+  const [imageSelector, setImageSelector] = useState ();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -20,16 +20,22 @@ const PostForm = ({ children, inputValue }) => {
   const categoryID = params.catId;
   const subCategoryID = params.subId;
 
- 
- console.log(inputValue);
- 
+  const handleSubmit = async () => {
+     const formData = new FormData();
+    formData.append("photos",imageSelector,imageSelector.name);
+    await dispatch(
+      postApi({
+        ...inputSelector,
+        details: inputValue,
+        categoryId: categoryID,
+        subcategoryId: subCategoryID,
+        formData
+      })
+    );
+  };
 
-    const handleSubmit = async() => {
-        //  setInputSelector()
-         await dispatch(postApi({...inputSelector, details:inputValue,categoryId:categoryID,subcategoryId:subCategoryID}))
-      }
-  
   console.log(inputSelector);
+  console.log(imageSelector);
 
   const pathName = window.location.pathname;
   const firstTwoPaths = pathName.split("/").slice(1, 3).join("/");
@@ -55,10 +61,9 @@ const PostForm = ({ children, inputValue }) => {
             <DescriptionAd input={inputSelector} setInput={setInputSelector} />
           </div>
           <SetPrice input={inputSelector} setInput={setInputSelector} />
-          <PhotoUploader input={inputSelector} setInput={setInputSelector} />
+          <PhotoUploader input={imageSelector} setInput={setImageSelector} />
           <LocationAdder input={inputSelector} setInput={setInputSelector} />
           <ReviewDetails />
-
           <PostNowBtn onClick={handleSubmit} />
         </div>
       </div>
