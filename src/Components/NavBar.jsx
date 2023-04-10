@@ -45,14 +45,14 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="w-full bg-slate-50 h-32 sm:h-20 md:h-[86px] md:px-40 flex flex-wrap justify-between items-center fixed top-0 left-0 z-20 font-outfit">
+    <nav className="w-full bg-slate-50 min-h-[86px] px-40 flex flex-wrap justify-between items-center fixed top-0 left-0 z-20 font-outfit">
       <div className="w-[164px] h-[43px]">
         <img className="w-full h-full" src={logo} alt="logo" />
       </div>
       <div className="flex gap-7 flex-wrap">
         <div className="w-[219px] h-10 border-2 border-[#3131FF] rounded bg-transparent text-lg text-[#3131FF] relative">
           <img
-            className="absolute w-5 h-5 inset-y-1/2 left-2  transform: -translate-y-1/2"
+            className="absolute w-4 h-4 inset-y-1/2 left-2 transform: -translate-y-1/2"
             src={location}
             alt="location"
           />
@@ -82,7 +82,7 @@ const NavBar = () => {
           <Link to={"/post"}>
           <button
           onClick={() => setShowModal(true)}
-          className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out hover:scale-105"
+          className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]"
         >
           SELL
         </button>
@@ -90,7 +90,7 @@ const NavBar = () => {
         ) : (
         <button
           onClick={() => setShowModal(true)}
-          className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out hover:scale-105"
+          className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]"
         >
           SELL
         </button>

@@ -100,6 +100,14 @@ export const usersGetApi = createAsyncThunk("admin/usersGetApi", async ({page,pa
   return respond.data;
 })
 
+// user delete
+
+export const usersDeleteApi = createAsyncThunk("admin/usersDeleteApi", async (userID) => {
+  const respond = await axiosApi.delete(`/user/user-delete/${userID}`)
+  console.log(respond);
+  return respond.data;
+})
+
 // get count
 
 export const getCountApi = createAsyncThunk("admin/getCountApi",async () => {
@@ -232,6 +240,17 @@ const adminSlice = createSlice({
       [usersGetApi.rejected]: (state) => {
         console.log("users getting rejected");
       },
+          // user delete
+          [usersDeleteApi.pending]: (state) => {
+            console.log("user delete pending");
+          },
+          [usersDeleteApi.fulfilled]: (state, action) => {
+            state.users = action.payload;
+            console.log("user delete success");
+          },
+          [usersDeleteApi.rejected]: (state) => {
+            console.log("user delete rejected");
+          },
           // get count
           [getCountApi.pending]: (state) => {
             console.log("count getting pending");

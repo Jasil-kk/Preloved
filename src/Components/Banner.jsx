@@ -7,7 +7,7 @@ import Painting from "../assets/Banner/Painting.png";
 
 const Banner = () => {
   const [itemsToShow, setItemsToShow] = useState(10);
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
 
   const handleClick = (id) => {
     setShow({ ...show, [id]: !show[id] });
@@ -28,7 +28,7 @@ const Banner = () => {
             <img className="w-full h-full relative" src={door} alt="door" />
 
             <img
-              src={!show[idx] ? favWhite : favPink}
+              src={show[idx] ? favPink : favWhite}
               onClick={() => handleClick(idx)}
               className="absolute top-3 left-1/2 right-1/2 transform: -translate-x-1/2"
             />

@@ -40,7 +40,7 @@ const Footer = () => {
         <div className="mt-6 flex flex-col gap-5">
          <h3 className="font-normal text-sm text-slate-600">Shopify</h3>
          <h3 className="font-normal text-sm text-slate-600">WordPress</h3>
-         <h3 className="font-normal text-sm text-slate-600">UI?UX DEsign</h3>
+         <h3 className="font-normal text-sm text-slate-600">UI?UX Design</h3>
         </div>
       </div>
       <div>

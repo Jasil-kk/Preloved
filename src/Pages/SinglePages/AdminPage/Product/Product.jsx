@@ -150,7 +150,7 @@ const Product = () => {
             </Stack>
           </>
         ) : (
-          <h4 className="text-xl mt-5 text-red-700 ">No Products found</h4>
+          <h4 className="text-xl mt-5 text-red-700">No Products found</h4>
         )}
         <Modal
           keepMounted
