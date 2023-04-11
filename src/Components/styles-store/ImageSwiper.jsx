@@ -21,11 +21,11 @@ const ImageSwiper = ({productImage}) => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper bg-black w-80 h-56 sm:w-96 sm:h-64 md:w-[800px] md:h-[500px]"
+        className="bg-black w-80 h-56 sm:w-96 sm:h-64 md:w-[800px] md:h-[500px]"
       >
         <SwiperSlide>
           <img
-            className="w-full h-full object-cover"
+            className="w-full h-full object-contain"
             src={productImage}
             alt="item-image"
           />

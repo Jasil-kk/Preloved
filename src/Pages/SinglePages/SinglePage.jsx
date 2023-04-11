@@ -49,21 +49,85 @@ const SinglePage = () => {
             </div>
           </div>
           <div className="bg-slate-100 w-72 sm:w-96 md:w-[800px] border border-slate-500">
-            <div className="p-3 sm:p-5 border-b border-slate-400">
-              <h2 className="text-xl sm:text-2xl font-semibold text-slate-900">
-                Details
-              </h2>
-              <span className="mt-3 flex gap-10 sm:gap-14">
-                <p className="text-sm sm:text-lg text-slate-600">Brand</p>
-                <p className="text-sm sm:text-lg text-slate-800">Infinix</p>
-              </span>
-            </div>
+            {product?.details ? (
+              <div className="p-3 sm:p-5 border-b border-slate-400">
+                <h2 className="text-xl sm:text-2xl font-semibold text-slate-900">
+                  Details
+                </h2>
+                <span className="mt-5 flex flex-col gap-10">
+                  <div className="flex gap-24">
+                    {product?.details?.brand && (
+                      <div>
+                        <p className="text-sm sm:text-lg text-slate-800 font-semibold">
+                          Brand
+                        </p>
+                        <p className="text-sm sm:text-lg text-slate-600">
+                          {product?.details?.brand}
+                        </p>
+                      </div>
+                    )}
+                    {product?.details?.fuel && (
+                      <div>
+                        <p className="text-sm sm:text-lg text-slate-800 font-semibold">
+                          Fuel
+                        </p>
+                        <p className="text-sm sm:text-lg text-slate-600">
+                          {product?.details?.fuel}
+                        </p>
+                      </div>
+                    )}
+                    {product?.details?.kmDriven && (
+                      <div>
+                        <p className="text-sm sm:text-lg text-slate-800 font-semibold">
+                          KM Driven
+                        </p>
+                        <p className="text-sm sm:text-lg text-slate-600">
+                          {product?.details?.kmDriven} KM
+                        </p>
+                      </div>
+                    )}
+                    {product?.details?.noOfOwner && (
+                      <div>
+                        <p className="text-sm sm:text-lg text-slate-800 font-semibold">
+                          No. Of Owner
+                        </p>
+                        <p className="text-sm sm:text-lg text-slate-600">
+                          {product?.details?.noOfOwner}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex gap-24">
+                    {product?.details?.transmissionType && (
+                      <div>
+                        <p className="text-sm sm:text-lg text-slate-800 font-semibold">
+                          Transmission Type
+                        </p>
+                        <p className="text-sm sm:text-lg text-slate-600">
+                          {product?.details?.transmissionType}
+                        </p>
+                      </div>
+                    )}
+                    {product?.details?.transmissionType && (
+                      <div>
+                        <p className="text-sm sm:text-lg text-slate-800 font-semibold">
+                          Year
+                        </p>
+                        <p className="text-sm sm:text-lg text-slate-600">
+                          {product?.details?.year}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+                </span>
+              </div>
+            ) : null}
             <div className="p-3 sm:p-5">
               <h2 className="text-xl sm:text-2xl font-semibold text-slate-900">
                 Description
               </h2>
               <p className="text-sm sm:text-lg mt-3 text-slate-800">
-                Mobile in new condition, only 1 month used with 2 back cover
+                {product?.description}
               </p>
             </div>
           </div>

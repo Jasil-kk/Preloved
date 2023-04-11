@@ -22,13 +22,14 @@ const PostForm = ({ children, inputValue }) => {
 
   const handleSubmit = async () => {
      const formData = new FormData();
-    formData.append("photos",imageSelector,imageSelector.name);
+    formData.append("photo",imageSelector,imageSelector.name);
     await dispatch(
       postApi({
         ...inputSelector,
         details: inputValue,
         categoryId: categoryID,
         subcategoryId: subCategoryID,
+        navigate,
         formData
       })
     );

@@ -9,7 +9,8 @@ export const postApi = createAsyncThunk("post/postApi", async(inputSelector) => 
     console.log(respond);
     const productId = respond.data.product._id;
     console.log(productId);
-    await axiosApi.post(`/productImage/admin/new/${productId}`,inputSelector.formData)
+    await axiosApi.post(`/productImage/admin/new?productId=${productId}`,inputSelector.formData)
+    inputSelector.navigate("/")
     return respond.data
 })
 
