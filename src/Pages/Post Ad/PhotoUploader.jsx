@@ -9,10 +9,13 @@ import PhotoBox from "../../Components/styles-store/PhotoBox";
       setInput(photos);
     }, [photos]);
   
-    const handleAddPhoto = (photo) => {
-      setPhotos(photo)
-    };
+    // const handleAddPhoto = (photo) => {
+    //   setPhotos((prevPhotos) => [...prevPhotos, photo]);
+    // };
   
+    const handleAddPhoto = (photo) => {
+      setPhotos( photo);
+    };
   return (
     <div className="p-5 border-b border-blue-500">
       <h2 className="text-2xl font-semibold text-slate-800">

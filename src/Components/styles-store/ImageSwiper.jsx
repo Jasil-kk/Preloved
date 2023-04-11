@@ -4,17 +4,18 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper";
 
-const ImageSwiper = () => {
+const ImageSwiper = ({productImage}) => {
   return (
     <div>
       <Swiper
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
+        // autoplay={{
+        //   delay: 3000,
+        //   disableOnInteraction: false,
+          
+        // }}
         pagination={{
           clickable: true,
         }}
@@ -25,11 +26,11 @@ const ImageSwiper = () => {
         <SwiperSlide>
           <img
             className="w-full h-full object-cover"
-            src="https://images.pexels.com/photos/193004/pexels-photo-193004.jpeg?auto=compress&cs=tinysrgb&w=1600"
-            alt=""
+            src={productImage}
+            alt="item-image"
           />
         </SwiperSlide>
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <img
             className="w-full h-full object-cover"
             src="https://images.pexels.com/photos/719399/pexels-photo-719399.jpeg?auto=compress&cs=tinysrgb&w=1600"
@@ -56,7 +57,7 @@ const ImageSwiper = () => {
             src="https://images.pexels.com/photos/1042143/pexels-photo-1042143.jpeg?auto=compress&cs=tinysrgb&w=1600"
             alt=""
           />
-        </SwiperSlide>
+        </SwiperSlide> */}
       </Swiper>
     </div>
   );

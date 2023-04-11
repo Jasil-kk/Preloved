@@ -25,7 +25,7 @@ const ProductView = () => {
 
   return (
     <div className="w-full min-h-screen p-10 bg-slate-50 flex items-center flex-col font-poppins">
-      <div className="p-5 w-1/2 h-auto bg-blue-200 rounded-xl">
+      <div className="p-5 w-1/2 h-auto bg-blue-100 rounded-xl">
         <h2 className="text-slate-900 text-3xl font-bold text-center">
           Post Item Details
         </h2>

@@ -44,9 +44,13 @@ const NavBar = () => {
     }
   };
 
+  const scrolltoTop = () => {
+    window.scrollTo(0, 0)
+  }
+
   return (
     <nav className="w-full bg-slate-50 min-h-[86px] px-40 flex flex-wrap justify-between items-center fixed top-0 left-0 z-20 font-outfit">
-      <div className="w-[164px] h-[43px]">
+      <div onClick={scrolltoTop} className="w-[164px] h-[43px] cursor-pointer">
         <img className="w-full h-full" src={logo} alt="logo" />
       </div>
       <div className="flex gap-7 flex-wrap">

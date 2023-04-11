@@ -52,6 +52,7 @@ export const updateSubCategoryApi = createAsyncThunk(
 );
 
 // sub category delete
+
 export const deleteSubCategoryApi = createAsyncThunk(
   "admin/deleteSubCategoryApi",
   async (categoryID) => {

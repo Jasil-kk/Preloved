@@ -42,7 +42,7 @@ function App() {
         <Route path="/resetpassword/:id" element={<ChangePassword/>}/>
         <Route path="/profile" element={<EditProfile/>}/>
         <Route path="/createcategory" element={<CreateCategory/>}/>
-        <Route path="/singlepage" element={<SinglePage/>}/>
+        <Route path="/singlepage/:id" element={<SinglePage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars/:catId/:subId" element={<CarsDetails />} />
         <Route path="/post/motorcycle/:catId/:subId" element={<MotorCycleDetails />} />
