@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
@@ -30,20 +30,41 @@ const RegisterPage = () => {
     event.preventDefault();
   };
 
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const confirmPasswordRef = useRef(null);
+  const nameRef = useRef(null);
+  const mobileNoRef = useRef(null);
+  const emailRef = useRef(null);
+
+  const handleKeyDown = (event, ref) => {
+    if (event.key === "Enter") {
+      ref.current.focus();
+    }
+  };
+
   return (
     <div className="w-full h-screen bg-slate-200 flex justify-center items-center font-poppins">
       <div className="bg-slate-50 min-w-min w-1/4 h-auto flex flex-col p-10 gap-5 rounded-md">
         <TextField
+          inputProps={{ style: { fontFamily: "poppins" } }}
+          InputLabelProps={{ style: { fontFamily: "poppins" } }}
           id="outlined-basic"
           label="Username"
           variant="outlined"
           onChange={(e) => setData({ ...data, username: e.target.value })}
+          onKeyDown={(event) => handleKeyDown(event, passwordRef)}
+          inputRef={usernameRef}
         />
         <FormControl sx={{ width: "100%" }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">
+          <InputLabel
+            style={{ fontFamily: "poppins" }}
+            htmlFor="outlined-adornment-password"
+          >
             Password
           </InputLabel>
           <OutlinedInput
+            style={{ fontFamily: "poppins" }}
             id="outlined-adornment-password"
             type={showPassword ? "text" : "password"}
             endAdornment={
@@ -59,16 +80,20 @@ const RegisterPage = () => {
               </InputAdornment>
             }
             label="Password"
-            onChange={(e) =>
-                setData({ ...data, password: e.target.value })
-              }
+            onChange={(e) => setData({ ...data, password: e.target.value })}
+            onKeyDown={(event) => handleKeyDown(event, confirmPasswordRef)}
+            inputRef={passwordRef}
           />
         </FormControl>
         <FormControl sx={{ width: "100%" }} variant="outlined">
-          <InputLabel htmlFor="outlined-adornment-password">
-            ConfirmPassword
+          <InputLabel
+            style={{ fontFamily: "poppins" }}
+            htmlFor="outlined-adornment-password"
+          >
+            Confirm Password
           </InputLabel>
           <OutlinedInput
+            style={{ fontFamily: "poppins" }}
             id="outlined-adornment-password"
             type={showPassword ? "text" : "password"}
             endAdornment={
@@ -85,28 +110,41 @@ const RegisterPage = () => {
             }
             label="ConfirmPassword"
             onChange={(e) =>
-                setData({ ...data, confirmPassword: e.target.value })
-              }
+              setData({ ...data, confirmPassword: e.target.value })
+            }
+            onKeyDown={(event) => handleKeyDown(event, nameRef)}
+            inputRef={confirmPasswordRef}
           />
         </FormControl>
         <TextField
+          inputProps={{ style: { fontFamily: "poppins" } }}
+          InputLabelProps={{ style: { fontFamily: "poppins" } }}
           id="outlined-basic"
           label="Name"
           variant="outlined"
           onChange={(e) => setData({ ...data, name: e.target.value })}
+          onKeyDown={(event) => handleKeyDown(event, mobileNoRef)}
+          inputRef={nameRef}
         />
         <TextField
+          inputProps={{ style: { fontFamily: "poppins" } }}
+          InputLabelProps={{ style: { fontFamily: "poppins" } }}
           id="outlined-number"
           label="Number"
           type="number"
           onChange={(e) => setData({ ...data, mobileNo: e.target.value })}
+          onKeyDown={(event) => handleKeyDown(event, emailRef)}
+          inputRef={mobileNoRef}
         />
         <TextField
+          inputProps={{ style: { fontFamily: "poppins" } }}
+          InputLabelProps={{ style: { fontFamily: "poppins" } }}
           id="outlined-email"
           label="Email"
           type="email"
           variant="outlined"
           onChange={(e) => setData({ ...data, email: e.target.value })}
+          inputRef={emailRef}
         />
         <button
           onClick={handleSubmit}

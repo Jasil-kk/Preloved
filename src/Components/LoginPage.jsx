@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { CgClose } from "react-icons/cg";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -8,6 +8,7 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
+import FormHelperText from "@mui/material/FormHelperText";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
@@ -17,16 +18,23 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const LoginPage = ({ setShowModal, login, sell }) => {
-  const [data, setData] = useState();
+  // const [data, setData] = useState();
+  const [data, setData] = useState({ username: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showError, setShowError] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signInApi({ data, navigate, login, sell }));
-    setShowModal(false);
+    if (data.username.trim() === "" || data.password.trim() === "") {
+      // Checking the username or password is empty
+      setShowError(true);
+    } else {
+      dispatch(signInApi({ data, navigate, login, sell }));
+      setShowModal(false);
+    }
   };
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -36,11 +44,20 @@ const LoginPage = ({ setShowModal, login, sell }) => {
     event.preventDefault();
   };
 
+  const usernameRef = useRef(null);
+  const passwordRef = useRef(null);
+
+  const handleKeyDown = (event, ref) => {
+    if (event.key === "Enter") {
+      ref.current.focus();
+    }
+  };
+
   return (
     <>
       <GoogleOAuthProvider clientId="92970027491-m7arhevv6ub2hgq19i6jj8q0f0ft47ub.apps.googleusercontent.com">
         <div className="fixed flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
-          <div className="w-96 h-auto bg-slate-50 m-5 pt-8 rounded-lg relative">
+          <div className="w-[400px] h-auto bg-slate-50 m-5 pt-8 rounded-lg relative">
             <span
               onClick={() => setShowModal(false)}
               className="absolute top-2 right-2 text-2xl text-slate-900 cursor-pointer"
@@ -52,21 +69,36 @@ const LoginPage = ({ setShowModal, login, sell }) => {
               className="w-full h-full flex flex-col p-4 gap-5 items-center"
             >
               <TextField
+                error={showError && data.username.trim() === ""}
                 type="text"
                 id="outlined-basic"
                 label="Username"
                 variant="outlined"
-                className="w-full h-10 sm:h-12 text-xl pl-4 font-poppins"
+                inputProps={{ style: { fontFamily: "poppins" } }}
+                InputLabelProps={{ style: { fontFamily: "poppins" } }}
+                FormHelperTextProps={{ style: { fontFamily: "poppins" } }}
                 onChange={(e) => setData({ ...data, username: e.target.value })}
+                onKeyDown={(event) => handleKeyDown(event, passwordRef)}
+                inputRef={usernameRef}
+                helperText={
+                  showError && data.username.trim() === ""
+                    ? "Username can't be empty"
+                    : ""
+                }
               />
               <FormControl
+                sx={{ width: "94%" }}
                 variant="outlined"
-                className="w-full h-10 sm:h-12 text-xl pl-4 font-poppins"
+                error={showError && data.password.trim() === ""}
               >
-                <InputLabel htmlFor="outlined-adornment-password">
+                <InputLabel
+                  style={{ fontFamily: "poppins" }}
+                  htmlFor="outlined-adornment-password"
+                >
                   Password
                 </InputLabel>
                 <OutlinedInput
+                  style={{ fontFamily: "poppins" }}
                   id="outlined-adornment-password"
                   type={showPassword ? "text" : "password"}
                   endAdornment={
@@ -81,11 +113,25 @@ const LoginPage = ({ setShowModal, login, sell }) => {
                       </IconButton>
                     </InputAdornment>
                   }
+                  I
                   label="Password"
                   onChange={(e) =>
                     setData({ ...data, password: e.target.value })
                   }
+                  onKeyDown={(event) =>
+                    handleKeyDown(event, confirmPasswordRef)
+                  }
+                  inputRef={passwordRef}
                 />
+                <FormHelperText
+                  sx={{ fontFamily: "poppins" }}
+                  id="outlined-weight-helper-text"
+                >
+                  {" "}
+                  {showError && data.password.trim() === ""
+                    ? "Password can't be empty"
+                    : ""}{" "}
+                </FormHelperText>
               </FormControl>
               <Link to={"/forgetpassword"}>
                 <p className="ml-56 text-sm text-slate-600 cursor-pointer">
