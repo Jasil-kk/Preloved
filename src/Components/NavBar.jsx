@@ -8,13 +8,16 @@ import { useDispatch, useSelector } from "react-redux";
 import logo from "../assets/Navbar/logo.svg";
 import searchIcon from "../assets/Navbar/searchIcon.svg";
 import location from "../assets/Navbar/location.svg";
-import bell from "../assets/Navbar/bell.svg"
-import notification from "../assets/Navbar/notification.svg"
-import avatar from "../assets/Navbar/avatar.svg"
+import bell from "../assets/Navbar/bell.svg";
+import notification from "../assets/Navbar/notification.svg";
+import { IoMdAddCircle } from "react-icons/io";
+import ImageAdder from "../Pages/SinglePages/ImageAdder";
 
 const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [userId, setUserId] = useState();
   const ref = useRef(null);
 
   const { profile } = useSelector((state) => state.auth);
@@ -44,10 +47,17 @@ const NavBar = () => {
     }
   };
 
-  const scrolltoTop = () => {
-    window.scrollTo(0, 0)
-  }
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const scrolltoTop = () => {
+    window.scrollTo(0, 0);
+  };
   return (
     <nav className="w-full bg-slate-50 min-h-[86px] px-40 flex flex-wrap justify-between items-center fixed top-0 left-0 z-20 font-outfit">
       <div onClick={scrolltoTop} className="w-[164px] h-[43px] cursor-pointer">
@@ -84,20 +94,17 @@ const NavBar = () => {
         </form>
         {token ? (
           <Link to={"/post"}>
-          <button
-          onClick={() => setShowModal(true)}
-          className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]"
-        >
-          SELL
-        </button>
-        </Link>
+            <button className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]">
+              SELL
+            </button>
+          </Link>
         ) : (
-        <button
-          onClick={() => setShowModal(true)}
-          className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]"
-        >
-          SELL
-        </button>
+          <button
+            onClick={() => setShowModal(true)}
+            className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]"
+          >
+            SELL
+          </button>
         )}
       </div>
       {token ? (
@@ -112,11 +119,20 @@ const NavBar = () => {
             onClick={() => setShow(!show)}
             className="relative cursor-pointer"
           >
-            <Avatar
-              alt="avatar"
-              src={avatar}
-              sx={{ width: 50, height: 50}}
-            />
+            {profile?.photos && profile.photos.length > 0 ? (
+              <>
+                {profile?.photos?.map((photo, key) =>
+                  (<Avatar
+                    key={key}
+                    alt="user-photo"
+                    src={photo?.url}
+                    sx={{ width: 50, height: 50 ,border: 2 , borderColor: "#3131FF"}}
+                  />)
+                )}
+              </>
+            ) : (
+              <Avatar alt="user-photo" src="" sx={{ width: 50, height: 50 }} />
+            )}
             {show && (
               <div
                 ref={ref}
@@ -130,11 +146,33 @@ const NavBar = () => {
                         {profile?.name}
                       </h1>
                     </div>
-                    <Avatar
-                      alt="Remy Sharp"
-                      src="https://images.pexels.com/photos/1648374/pexels-photo-1648374.jpeg?auto=compress&cs=tinysrgb&w=1600"
-                      sx={{ width: 70, height: 70 }}
-                    />
+                    {profile?.photos && profile.photos.length > 0 ? (
+                      <>
+                        {profile?.photos?.map((photo, key) => (
+                          <Avatar
+                            key={key}
+                            alt="user-photo"
+                            src={photo?.url}
+                            sx={{ width: 70, height: 70 }}
+                          />
+                        ))}
+                      </>
+                    ) : (
+                      <div className="relative">
+                        <Avatar
+                          alt="user-photo"
+                          src=""
+                          sx={{ width: 70, height: 70 }}
+                        />
+                        <button
+                          onClick={()=>{handleClickOpen();
+                          setUserId(profile?._id)}}
+                          className="absolute top-10 -right-2 text-4xl w-auto h-auto text-blue-500 bg-transparent"
+                        >
+                          <IoMdAddCircle />
+                        </button>
+                      </div>
+                    )}
                   </span>
                   <Link
                     to={"/profile"}
@@ -146,7 +184,7 @@ const NavBar = () => {
                 <button className="flex justify-center items-center gap-3 mt-5 w-full h-10 bg-pink-400 text-slate-50 text-lg rounded-lg">
                   <span className="text-2xl">
                     <MdOutlineFavoriteBorder />
-                  </span>{" "}
+                  </span>
                   My ADS
                 </button>
                 <button
@@ -160,11 +198,15 @@ const NavBar = () => {
           </span>
         </div>
       ) : (
-        <button onClick={() => setShowModal(true)} className="bg-transparent text-xl text-[#3131FF] font-semibold">
+        <button
+          onClick={() => setShowModal(true)}
+          className="bg-transparent text-xl text-[#3131FF] font-semibold"
+        >
           Login
         </button>
       )}
       {showModal ? <LoginPage setShowModal={setShowModal} /> : null}
+      <ImageAdder open={open} handleClose={handleClose} userId={userId} />
     </nav>
   );
 };

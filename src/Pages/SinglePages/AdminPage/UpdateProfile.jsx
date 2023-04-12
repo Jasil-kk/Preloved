@@ -10,7 +10,6 @@ import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import Stack from "@mui/material/Stack";
 import InputField from "../../../Components/styles-store/InputField";
-import { Padding } from "@mui/icons-material";
 import { useDispatch } from "react-redux";
 import { profileUpdateApi, userProfileApi } from "../../../Store/AuthSlice";
 

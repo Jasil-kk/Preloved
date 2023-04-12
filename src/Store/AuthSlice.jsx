@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosApi } from "./Axiosmethod";
 
-
 // registration
 
 export const registerApi = createAsyncThunk(
@@ -38,7 +37,7 @@ export const signInApi = createAsyncThunk("auth/signInApi", async (input) => {
 
 export const signOutApi = createAsyncThunk(
   "auth/signOutApi",
-  async ( navigate ) => {
+  async (navigate) => {
     const token = localStorage.getItem("token");
     const respond = await axiosApi.post("/auth/user-logout", token);
     console.log(respond);
@@ -62,7 +61,7 @@ export const forgetPasswordApi = createAsyncThunk(
 // change password
 export const changePasswordApi = createAsyncThunk(
   "auth/changePasswordApi",
-  async ({pageId,input}) => {
+  async ({ pageId, input }) => {
     const respond = await axiosApi.post(`/user/resetpassword/${pageId}`, input);
     console.log(respond);
     return respond.data;
@@ -71,28 +70,50 @@ export const changePasswordApi = createAsyncThunk(
 
 // profile
 
-export const userProfileApi = createAsyncThunk("auth/userProfileApi", async (token) => {
-  const respond = await axiosApi.get("/user/get",token);
-  console.log(respond);
-  return respond.data
-})
+export const userProfileApi = createAsyncThunk(
+  "auth/userProfileApi",
+  async (token) => {
+    const respond = await axiosApi.get("/user/get", token);
+    console.log(respond);
+    return respond.data;
+  }
+);
+
+// profile Image
+
+export const profileImageApi = createAsyncThunk(
+  "auth/profileImageApi",
+  async ({userId,formData}) => {
+    const respond = await axiosApi.post(
+      `/productImage/admin/new?userId=${userId}`,formData
+    );
+    console.log(respond);
+    return respond.data;
+  }
+);
 
 // profile update
 
-export const profileUpdateApi = createAsyncThunk("auth/profileUpdateApi", async ({inputValue,navigate}) => {
-  const respond = await axiosApi.post("/user/update",inputValue);
-  console.log(respond);
-  navigate("/");
-  return respond.data
-})
+export const profileUpdateApi = createAsyncThunk(
+  "auth/profileUpdateApi",
+  async ({ inputValue, navigate }) => {
+    const respond = await axiosApi.post("/user/update", inputValue);
+    console.log(respond);
+    navigate("/");
+    return respond.data;
+  }
+);
 
 // profile delete
-export const profileDeleteApi = createAsyncThunk("auth/profileDeleteApi", async ({token,navigate}) => {
-  const respond = await axiosApi.post("/user/delete",token);
-  console.log(respond);
-  navigate("/")
-  return respond.data
-})
+export const profileDeleteApi = createAsyncThunk(
+  "auth/profileDeleteApi",
+  async ({ token, navigate }) => {
+    const respond = await axiosApi.post("/user/delete", token);
+    console.log(respond);
+    navigate("/");
+    return respond.data;
+  }
+);
 
 const initialState = {
   user: {},
@@ -102,7 +123,7 @@ const initialState = {
   loading: false,
   error: "",
   message: "",
-  profile: {}
+  profile: {},
 };
 
 const authSlice = createSlice({
@@ -165,39 +186,50 @@ const authSlice = createSlice({
     [changePasswordApi.rejected]: (state) => {
       console.log("change password rejected");
     },
-       // user profile
-       [userProfileApi.pending]: (state) => {
-        console.log("user profile pending");
-      },
-      [userProfileApi.fulfilled]: (state, action) => {
-        state.profile = action.payload;
-        console.log("user profile success");
-      },
-      [userProfileApi.rejected]: (state) => {
-        console.log("user profile rejected");
-      },
-           //profile update
-           [profileUpdateApi.pending]: (state) => {
-            console.log("profile update pending");
-          },
-          [profileUpdateApi.fulfilled]: (state, action) => {
-            state.profile = action.payload;
-            console.log("profile update success");
-          },
-          [profileUpdateApi.rejected]: (state) => {
-            console.log("profile update rejected");
-          },
-             //profile delete
-             [profileDeleteApi.pending]: (state) => {
-              console.log("profile delete pending");
-            },
-            [profileDeleteApi.fulfilled]: (state, action) => {
-              state.profile = action.payload;
-              console.log("profile delete success");
-            },
-            [profileDeleteApi.rejected]: (state) => {
-              console.log("profile delete rejected");
-            },
+    // user profile
+    [userProfileApi.pending]: (state) => {
+      console.log("user profile pending");
+    },
+    [userProfileApi.fulfilled]: (state, action) => {
+      state.profile = action.payload;
+      console.log("user profile success");
+    },
+    [userProfileApi.rejected]: (state) => {
+      console.log("user profile rejected");
+    },
+    // profile image
+    [profileImageApi.pending]: (state) => {
+      console.log("profile image pending");
+    },
+    [profileImageApi.fulfilled]: (state, action) => {
+      state.profile = action.payload;
+      console.log("profile image success");
+    },
+    [profileImageApi.rejected]: (state) => {
+      console.log("profile image rejected");
+    },
+    //profile update
+    [profileUpdateApi.pending]: (state) => {
+      console.log("profile update pending");
+    },
+    [profileUpdateApi.fulfilled]: (state, action) => {
+      state.profile = action.payload;
+      console.log("profile update success");
+    },
+    [profileUpdateApi.rejected]: (state) => {
+      console.log("profile update rejected");
+    },
+    //profile delete
+    [profileDeleteApi.pending]: (state) => {
+      console.log("profile delete pending");
+    },
+    [profileDeleteApi.fulfilled]: (state, action) => {
+      state.profile = action.payload;
+      console.log("profile delete success");
+    },
+    [profileDeleteApi.rejected]: (state) => {
+      console.log("profile delete rejected");
+    },
   },
 });
 

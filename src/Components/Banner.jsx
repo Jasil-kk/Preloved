@@ -47,7 +47,7 @@ const Banner = () => {
           <Link to={`/singlepage/${product?._id}`}>
             <div className="w-full h-[236px] overflow-hidden">
               <img
-                className="w-full h-full aspect-auto object-cover transform transition duration-500 ease-in-out hover:scale-110"
+                className="w-full h-full aspect-[3/5] object-cover transform transition duration-500 ease-in-out hover:scale-110"
                 src={product?.photos[0]?.url}
                 alt="card-pic"
               />

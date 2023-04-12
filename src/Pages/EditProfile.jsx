@@ -33,14 +33,14 @@ const EditProfile = () => {
   const [inputValue, setInputValue] = useState();
   const [imageSrc, setImageSrc] = useState("");
   const [open, setOpen] = useState(false);
-  const token = localStorage.getItem("token");
 
 const {profile} = useSelector((state)=> state.auth)
 const dispatch = useDispatch();
 const navigate = useNavigate();
-useEffect(()=> {
-  dispatch(userProfileApi(token))
-},[token])
+
+useEffect(() => {
+  dispatch(userProfileApi());
+}, []);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -52,13 +52,12 @@ useEffect(()=> {
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
-    setImageSrc(URL.createObjectURL(file));
+    setImageSrc( URL.createObjectURL(file))
   };
 
   const handleDelete = () => {
     dispatch(profileDeleteApi({ token, navigate }));
   };
-
   return (
     <>
       <BackNav />
@@ -90,7 +89,9 @@ useEffect(()=> {
                   <PhotoCamera />
                 </IconButton>
               </div>
-              {imageSrc && <img src={imageSrc} alt="Selected" />}
+              {imageSrc ? (<img src={imageSrc} alt="Selected" /> ): 
+              <img src={profile?.photos[0]?.url} alt="" /> }
+              
             </div>
 
             <h2 className="mt-7 text-lg font-semibold">Basic information</h2>
