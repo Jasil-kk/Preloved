@@ -116,11 +116,14 @@ const Users = () => {
                   <StyledTableCell align="right">
                     {user?.username}
                   </StyledTableCell>
-                  <StyledTableCell sx={{display:"flex",justifyContent:"end"}}>
+                  <StyledTableCell >
+                    <div className="flex justify-end">
                     <img className="w-10 h-10 aspect-[3/2] object-cover rounded-full" src={user?.photos[0]?.url} alt="photo" />
+                    </div>
                   </StyledTableCell>
                   <StyledTableCell align="right">{user?.role}</StyledTableCell>
-                  <StyledTableCell sx={{display:"flex",justifyContent:"end"}}>
+                  <StyledTableCell>
+                  <div className="flex justify-end">
                     <button
                       onClick={() => {
                         handleOpen();
@@ -134,6 +137,7 @@ const Users = () => {
                     >
                       <RiDeleteBin3Fill />
                     </button>
+                    </div>
                   </StyledTableCell>
                 </StyledTableRow>
               ))}

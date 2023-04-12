@@ -9,7 +9,7 @@ import { FiUser } from "react-icons/fi";
 import { MdOutlineSettings } from "react-icons/md";
 import { IoPower } from "react-icons/io5"
 import Profile from "./Profile";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signOutApi } from "../../../Store/AuthSlice";
 import { useNavigate } from "react-router-dom";
 
@@ -57,7 +57,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header = () => {
   const [anchorEl, setAnchorEl] = useState(null);
     const [opener, setOpener] = useState(false);
-
+const {profile} = useSelector ((state)=> state.auth)
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -97,10 +97,23 @@ const Header = () => {
           direction="row"
           spacing={2}
         >
-          <Avatar
-            alt="Remy Sharp"
-            src="https://images.pexels.com/photos/14036408/pexels-photo-14036408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          />
+         {profile?.photos && profile.photos.length > 0 ? (
+              <>
+                {profile?.photos?.map((photo, key) => (
+                  <Avatar
+                    sx={{ width: "50px", height: "50px",border: 2 , borderColor:"#f5f5fa" }}
+                    alt="photo"
+                    src={photo?.url}
+                  />
+                ))}
+              </>
+            ) : (
+              <Avatar
+                sx={{ width: "50px", height: "50px" }}
+                alt="photo"
+                src=""
+              />
+            )}
         </Stack>
         <Popover
           id={id}

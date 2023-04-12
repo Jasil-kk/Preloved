@@ -50,6 +50,7 @@ const Dashboard = () => {
               View profile
             </button>
           </div>
+
           <Stack
             className="absolute top-1/2 left-12 transform -translate-x-1/2 -translate-y-1/2"
             direction="row"
@@ -61,11 +62,24 @@ const Dashboard = () => {
               borderRadius: "50%",
             }}
           >
-            <Avatar
-              sx={{ width: "70px", height: "70px" }}
-              alt="Remy Sharp"
-              src="https://images.pexels.com/photos/14036408/pexels-photo-14036408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-            />
+            {profile?.photos && profile.photos.length > 0 ? (
+              <>
+                {profile?.photos?.map((photo, key) => (
+                  <Avatar
+                  key={key}
+                    sx={{ width: "70px", height: "70px" }}
+                    alt="photo"
+                    src={photo?.url}
+                  />
+                ))}
+              </>
+            ) : (
+              <Avatar
+                sx={{ width: "70px", height: "70px" }}
+                alt="photo"
+                src=""
+              />
+            )}
           </Stack>
         </div>
         <div className="flex flex-wrap gap-5">

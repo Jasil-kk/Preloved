@@ -4,6 +4,8 @@ import Modal from "@mui/material/Modal";
 import Avatar from "@mui/material/Avatar";
 import { useSelector } from "react-redux";
 import UpdateProfile from "./UpdateProfile";
+import { IoMdAddCircle } from "react-icons/io";
+import ImageAdder from "../ImageAdder";
 
 const style = {
   position: "absolute",
@@ -23,6 +25,8 @@ const style = {
 
 const Profile = ({ open, setOpen }) => {
   const [opener, setOpener] = useState(false);
+  const [show, setShow] = useState(false);
+  const [userId, setUserId] = useState();
 
   const { profile } = useSelector((state) => state.auth);
 
@@ -30,6 +34,10 @@ const Profile = ({ open, setOpen }) => {
 
   const handleClickOpen = () => {
     setOpener(true);
+  };
+
+  const handleClickOpener = () => {
+    setShow(true);
   };
   return (
     <div className="font-poppins">
@@ -40,15 +48,40 @@ const Profile = ({ open, setOpen }) => {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Avatar
-            sx={{
-              width: "150px",
-              height: "150px",
-              border: "5px solid #d6d4d9",
-            }}
-            alt="Travis Howard"
-            src="https://images.pexels.com/photos/14036408/pexels-photo-14036408.jpeg?auto=compress&cs=tinysrgb&w=1600"
-          />
+          {profile?.photos && profile.photos.length > 0 ? (
+            <>
+              {profile?.photos?.map((photo, key) => (
+                <Avatar
+                  key={key}
+                  alt="user-photo"
+                  src={photo?.url}
+                  sx={{ width: 110, height: 110,border: 3 , borderColor:"#b8b8bf" }}
+                />
+              ))}
+            </>
+          ) : (
+            <div className="relative">
+              <Avatar
+                sx={{
+                  width: "150px",
+                  height: "150px",
+                  border: "5px solid #d6d4d9",
+                }}
+                alt="Travis Howard"
+                src=""
+              ></Avatar>
+              <button
+                onClick={() => {
+                  handleClose();
+                  handleClickOpener();
+                  setUserId(profile?._id);
+                }}
+                className="absolute -bottom-2 left-[50px] text-5xl w-auto h-auto text-blue-500 bg-transparent"
+              >
+                <IoMdAddCircle />
+              </button>
+            </div>
+          )}
           <div className="ml-7 flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <p className="w-24 text-slate-500">name :</p>
@@ -76,7 +109,14 @@ const Profile = ({ open, setOpen }) => {
         </Box>
       </Modal>
       {/* update profile */}
-      <UpdateProfile opener={opener} setOpener={setOpener} name={profile?.name} email={profile?.email} mobileNo={profile?.mobileNo}/>
+      <UpdateProfile
+        opener={opener}
+        setOpener={setOpener}
+        name={profile?.name}
+        email={profile?.email}
+        mobileNo={profile?.mobileNo}
+      />
+      <ImageAdder open={show} setOpen={setShow} userId={userId} />
     </div>
   );
 };

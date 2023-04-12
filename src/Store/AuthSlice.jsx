@@ -22,12 +22,14 @@ export const signInApi = createAsyncThunk("auth/signInApi", async (input) => {
     console.log(respond?.data?.tokenRole?.token);
     localStorage.setItem("token", respond?.data?.tokenRole?.token);
     localStorage.setItem("role", respond?.data?.tokenRole?.role);
-    input.navigate("/post");
-
     if (respond?.data?.tokenRole?.role === "admin") {
       input.navigate("/dashboard");
     } else {
-      input.navigate("/post");
+      if (input.login) {
+        input.navigate("/");
+      } else if (input.sell) {
+        input.navigate("/post");
+      }
     }
   }
   return respond.data;
@@ -83,9 +85,10 @@ export const userProfileApi = createAsyncThunk(
 
 export const profileImageApi = createAsyncThunk(
   "auth/profileImageApi",
-  async ({userId,formData}) => {
+  async ({ userId, formData }) => {
     const respond = await axiosApi.post(
-      `/productImage/admin/new?userId=${userId}`,formData
+      `/productImage/admin/new?userId=${userId}`,
+      formData
     );
     console.log(respond);
     return respond.data;

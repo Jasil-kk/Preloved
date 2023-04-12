@@ -17,6 +17,7 @@ const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
   const [show, setShow] = useState(false);
   const [open, setOpen] = useState(false);
+  const [clicked, setClicked] = useState("");
   const [userId, setUserId] = useState();
   const ref = useRef(null);
 
@@ -49,10 +50,6 @@ const NavBar = () => {
 
   const handleClickOpen = () => {
     setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
   };
 
   const scrolltoTop = () => {
@@ -100,7 +97,9 @@ const NavBar = () => {
           </Link>
         ) : (
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => {setShowModal(true);
+              setClicked({...clicked,sell:"sell"})
+            }}
             className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]"
           >
             SELL
@@ -199,13 +198,14 @@ const NavBar = () => {
         </div>
       ) : (
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => {setShowModal(true);
+            setClicked({...clicked,login:"login"})}}
           className="bg-transparent text-xl text-[#3131FF] font-semibold"
         >
           Login
         </button>
       )}
-      {showModal ? <LoginPage setShowModal={setShowModal} /> : null}
+      {showModal ? <LoginPage setShowModal={setShowModal} login={clicked.login} sell={clicked.sell} /> : null}
       <ImageAdder open={open} setOpen={setOpen} userId={userId} />
     </nav>
   );
