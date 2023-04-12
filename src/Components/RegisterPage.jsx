@@ -4,6 +4,7 @@ import OutlinedInput from "@mui/material/OutlinedInput";
 import InputLabel from "@mui/material/InputLabel";
 import InputAdornment from "@mui/material/InputAdornment";
 import FormControl from "@mui/material/FormControl";
+import FormHelperText from "@mui/material/FormHelperText";
 import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import TextField from "@mui/material/TextField";
@@ -13,13 +14,23 @@ import { registerApi } from "../Store/AuthSlice";
 
 const RegisterPage = () => {
   const [data, setData] = useState();
+  const [passwordError, setPasswordError] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   dispatch(registerApi({ data, navigate }));
+  // };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerApi({ data, navigate }));
+    if (data.password !== data.confirmPassword) {
+      setPasswordError(true);
+    } else {
+      dispatch(registerApi({ data, navigate }));
+    }
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -86,13 +97,16 @@ const RegisterPage = () => {
           />
         </FormControl>
         <FormControl sx={{ width: "100%" }} variant="outlined">
+        
           <InputLabel
+           error={passwordError}
             style={{ fontFamily: "poppins" }}
             htmlFor="outlined-adornment-password"
           >
             Confirm Password
           </InputLabel>
           <OutlinedInput
+           error={passwordError}
             style={{ fontFamily: "poppins" }}
             id="outlined-adornment-password"
             type={showPassword ? "text" : "password"}
@@ -115,6 +129,10 @@ const RegisterPage = () => {
             onKeyDown={(event) => handleKeyDown(event, nameRef)}
             inputRef={confirmPasswordRef}
           />
+           <FormHelperText
+            sx={{ fontFamily: "poppins",color:"red" }}
+            id="outlined-weight-helper-text"
+          >{passwordError && ("Passwords do not match" )}</FormHelperText>
         </FormControl>
         <TextField
           inputProps={{ style: { fontFamily: "poppins" } }}
