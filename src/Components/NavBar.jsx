@@ -126,7 +126,7 @@ const NavBar = () => {
                     key={key}
                     alt="user-photo"
                     src={photo?.url}
-                    sx={{ width: 50, height: 50 ,border: 2 , borderColor: "#3131FF"}}
+                    sx={{ width: 50, height: 50 ,border: 2 , borderColor: "blue"}}
                   />)
                 )}
               </>
@@ -206,7 +206,7 @@ const NavBar = () => {
         </button>
       )}
       {showModal ? <LoginPage setShowModal={setShowModal} /> : null}
-      <ImageAdder open={open} handleClose={handleClose} userId={userId} />
+      <ImageAdder open={open} setOpen={setOpen} userId={userId} />
     </nav>
   );
 };

@@ -98,6 +98,7 @@ const Users = () => {
                 <StyledTableCell align="right">Email</StyledTableCell>
                 <StyledTableCell align="right">Mobile No.</StyledTableCell>
                 <StyledTableCell align="right">UserName</StyledTableCell>
+                <StyledTableCell align="right">Photo</StyledTableCell>
                 <StyledTableCell align="right">Role</StyledTableCell>
                 <StyledTableCell align="right">Action</StyledTableCell>
               </TableRow>
@@ -115,8 +116,11 @@ const Users = () => {
                   <StyledTableCell align="right">
                     {user?.username}
                   </StyledTableCell>
+                  <StyledTableCell sx={{display:"flex",justifyContent:"end"}}>
+                    <img className="w-10 h-10 aspect-[3/2] object-cover rounded-full" src={user?.photos[0]?.url} alt="photo" />
+                  </StyledTableCell>
                   <StyledTableCell align="right">{user?.role}</StyledTableCell>
-                  <StyledTableCell align="right">
+                  <StyledTableCell sx={{display:"flex",justifyContent:"end"}}>
                     <button
                       onClick={() => {
                         handleOpen();

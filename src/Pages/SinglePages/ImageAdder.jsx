@@ -8,30 +8,37 @@ import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
 import { useDispatch } from "react-redux";
-import { profileImageApi } from "../../Store/AuthSlice";
+import { profileImageApi, userProfileApi } from "../../Store/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ImageAdder = ({ open, handleClose,userId }) => {
+const ImageAdder = ({ open, setOpen, userId }) => {
   const [imageSrc, setImageSrc] = useState("");
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
     setImageSrc(URL.createObjectURL(file));
-    if(file) {
-        handleSave(file)  
+    if (file) {
+      handleSave(file);
     }
   };
   const dispatch = useDispatch();
 
   const handleSave = (file) => {
     const formData = new FormData();
-    formData.append("photo",file,file.name);
-    dispatch(profileImageApi({userId,formData}));
+    formData.append("photo", file, file.name);
+    dispatch(profileImageApi({ userId, formData })).then(() => {
+      dispatch(userProfileApi());
+    });
   };
 
+
+  const handleClose = () => {
+    setOpen(false);
+  };
   return (
     <div>
       <Dialog
@@ -96,7 +103,11 @@ const ImageAdder = ({ open, handleClose,userId }) => {
               ":hover": { background: "#08a662", color: "white" },
               fontFamily: "poppins",
             }}
-            onClick={handleSave}
+            onClick={ () => {
+                handleClose();
+              handleSave();
+              
+            }}
           >
             Save
           </Button>
