@@ -16,6 +16,7 @@ import { signInApi } from "../Store/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { getPostApi } from "../Store/AdminSlice";
 
 const LoginPage = ({ setShowModal, login, sell }) => {
   // const [data, setData] = useState();
@@ -32,7 +33,9 @@ const LoginPage = ({ setShowModal, login, sell }) => {
       // Checking the username or password is empty
       setShowError(true);
     } else {
-      dispatch(signInApi({ data, navigate, login, sell }));
+      dispatch(signInApi({ data, navigate, login, sell })).then(()=>{
+        dispatch(getPostApi({}))
+      });
       setShowModal(false);
     }
   };

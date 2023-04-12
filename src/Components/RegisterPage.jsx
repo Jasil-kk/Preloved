@@ -15,6 +15,8 @@ import { registerApi } from "../Store/AuthSlice";
 const RegisterPage = () => {
   const [data, setData] = useState();
   const [passwordError, setPasswordError] = useState(false);
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -51,6 +53,16 @@ const RegisterPage = () => {
   const handleKeyDown = (event, ref) => {
     if (event.key === "Enter") {
       ref.current.focus();
+    }
+  };
+
+  const validateEmail = () => {
+    if (!email) {
+      setEmailError("Email is required");
+    } else if (!/\S+@\S+\.\S+/.test(email)) {
+      setEmailError("Please enter a valid email address");
+    } else {
+      setEmailError("");
     }
   };
 
@@ -97,16 +109,15 @@ const RegisterPage = () => {
           />
         </FormControl>
         <FormControl sx={{ width: "100%" }} variant="outlined">
-        
           <InputLabel
-           error={passwordError}
+            error={passwordError}
             style={{ fontFamily: "poppins" }}
             htmlFor="outlined-adornment-password"
           >
             Confirm Password
           </InputLabel>
           <OutlinedInput
-           error={passwordError}
+            error={passwordError}
             style={{ fontFamily: "poppins" }}
             id="outlined-adornment-password"
             type={showPassword ? "text" : "password"}
@@ -129,10 +140,12 @@ const RegisterPage = () => {
             onKeyDown={(event) => handleKeyDown(event, nameRef)}
             inputRef={confirmPasswordRef}
           />
-           <FormHelperText
-            sx={{ fontFamily: "poppins",color:"red" }}
+          <FormHelperText
+            sx={{ fontFamily: "poppins", color: "red" }}
             id="outlined-weight-helper-text"
-          >{passwordError && ("Passwords do not match" )}</FormHelperText>
+          >
+            {passwordError && "Passwords do not match"}
+          </FormHelperText>
         </FormControl>
         <TextField
           inputProps={{ style: { fontFamily: "poppins" } }}
@@ -163,6 +176,9 @@ const RegisterPage = () => {
           variant="outlined"
           onChange={(e) => setData({ ...data, email: e.target.value })}
           inputRef={emailRef}
+          onBlur={validateEmail}
+          error={!!emailError}
+          helperText={emailError}
         />
         <button
           onClick={handleSubmit}
