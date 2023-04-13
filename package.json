@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@mui/icons-material": "^5.11.11",
     "@react-oauth/google": "^0.8.0",
     "@reduxjs/toolkit": "^1.9.3",

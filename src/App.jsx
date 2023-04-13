@@ -29,6 +29,7 @@ import DashLayout from "./Pages/SinglePages/AdminPage/DashLayout";
 import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
 import Users from "./Pages/SinglePages/AdminPage/Users/Users";
 import Categories from "./Pages/SinglePages/AdminPage/Category/Categories";
+import NotFound from "./Pages/NotFound";
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
     <div className="App">
       <Routes>
         <Route path="/" element={<Pages />} />
+        <Route path="*" element={<NotFound/>}/>
         <Route path="/register" element={<RegisterPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/forgetpassword" element={<ForgetPassword/>}/>
