@@ -30,6 +30,7 @@ import Dashboard from "./Pages/SinglePages/AdminPage/Dashboard";
 import Users from "./Pages/SinglePages/AdminPage/Users/Users";
 import Categories from "./Pages/SinglePages/AdminPage/Category/Categories";
 import NotFound from "./Pages/NotFound";
+import ErrorToast, { InfoToast, SuccessToast, WarningToast } from "./Components/styles-store/Toasts";
 
 
 function App() {
@@ -59,6 +60,11 @@ function App() {
         <Route path="/post/furniture/:catId/:subId" element={<SofaDetails/>}/>
         <Route path="/post/fashion/:catId/:subId" element={<FashionDetails/>}/>
         <Route path="/post/pets/:catId/:subId" element={<PetsDetails/>}/>
+        <Route path="/error" element={<ErrorToast/>}/>
+        <Route path="/warning" element={<WarningToast/>}/>
+        <Route path="/info" element={<InfoToast/>}/>
+        <Route path="/success" element={<SuccessToast/>}/>
+
         {/* admin */}
         <Route element={<DashLayout/>}>
         <Route path="/dashboard" element={<Dashboard/>}/>

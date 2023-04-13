@@ -23,9 +23,12 @@ const LoginPage = ({ setShowModal, login, sell }) => {
   const [data, setData] = useState({ username: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showError, setShowError] = useState(false);
+  const [google, setGoogle] = useState();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const pageLimit = 10 ;
+  const page = 1;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +37,7 @@ const LoginPage = ({ setShowModal, login, sell }) => {
       setShowError(true);
     } else {
       dispatch(signInApi({ data, navigate, login, sell })).then(()=>{
-        dispatch(getPostApi({}))
+        dispatch(getPostApi({page, pageLimit}))
       });
       setShowModal(false);
     }
@@ -56,6 +59,7 @@ const LoginPage = ({ setShowModal, login, sell }) => {
     }
   };
 
+console.log(google?.clientId);
   return (
     <>
       <GoogleOAuthProvider clientId="92970027491-m7arhevv6ub2hgq19i6jj8q0f0ft47ub.apps.googleusercontent.com">
@@ -69,9 +73,10 @@ const LoginPage = ({ setShowModal, login, sell }) => {
             </span>
             <form
               action=""
-              className="w-full h-full flex flex-col p-4 gap-5 items-center"
+              className="w-full h-full flex flex-col p-4 px-6 gap-5 items-center"
             >
               <TextField
+              sx={{width:"100%"}}
                 error={showError && data.username.trim() === ""}
                 type="text"
                 id="outlined-basic"
@@ -90,7 +95,7 @@ const LoginPage = ({ setShowModal, login, sell }) => {
                 }
               />
               <FormControl
-                sx={{ width: "94%" }}
+                sx={{ width: "100%" }}
                 variant="outlined"
                 error={showError && data.password.trim() === ""}
               >
@@ -145,6 +150,7 @@ const LoginPage = ({ setShowModal, login, sell }) => {
                 width="300"
                 onSuccess={(credentialResponse) => {
                   console.log(credentialResponse);
+                  setGoogle(credentialResponse);
                 }}
                 onError={() => {
                   console.log("Login Failed");
