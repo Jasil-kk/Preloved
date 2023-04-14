@@ -9,10 +9,12 @@ import PhotoUploader from "./Post Ad/PhotoUploader";
 import PostNowBtn from "./Post Ad/PostNowBtn";
 import ReviewDetails from "./Post Ad/ReviewDetails";
 import SetPrice from "./Post Ad/SetPrice";
+import { InfoToast } from "../Components/styles-store/Toasts";
 
 const PostForm = ({ children, inputValue }) => {
   const [inputSelector, setInputSelector] = useState([]);
-  const [imageSelector, setImageSelector] = useState ();
+  const [imageSelector, setImageSelector] = useState();
+  const [posting, setPosting] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -21,8 +23,9 @@ const PostForm = ({ children, inputValue }) => {
   const subCategoryID = params.subId;
 
   const handleSubmit = async () => {
-     const formData = new FormData();
-    formData.append("photo",imageSelector,imageSelector.name);
+    const formData = new FormData();
+    formData.append("photo", imageSelector, imageSelector.name);
+    setPosting(true); 
     await dispatch(
       postApi({
         ...inputSelector,
@@ -30,9 +33,10 @@ const PostForm = ({ children, inputValue }) => {
         categoryId: categoryID,
         subcategoryId: subCategoryID,
         navigate,
-        formData
+        formData,
       })
     );
+    setPosting(false);
   };
 
   console.log(inputSelector);
@@ -68,6 +72,11 @@ const PostForm = ({ children, inputValue }) => {
           <PostNowBtn onClick={handleSubmit} />
         </div>
       </div>
+      {posting && ( 
+      <div className="fixed top-10 right-10 z-50 w-80 h-auto">
+        <InfoToast content={"Posting pending..."} />
+      </div>
+      )}
     </div>
   );
 };

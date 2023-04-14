@@ -12,6 +12,8 @@ import bell from "../assets/Navbar/bell.svg";
 import notification from "../assets/Navbar/notification.svg";
 import { IoMdAddCircle } from "react-icons/io";
 import ImageAdder from "../Pages/SinglePages/ImageAdder";
+import { SuccessToast } from "./styles-store/Toasts";
+import { signInApi } from "../Store/AuthSlice";
 
 const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -33,6 +35,16 @@ const NavBar = () => {
   };
   useEffect(() => {
     dispatch(userProfileApi(token));
+
+    if (token) {
+      const successToastContainer = document.getElementById(
+        "success-toast-container"
+      );
+      successToastContainer.style.display = "block";
+      setTimeout(() => {
+        successToastContainer.style.display = "none";
+      }, 2000);
+    }
   }, [token]);
 
   useEffect(() => {
@@ -55,6 +67,7 @@ const NavBar = () => {
   const scrolltoTop = () => {
     window.scrollTo(0, 0);
   };
+
   return (
     <nav className="w-full bg-slate-50 min-h-[86px] px-40 flex flex-wrap justify-between items-center fixed top-0 left-0 z-20 font-outfit">
       <div onClick={scrolltoTop} className="w-[164px] h-[43px] cursor-pointer">
@@ -97,8 +110,9 @@ const NavBar = () => {
           </Link>
         ) : (
           <button
-            onClick={() => {setShowModal(true);
-              setClicked({...clicked,sell:"sell"})
+            onClick={() => {
+              setShowModal(true);
+              setClicked({ ...clicked, sell: "sell" });
             }}
             className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]"
           >
@@ -120,14 +134,19 @@ const NavBar = () => {
           >
             {profile?.photos && profile.photos.length > 0 ? (
               <>
-                {profile?.photos?.map((photo, key) =>
-                  (<Avatar
+                {profile?.photos?.map((photo, key) => (
+                  <Avatar
                     key={key}
                     alt="user-photo"
                     src={photo?.url}
-                    sx={{ width: 50, height: 50 ,border: 2 , borderColor: "blue"}}
-                  />)
-                )}
+                    sx={{
+                      width: 50,
+                      height: 50,
+                      border: 2,
+                      borderColor: "blue",
+                    }}
+                  />
+                ))}
               </>
             ) : (
               <Avatar alt="user-photo" src="" sx={{ width: 50, height: 50 }} />
@@ -164,8 +183,10 @@ const NavBar = () => {
                           sx={{ width: 70, height: 70 }}
                         />
                         <button
-                          onClick={()=>{handleClickOpen();
-                          setUserId(profile?._id)}}
+                          onClick={() => {
+                            handleClickOpen();
+                            setUserId(profile?._id);
+                          }}
                           className="absolute top-10 -right-2 text-4xl w-auto h-auto text-blue-500 bg-transparent"
                         >
                           <IoMdAddCircle />
@@ -198,15 +219,30 @@ const NavBar = () => {
         </div>
       ) : (
         <button
-          onClick={() => {setShowModal(true);
-            setClicked({...clicked,login:"login"})}}
+          onClick={() => {
+            setShowModal(true);
+            setClicked({ ...clicked, login: "login" });
+          }}
           className="bg-transparent text-xl text-[#3131FF] font-semibold"
         >
           Login
         </button>
       )}
-      {showModal ? <LoginPage setShowModal={setShowModal} login={clicked.login} sell={clicked.sell} /> : null}
+      {showModal ? (
+        <LoginPage
+          setShowModal={setShowModal}
+          login={clicked.login}
+          sell={clicked.sell}
+        />
+      ) : null}
       <ImageAdder open={open} setOpen={setOpen} userId={userId} />
+
+      <div
+        id="success-toast-container"
+        className="absolute top-20 right-10 z-50 w-80 h-auto"
+      >
+        <SuccessToast content={"Login Success"} />
+      </div>
     </nav>
   );
 };

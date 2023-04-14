@@ -22,21 +22,21 @@ export function WarningToast() {
   );
 }
 
-export function InfoToast() {
+export function InfoToast({content}) {
   return (
     <Stack sx={{ width: "100%" }}>
       <Alert sx={{fontFamily:"poppins"}} variant="filled" severity="info">
-        This is an info alert — check it out!
+        {content}
       </Alert>
     </Stack>
   );
 }
 
-export function SuccessToast() {
+export function SuccessToast({content}) {
   return (
     <Stack sx={{ width: "100%" }}>
       <Alert sx={{fontFamily:"poppins"}} variant="filled" severity="success">
-        This is a success alert — check it out!
+      {content}
       </Alert>
     </Stack>
   );

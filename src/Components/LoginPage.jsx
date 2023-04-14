@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { CgClose } from "react-icons/cg";
 import IconButton from "@mui/material/IconButton";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -14,12 +14,10 @@ import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
 import { signInApi } from "../Store/AuthSlice";
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { getPostApi } from "../Store/AdminSlice";
+import { InfoToast } from "./styles-store/Toasts";
 
 const LoginPage = ({ setShowModal, login, sell }) => {
-  // const [data, setData] = useState();
   const [data, setData] = useState({ username: "", password: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [showError, setShowError] = useState(false);
@@ -27,8 +25,9 @@ const LoginPage = ({ setShowModal, login, sell }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const pageLimit = 10 ;
+  const pageLimit = 10;
   const page = 1;
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -36,13 +35,33 @@ const LoginPage = ({ setShowModal, login, sell }) => {
       // Checking the username or password is empty
       setShowError(true);
     } else {
-      dispatch(signInApi({ data, navigate, login, sell })).then(()=>{
-        dispatch(getPostApi({page, pageLimit}))
-      });
-      setShowModal(false);
+      setIsSubmitting(true);
+      
+      setTimeout(() => {
+        dispatch(signInApi({ data, navigate, login, sell })).then(() => {
+          dispatch(getPostApi({ page, pageLimit }));
+          setShowModal(false);
+          setIsSubmitting(false); 
+        });
+      }, 1000);
     }
   };
-  const [showPassword, setShowPassword] = React.useState(false);
+  
+
+  useEffect(() => {
+    if (isSubmitting) {
+      // Display the InfoToast for 2 seconds
+      const timeoutId = setTimeout(() => {
+        setShowModal(false);
+        setIsSubmitting(false);
+      }, 1000);
+  
+      return () => clearTimeout(timeoutId);
+    }
+  }, [isSubmitting]);
+    
+  
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -59,7 +78,7 @@ const LoginPage = ({ setShowModal, login, sell }) => {
     }
   };
 
-console.log(google?.clientId);
+  console.log(google?.clientId);
   return (
     <>
       <GoogleOAuthProvider clientId="92970027491-m7arhevv6ub2hgq19i6jj8q0f0ft47ub.apps.googleusercontent.com">
@@ -76,7 +95,7 @@ console.log(google?.clientId);
               className="w-full h-full flex flex-col p-4 px-6 gap-5 items-center"
             >
               <TextField
-              sx={{width:"100%"}}
+                sx={{ width: "100%" }}
                 error={showError && data.username.trim() === ""}
                 type="text"
                 id="outlined-basic"
@@ -160,8 +179,9 @@ console.log(google?.clientId);
                 to={"/register"}
                 className="text-sm text-slate-600 font-poppins"
               >
-                No account ?
-                <span className="text-lg text-blue-500 ml-1">register</span>
+          
+                <span className="text-base text-blue-500 mr-1">Register</span>
+                a new account
               </Link>
               <button
                 onClick={handleSubmit}
@@ -171,12 +191,16 @@ console.log(google?.clientId);
               >
                 {isSubmitting ? "Submitting..." : "Submit"}
               </button>
-              <ToastContainer />
             </form>
           </div>
         </div>
-        <div className="opacity-50 fixed inset-0 z-40 bg-black"></div>
+        <div className="w-full h-full opacity-50 fixed inset-0 z-40 bg-black"></div>
       </GoogleOAuthProvider>
+      {isSubmitting && (
+      <div className="absolute top-10 right-10 z-50 w-80 h-auto">
+      <InfoToast content={"Login Pending..."}/>
+      </div>
+      )}
     </>
   );
 };

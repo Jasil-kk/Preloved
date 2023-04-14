@@ -14,6 +14,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
+import { InfoToast } from "../Components/styles-store/Toasts";
 
 const style = {
   position: "absolute",
@@ -33,30 +34,39 @@ const EditProfile = () => {
   const [inputValue, setInputValue] = useState();
   const [imageSrc, setImageSrc] = useState("");
   const [open, setOpen] = useState(false);
+  const [updating, setUpdating] = useState(false);
 
-const {profile} = useSelector((state)=> state.auth)
-const dispatch = useDispatch();
-const navigate = useNavigate();
+  const { profile } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-useEffect(() => {
-  dispatch(userProfileApi());
-}, []);
+  useEffect(() => {
+    dispatch(userProfileApi());
+  }, []);
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleUpdate = (e) => {
     e.preventDefault();
+    setUpdating(true); 
+    setTimeout(() => {
     dispatch(profileUpdateApi({ inputValue, navigate }));
+  setUpdating(false);
+  }, 2000);
   };
 
   const handleFileSelection = (e) => {
     const file = e.target.files[0];
-    setImageSrc( URL.createObjectURL(file))
+    setImageSrc(URL.createObjectURL(file));
   };
 
   const handleDelete = () => {
     dispatch(profileDeleteApi({ token, navigate }));
+  };
+
+  const scrolltoTop = () => {
+    window.scrollTo(0, 0);
   };
   return (
     <>
@@ -89,9 +99,15 @@ useEffect(() => {
                   <PhotoCamera />
                 </IconButton>
               </div>
-              {imageSrc ? (<img src={imageSrc} alt="Selected" /> ): 
-              <img src={profile?.photos[0]?.url} alt="" /> }
-              
+              {imageSrc ? (
+                <img src={imageSrc} alt="Selected" />
+              ) : (
+                <>
+                {profile?.photos?.map((photo) => (
+                <img src={photo?.url} alt="user-photo" />
+              ))}
+              </>
+              )}
             </div>
 
             <h2 className="mt-7 text-lg font-semibold">Basic information</h2>
@@ -131,7 +147,7 @@ useEffect(() => {
             </div>
           </div>
           <div className="p-6 flex justify-between">
-            <Link to={"/"}>
+            <Link onClick={scrolltoTop} to={"/"}>
               <button className="h-10 px-4 bg-slate-700 text-slate-50 text-lg rounded-md">
                 Cancel
               </button>
@@ -173,6 +189,11 @@ useEffect(() => {
             </div>
           </Box>
         </Modal>
+        {updating && (
+          <div className="fixed top-10 right-10 z-50 w-80 h-auto">
+            <InfoToast content={"Profile update pending..."} />
+          </div>
+        )}
       </div>
     </>
   );
