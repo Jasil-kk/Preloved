@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useParams, useLocation } from "react-router-dom";
 import "./App.css";
 import ChangePassword from "./Components/ChangePassword";
 import ForgetPassword from "./Components/ForgetPassword";
@@ -34,6 +34,10 @@ import ErrorToast, { InfoToast, SuccessToast, WarningToast } from "./Components/
 
 
 function App() {
+
+  const role = localStorage.getItem("role")
+const adminRole = role === "admin"
+  console.log(adminRole);
 
   return (
     <div className="App">

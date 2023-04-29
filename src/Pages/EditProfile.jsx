@@ -53,7 +53,7 @@ const EditProfile = () => {
     setTimeout(() => {
     dispatch(profileUpdateApi({ inputValue, navigate }));
   setUpdating(false);
-  }, 2000);
+  }, 1000);
   };
 
   const handleFileSelection = (e) => {
@@ -103,8 +103,8 @@ const EditProfile = () => {
                 <img src={imageSrc} alt="Selected" />
               ) : (
                 <>
-                {profile?.photos?.map((photo) => (
-                <img src={photo?.url} alt="user-photo" />
+                {profile?.photos?.map((photo,key) => (
+                <img key={key} src={photo?.url} alt="user-photo" />
               ))}
               </>
               )}

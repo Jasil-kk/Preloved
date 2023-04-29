@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { axiosApi } from "./Axiosmethod";
+import { SuccessToast } from "../Components/styles-store/Toasts";
 
 // registration
 
@@ -118,6 +119,14 @@ export const profileDeleteApi = createAsyncThunk(
   }
 );
 
+// Google Login
+
+export const googleLoginApi = createAsyncThunk("auth/googleLoginApi",async()=>{
+  const respond = await axiosApi.get("/auth/google");
+  console.log(respond);
+  return respond;
+})
+
 const initialState = {
   user: {},
   email: "",
@@ -127,6 +136,7 @@ const initialState = {
   error: "",
   message: "",
   profile: {},
+  google: {},
 };
 
 const authSlice = createSlice({
@@ -232,6 +242,17 @@ const authSlice = createSlice({
     },
     [profileDeleteApi.rejected]: (state) => {
       console.log("profile delete rejected");
+    },
+    // google login
+    [googleLoginApi.pending]: (state) => {
+      console.log("google login getting pending");
+    },
+    [googleLoginApi.fulfilled]: (state, action) => {
+      console.log("google login getting success");
+      state.google = action.payload;
+    },
+    [googleLoginApi.rejected]: (state) => {
+      console.log("google login getting rejected");
     },
   },
 });

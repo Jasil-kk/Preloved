@@ -12,10 +12,14 @@ import FormHelperText from "@mui/material/FormHelperText";
 import { GoogleLogin } from "@react-oauth/google";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { useDispatch } from "react-redux";
-import { signInApi } from "../Store/AuthSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { googleLoginApi, signInApi } from "../Store/AuthSlice";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getPostApi } from "../Store/AdminSlice";
-import { InfoToast } from "./styles-store/Toasts";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { axiosApi } from "../Store/Axiosmethod";
+import {FcGoogle} from "react-icons/fc"
+// import { InfoToast } from "./styles-store/Toasts";
 
 const LoginPage = ({ setShowModal, login, sell }) => {
   const [data, setData] = useState({ username: "", password: "" });
@@ -27,6 +31,13 @@ const LoginPage = ({ setShowModal, login, sell }) => {
   const navigate = useNavigate();
   const pageLimit = 10;
   const page = 1;
+
+  const googleAuth = () => {
+		window.open(
+      "http://192.168.29.54:4001/auth/google",
+			"_self"
+		);
+	};
 
 
   const handleSubmit = (e) => {
@@ -48,18 +59,23 @@ const LoginPage = ({ setShowModal, login, sell }) => {
   };
   
 
-  useEffect(() => {
-    if (isSubmitting) {
-      // Display the InfoToast for 2 seconds
-      const timeoutId = setTimeout(() => {
-        setShowModal(false);
-        setIsSubmitting(false);
-      }, 1000);
+  // useEffect(() => {
+  //   if (isSubmitting) {
+  //     // Display the InfoToast for 2 seconds
+  //     const timeoutId = setTimeout(() => {
+  //       setShowModal(false);
+  //       setIsSubmitting(false);
+  //     }, 1000);
   
-      return () => clearTimeout(timeoutId);
-    }
-  }, [isSubmitting]);
-    
+  //     return () => clearTimeout(timeoutId);
+  //   }
+  // }, [isSubmitting]);
+ 
+
+    // const handlegoogleLog = () => {
+    //   dispatch(googleLoginApi());
+
+    // }
   
   const [showPassword, setShowPassword] = useState(false);
 
@@ -77,12 +93,21 @@ const LoginPage = ({ setShowModal, login, sell }) => {
       ref.current.focus();
     }
   };
+  const notify =() =>  toast.info('Login pending...', {
+    position: "top-right",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "light",
+    });
 
-  console.log(google?.clientId);
   return (
     <>
-      <GoogleOAuthProvider clientId="92970027491-m7arhevv6ub2hgq19i6jj8q0f0ft47ub.apps.googleusercontent.com">
-        <div className="fixed flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
+      {/* <GoogleOAuthProvider clientId="92970027491-m7arhevv6ub2hgq19i6jj8q0f0ft47ub.apps.googleusercontent.com"> */}
+        <div onClick={notify} className="fixed flex justify-center items-center inset-0 z-50 outline-none focus:outline-none">
           <div className="w-[400px] h-auto bg-slate-50 m-5 pt-8 rounded-lg relative">
             <span
               onClick={() => setShowModal(false)}
@@ -165,7 +190,8 @@ const LoginPage = ({ setShowModal, login, sell }) => {
                   forgot password
                 </p>
               </Link>
-              <GoogleLogin
+              <div onClick={googleAuth} className="w-auto px-5 h-10 flex items-center justify-around gap-5 border border-slate-400 rounded bg-transparent text-slate-700 text-lg"><span className="text-2xl"><FcGoogle/></span>Sign in with Google</div>
+              {/* <GoogleLogin
                 width="300"
                 onSuccess={(credentialResponse) => {
                   console.log(credentialResponse);
@@ -174,7 +200,7 @@ const LoginPage = ({ setShowModal, login, sell }) => {
                 onError={() => {
                   console.log("Login Failed");
                 }}
-              />
+              /> */}
               <Link
                 to={"/register"}
                 className="text-sm text-slate-600 font-poppins"
@@ -195,12 +221,13 @@ const LoginPage = ({ setShowModal, login, sell }) => {
           </div>
         </div>
         <div className="w-full h-full opacity-50 fixed inset-0 z-40 bg-black"></div>
-      </GoogleOAuthProvider>
-      {isSubmitting && (
+      {/* </GoogleOAuthProvider> */}
+      {/* {isSubmitting && (
       <div className="absolute top-10 right-10 z-50 w-80 h-auto">
       <InfoToast content={"Login Pending..."}/>
       </div>
-      )}
+      )} */}
+       {/* <ToastContainer /> */}
     </>
   );
 };

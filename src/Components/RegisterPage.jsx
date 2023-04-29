@@ -68,8 +68,9 @@ const RegisterPage = () => {
 
   return (
     <div className="w-full h-screen bg-slate-200 flex justify-center items-center font-poppins">
-      <div className="bg-slate-50 min-w-min w-1/4 h-auto flex flex-col p-10 gap-5 rounded-md">
+      <div className="bg-slate-50 min-w-min w-1/4 h-auto flex flex-col items-center p-10 gap-5 rounded-md">
         <TextField
+        sx={{width:"100%"}}
           inputProps={{ style: { fontFamily: "poppins" } }}
           InputLabelProps={{ style: { fontFamily: "poppins" } }}
           id="outlined-basic"
@@ -148,6 +149,7 @@ const RegisterPage = () => {
           </FormHelperText>
         </FormControl>
         <TextField
+        sx={{width:"100%"}}
           inputProps={{ style: { fontFamily: "poppins" } }}
           InputLabelProps={{ style: { fontFamily: "poppins" } }}
           id="outlined-basic"
@@ -158,6 +160,7 @@ const RegisterPage = () => {
           inputRef={nameRef}
         />
         <TextField
+        sx={{width:"100%"}}
           inputProps={{ style: { fontFamily: "poppins" } }}
           InputLabelProps={{ style: { fontFamily: "poppins" } }}
           id="outlined-number"
@@ -168,6 +171,7 @@ const RegisterPage = () => {
           inputRef={mobileNoRef}
         />
         <TextField
+        sx={{width:"100%"}}
           inputProps={{ style: { fontFamily: "poppins" } }}
           InputLabelProps={{ style: { fontFamily: "poppins" } }}
           id="outlined-email"

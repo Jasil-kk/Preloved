@@ -13,7 +13,6 @@ import notification from "../assets/Navbar/notification.svg";
 import { IoMdAddCircle } from "react-icons/io";
 import ImageAdder from "../Pages/SinglePages/ImageAdder";
 import { SuccessToast } from "./styles-store/Toasts";
-import { signInApi } from "../Store/AuthSlice";
 
 const NavBar = () => {
   const [showModal, setShowModal] = useState(false);
@@ -22,6 +21,7 @@ const NavBar = () => {
   const [clicked, setClicked] = useState("");
   const [userId, setUserId] = useState();
   const ref = useRef(null);
+
 
   const { profile } = useSelector((state) => state.auth);
 
@@ -33,18 +33,19 @@ const NavBar = () => {
   const handleLogout = () => {
     dispatch(signOutApi(navigate));
   };
+
   useEffect(() => {
     dispatch(userProfileApi(token));
 
-    if (token) {
-      const successToastContainer = document.getElementById(
-        "success-toast-container"
-      );
-      successToastContainer.style.display = "block";
-      setTimeout(() => {
-        successToastContainer.style.display = "none";
-      }, 2000);
-    }
+    // if (token) {
+    //   const successToastContainer = document.getElementById(
+    //     "success-toast-container"
+    //   );
+    //   successToastContainer.style.display = "block";
+    //   setTimeout(() => {
+    //     successToastContainer.style.display = "none";
+    //   }, 2000);
+    // }
   }, [token]);
 
   useEffect(() => {
@@ -178,7 +179,7 @@ const NavBar = () => {
                     ) : (
                       <div className="relative">
                         <Avatar
-                          alt="user-photo"
+                          alt="User"
                           src=""
                           sx={{ width: 70, height: 70 }}
                         />
@@ -237,12 +238,15 @@ const NavBar = () => {
       ) : null}
       <ImageAdder open={open} setOpen={setOpen} userId={userId} />
 
-      <div
+      {/* <div
         id="success-toast-container"
         className="absolute top-20 right-10 z-50 w-80 h-auto"
       >
         <SuccessToast content={"Login Success"} />
       </div>
+      <div className="absolute top-20 right-10 z-50 w-80 h-auto">
+        <SuccessToast content={"Profile update Success"} />
+      </div> */}
     </nav>
   );
 };
