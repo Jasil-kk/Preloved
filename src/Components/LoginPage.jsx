@@ -29,8 +29,6 @@ const LoginPage = ({ setShowModal, login, sell }) => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const pageLimit = 10;
-  const page = 1;
 
   const googleAuth = () => {
 		window.open(
@@ -49,33 +47,13 @@ const LoginPage = ({ setShowModal, login, sell }) => {
       setIsSubmitting(true);
       
       setTimeout(() => {
-        dispatch(signInApi({ data, navigate, login, sell })).then(() => {
-          dispatch(getPostApi({ page, pageLimit }));
+        dispatch(signInApi({ data, navigate, login, sell }))
           setShowModal(false);
           setIsSubmitting(false); 
-        });
       }, 1000);
     }
   };
   
-
-  // useEffect(() => {
-  //   if (isSubmitting) {
-  //     // Display the InfoToast for 2 seconds
-  //     const timeoutId = setTimeout(() => {
-  //       setShowModal(false);
-  //       setIsSubmitting(false);
-  //     }, 1000);
-  
-  //     return () => clearTimeout(timeoutId);
-  //   }
-  // }, [isSubmitting]);
- 
-
-    // const handlegoogleLog = () => {
-    //   dispatch(googleLoginApi());
-
-    // }
   
   const [showPassword, setShowPassword] = useState(false);
 
