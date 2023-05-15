@@ -84,7 +84,7 @@ const NavBar = () => {
           <select
             name="state"
             id="state"
-            className="w-full h-full pl-7 bg-transparent outline-none"
+            className="w-full h-full pl-7 border-r-8 border-slate-50 bg-slate-50 bg-transparent outline-none"
           >
             <option value="">Kerala</option>
             <option value="">Tamilnadu</option>
