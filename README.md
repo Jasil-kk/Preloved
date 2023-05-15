@@ -24,4 +24,4 @@ To run the frontend of the Preloved application locally, follow these steps:
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/Preloved-frontend.git
+   git clone https://github.com/Jasil-kk/Preloved.git
