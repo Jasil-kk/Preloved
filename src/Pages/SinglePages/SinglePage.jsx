@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import BackNav from "../../Components/BackNav";
 import ImageSwiper from "../../Components/styles-store/ImageSwiper";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,7 @@ const SinglePage = () => {
           month: "short",
         })} ${new Date(product.updatedAt).getDate()}`
     : "";
+
   return (
     <>
       <BackNav />
@@ -54,23 +55,23 @@ const SinglePage = () => {
                 </span>
               </div>
               <Link to="/chatpage">
-              <div className="mt-5 w-auto h-auto flex flex-col p-2 bg-slate-100 border border-slate-800 cursor-pointer">
-                <div className="flex">
-                  <h5 className="text-lg text-slate-800">Chat with Seller</h5>
-                  <span className="ml-auto text-4xl text-[#3131FF]">
-                    <AiFillWechat />
-                  </span>
+                <div className="mt-5 w-auto h-auto flex flex-col p-2 bg-slate-100 border border-slate-800 cursor-pointer">
+                  <div className="flex">
+                    <h5 className="text-lg text-slate-800">Chat with Seller</h5>
+                    <span className="ml-auto text-4xl text-[#3131FF]">
+                      <AiFillWechat />
+                    </span>
+                  </div>
+                  <div className="flex items-center">
+                    <Avatar alt="Remy Sharp" src="" />
+                    <h6 className="ml-4 text-lg text-slate-700">
+                      {product?.userId?.name}
+                    </h6>
+                    <span className="ml-auto text-xl text-slate-500">
+                      <MdArrowForwardIos />
+                    </span>
+                  </div>
                 </div>
-                <div className="flex items-center">
-                  <Avatar alt="Remy Sharp" src="" />
-                  <h6 className="ml-4 text-lg text-slate-700">
-                    {product?.userId?.name}
-                  </h6>
-                  <span className="ml-auto text-xl text-slate-500">
-                    <MdArrowForwardIos />
-                  </span>
-                </div>
-              </div>
               </Link>
             </div>
           </div>

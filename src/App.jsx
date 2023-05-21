@@ -38,10 +38,11 @@ function App() {
 
   const role = localStorage.getItem("role")
 const adminRole = role === "admin"
-  console.log(adminRole);
+  // console.log(adminRole);
 
   return (
     <div className="App">
+  
       <Routes>
         <Route path="/" element={<Pages />} />
         <Route path="*" element={<NotFound/>}/>

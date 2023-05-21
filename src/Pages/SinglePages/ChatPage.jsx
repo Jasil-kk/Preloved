@@ -4,9 +4,11 @@ import Avatar from "@mui/material/Avatar";
 import InputEmoji from "react-input-emoji";
 import IconButton from "@mui/material/IconButton";
 import SendIcon from "@mui/icons-material/Send";
+import { useParams } from "react-router-dom";
 
 const ChatPage = () => {
   const [text, setText] = useState("");
+ 
 
   function handleOnEnter(text) {
     console.log("enter", text);
@@ -17,7 +19,8 @@ const ChatPage = () => {
   }
   return (
     <div className="w-full min-h-screen grid place-items-center bg-slate-100 font-outfit">
-      <div className="w-full h-screen sm:w-[700px] sm:h-[800px]  flex flex-col bg-slate-50 border sm:border-[#3131FF] sm:rounded overflow-hidden">
+        {/* {productData.map((seller,index)=>{ */}
+      <div className="w-full h-screen sm:w-[700px] sm:h-[750px]  flex flex-col bg-slate-50 border sm:border-[#3131FF] sm:rounded overflow-hidden">
         <div className="w-full h-14 px-2 sm:h-16 sm:px-5 bg-blue-600 flex items-center">
           <Avatar alt="Remy Sharp" src="" />
           <h2 className="text-xl sm:text-2xl text-slate-50 ml-3 sm:ml-5 capitalize">
@@ -45,6 +48,7 @@ const ChatPage = () => {
           </IconButton>
         </div>
       </div>
+      {/* })} */}
     </div>
   );
 };
