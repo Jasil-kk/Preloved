@@ -3,7 +3,10 @@ import BackNav from "../../Components/BackNav";
 import ImageSwiper from "../../Components/styles-store/ImageSwiper";
 import { useDispatch, useSelector } from "react-redux";
 import { singlePostApi } from "../../Store/AdminSlice";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { AiFillWechat } from "react-icons/ai";
+import Avatar from "@mui/material/Avatar";
+import { MdArrowForwardIos } from "react-icons/md";
 
 const SinglePage = () => {
   const { singleProduct } = useSelector((state) => state.adminWork);
@@ -33,19 +36,42 @@ const SinglePage = () => {
         <div className="flex flex-col gap-2 justify-center items-center md:items-start">
           <div className="flex flex-wrap justify-center items-center gap-2 sm:gap-5">
             <ImageSwiper productImage={product?.photos[0]?.url} />
-            <div className="w-72 sm:w-96 md:w-[500px] h-auto p-2 sm:p-5 bg-slate-100 border border-slate-500">
-              <h1 className="text-3xl sm:text-4xl font-semibold text-slate-900">
-                ₹ {product?.price}
-              </h1>
-              <h5 className="text-sm sm:text-lg text-slate-700 mt-4">
-                {product?.description}
-              </h5>
-              <span className="flex justify-between mt-3 sm:mt-5">
-                <p className="text-xs sm:text-sm text-slate-600">
-                  {product?.district}
-                </p>
-                <p className="text-xs sm:text-sm text-slate-600">{updatedAt}</p>
-              </span>
+            <div>
+              <div className="w-72 sm:w-96 md:w-[500px] h-auto p-2 sm:p-5 bg-slate-100 border border-slate-500">
+                <h1 className="text-3xl sm:text-4xl font-semibold text-slate-900">
+                  ₹ {product?.price}
+                </h1>
+                <h5 className="text-sm sm:text-lg text-slate-700 mt-4">
+                  {product?.description}
+                </h5>
+                <span className="flex justify-between mt-3 sm:mt-5">
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    {product?.district}
+                  </p>
+                  <p className="text-xs sm:text-sm text-slate-600">
+                    {updatedAt}
+                  </p>
+                </span>
+              </div>
+              <Link to="/chatpage">
+              <div className="mt-5 w-auto h-auto flex flex-col p-2 bg-slate-100 border border-slate-800 cursor-pointer">
+                <div className="flex">
+                  <h5 className="text-lg text-slate-800">Chat with Seller</h5>
+                  <span className="ml-auto text-4xl text-[#3131FF]">
+                    <AiFillWechat />
+                  </span>
+                </div>
+                <div className="flex items-center">
+                  <Avatar alt="Remy Sharp" src="" />
+                  <h6 className="ml-4 text-lg text-slate-700">
+                    {product?.userId?.name}
+                  </h6>
+                  <span className="ml-auto text-xl text-slate-500">
+                    <MdArrowForwardIos />
+                  </span>
+                </div>
+              </div>
+              </Link>
             </div>
           </div>
           <div className="bg-slate-100 w-72 sm:w-96 md:w-[800px] border border-slate-500">

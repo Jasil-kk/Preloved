@@ -20,7 +20,6 @@ export const signInApi = createAsyncThunk("auth/signInApi", async (input) => {
   const respond = await axiosApi.post("/auth/user-signin", input.data);
   console.log(respond);
   if (respond?.data?.tokenRole?.token) {
-    console.log(respond?.data?.tokenRole?.token);
     localStorage.setItem("token", respond?.data?.tokenRole?.token);
     localStorage.setItem("role", respond?.data?.tokenRole?.role);
     if (respond?.data?.tokenRole?.role === "admin") {

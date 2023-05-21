@@ -31,6 +31,7 @@ import Users from "./Pages/SinglePages/AdminPage/Users/Users";
 import Categories from "./Pages/SinglePages/AdminPage/Category/Categories";
 import NotFound from "./Pages/NotFound";
 import ErrorToast, { InfoToast, SuccessToast, WarningToast } from "./Components/styles-store/Toasts";
+import ChatPage from "./Pages/SinglePages/ChatPage";
 
 
 function App() {
@@ -51,6 +52,7 @@ const adminRole = role === "admin"
         <Route path="/profile" element={<EditProfile/>}/>
         <Route path="/createcategory" element={<CreateCategory/>}/>
         <Route path="/singlepage/:id" element={<SinglePage/>}/>
+        <Route path="/chatpage" element={<ChatPage/>}/>
         <Route path="/post" element={<Post />} />
         <Route path="/post/cars/:catId/:subId" element={<CarsDetails />} />
         <Route path="/post/motorcycle/:catId/:subId" element={<MotorCycleDetails />} />
