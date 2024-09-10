@@ -22,7 +22,6 @@ const NavBar = () => {
   const [userId, setUserId] = useState();
   const ref = useRef(null);
 
-
   const { profile } = useSelector((state) => state.auth);
 
   const token = localStorage.getItem("token");
@@ -70,21 +69,21 @@ const NavBar = () => {
   };
 
   return (
-    <nav className="w-full bg-slate-50 min-h-[86px] px-40 flex flex-wrap justify-between items-center fixed top-0 left-0 z-20 font-outfit">
-      <div onClick={scrolltoTop} className="w-[164px] h-[43px] cursor-pointer">
+    <nav className="w-full bg-slate-50 min-h-[86px] py-5 px-[5%] z-20 font-outfit flex items-center">
+      <div onClick={scrolltoTop} className="w-[150px] cursor-pointer">
         <img className="w-full h-full" src={logo} alt="logo" />
       </div>
-      <div className="flex gap-7 flex-wrap">
-        <div className="w-[219px] h-10 border-2 border-[#3131FF] rounded bg-transparent text-lg text-[#3131FF] relative">
+      <div className="flex gap-4 flex-wrap">
+        <div className="w-[200px] h-9 border-2 border-[#3131FF] rounded bg-transparent text-lg text-[#3131FF] relative">
           <img
-            className="absolute w-4 h-4 inset-y-1/2 left-2 transform: -translate-y-1/2"
+            className="absolute w-3 inset-y-1/2 left-2 transform: -translate-y-1/2"
             src={location}
             alt="location"
           />
           <select
             name="state"
             id="state"
-            className="w-full h-full pl-7 border-r-8 border-slate-50 bg-slate-50 bg-transparent outline-none"
+            className="w-full h-full text-base pl-7 border-r-8 border-slate-50 bg-slate-50 bg-transparent outline-none"
           >
             <option value="">Kerala</option>
             <option value="">Tamilnadu</option>
@@ -97,15 +96,15 @@ const NavBar = () => {
           <input
             type="search"
             placeholder="Search for Cars, Mobile Phones and more"
-            className="w-[606px] h-10 bg-slate-50 rounded pl-4 pr-2 text-base text-slate-700 border-2 border-[#3131FF] outline-none placeholder:text-[#8D8FFE]"
+            className="w-[580px] h-9 bg-slate-50 rounded pl-4 pr-2 text-base text-slate-700 border-2 border-[#3131FF] outline-none placeholder:text-[#8D8FFE]"
           />
-          <button className="-ml-1 bg-[#3131FF] w-10 h-10 rounded px-2">
-            <img src={searchIcon} alt="icon" />
+          <button className="-ml-1 bg-[#3131FF] w-9 h-9 rounded px-2">
+            <img src={searchIcon} alt="icon" className="w-6" />
           </button>
         </form>
         {token ? (
           <Link to={"/post"}>
-            <button className="w-[100px] h-10 rounded bg-[#3131FF] text-slate-50 text-xl font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]">
+            <button className="w-[100px] h-9 rounded bg-[#3131FF] text-slate-50 text-lg font-semibold tracking-wider transform transition duration-500 ease-in-out shadow-[0px_0px_20px_rgba(49,49,255,0.55)]">
               SELL
             </button>
           </Link>

@@ -41,7 +41,7 @@ const adminRole = role === "admin"
   // console.log(adminRole);
 
   return (
-    <div className="App">
+    <div className="App bg-slate-50">
   
       <Routes>
         <Route path="/" element={<Pages />} />
